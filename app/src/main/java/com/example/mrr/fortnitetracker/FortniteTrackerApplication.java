@@ -20,24 +20,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FortniteTrackerApplication extends Application {
 
-    private FortniteApiService fortniteApiService;
+    FortniteApplicationComponent component;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        FortniteApplicationComponent component = DaggerFortniteApplicationComponent.builder()
+        component = DaggerFortniteApplicationComponent.builder()
                 .contextModule(new ContextModule(this))
                 .build();
+    }
 
-        fortniteApiService = component.getFortniteApiService();
+    public FortniteApplicationComponent getComponent() {
+        return component;
     }
 
     public static FortniteTrackerApplication get(Activity activity) {
         return (FortniteTrackerApplication) activity.getApplication();
-    }
-
-    public FortniteApiService getFortniteApiService() {
-        return fortniteApiService;
     }
 }

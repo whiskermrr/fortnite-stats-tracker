@@ -1,7 +1,5 @@
 package com.example.mrr.fortnitetracker.view;
 
-import android.util.Log;
-
 import com.example.mrr.fortnitetracker.Model.UserProfileModel;
 import com.example.mrr.fortnitetracker.Network.FortniteApiService;
 
@@ -13,7 +11,7 @@ public class StatsInteractor implements StatsContracts.Interactor {
 
     private FortniteApiService apiService;
 
-    StatsInteractor(FortniteApiService apiService) {
+    public StatsInteractor(FortniteApiService apiService) {
         this.apiService = apiService;
     }
 

@@ -6,8 +6,12 @@ import android.widget.TextView;
 
 import com.example.mrr.fortnitetracker.FortniteTrackerApplication;
 import com.example.mrr.fortnitetracker.Model.UserProfileModel;
-import com.example.mrr.fortnitetracker.Network.FortniteApiService;
 import com.example.mrr.fortnitetracker.R;
+import com.example.mrr.fortnitetracker.dagger.components.DaggerMainActivityComponent;
+import com.example.mrr.fortnitetracker.dagger.components.MainActivityComponent;
+import com.example.mrr.fortnitetracker.dagger.modules.MainActivityModule;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +21,8 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
     @BindView(R.id.tText)
     TextView tText;
 
-    FortniteApiService fortniteApiService;
+    @Inject
+    StatsContracts.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +30,12 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        fortniteApiService = FortniteTrackerApplication.get(this).getFortniteApiService();
-        StatsPresenter presenter = new StatsPresenter(this, new StatsInteractor(fortniteApiService));
+        MainActivityComponent component = DaggerMainActivityComponent.builder()
+                .mainActivityModule(new MainActivityModule(this))
+                .fortniteApplicationComponent(FortniteTrackerApplication.get(this).getComponent())
+                .build();
+        component.inject(this);
+
         presenter.getUserStats("pc", "whiskermrr");
     }
 

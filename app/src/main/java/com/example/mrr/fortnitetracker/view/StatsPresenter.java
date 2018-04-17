@@ -7,7 +7,7 @@ public class StatsPresenter implements StatsContracts.Presenter, StatsContracts.
     private StatsContracts.View view;
     private StatsContracts.Interactor interactor;
 
-    StatsPresenter(StatsContracts.View view, StatsContracts.Interactor interactor) {
+    public StatsPresenter(StatsContracts.View view, StatsContracts.Interactor interactor) {
         this.view = view;
         this.interactor = interactor;
     }
