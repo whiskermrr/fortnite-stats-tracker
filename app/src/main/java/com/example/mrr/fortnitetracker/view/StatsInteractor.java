@@ -24,11 +24,14 @@ public class StatsInteractor implements StatsContracts.Interactor {
             @Override
             public void onResponse(Call<UserProfileModel> call, Response<UserProfileModel> response) {
                 if(response.isSuccessful()) {
-                    UserProfileModel model = response.body();
-                    if(model.getAccountId() != null)
-                        listener.onFinished(response.body());
-                    else
-                        listener.onFailure("User not found.");
+                    // this api is like an cancer
+                    if(response.body() != null) {
+                        UserProfileModel model = response.body();
+                        if (model.getAccountId() != null)
+                            listener.onFinished(response.body());
+                        else
+                            listener.onFailure("User not found.");
+                    }
                 }
                 else {
                     switch (response.code()) {
