@@ -2,20 +2,31 @@ package com.example.mrr.fortnitetracker.view;
 
 import com.example.mrr.fortnitetracker.Model.UserProfileModel;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+
 public class StatsPresenter implements StatsContracts.Presenter, StatsContracts.Interactor.OnStatsFinishedListener {
 
     private StatsContracts.View view;
     private StatsContracts.Interactor interactor;
+    private CompositeDisposable disposables;
 
     public StatsPresenter(StatsContracts.View view, StatsContracts.Interactor interactor) {
         this.view = view;
         this.interactor = interactor;
+        disposables = new CompositeDisposable();
     }
 
     @Override
     public void getUserStats(String platform, String username) {
         view.showProgress();
-        interactor.getUserStats(platform, username, this);
+        final Observable<UserProfileModel> observable = interactor.getProfile(platform, username)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        disposables.add(observable.subscribeWith(new UserProfileObserver()));
     }
 
 
@@ -29,5 +40,29 @@ public class StatsPresenter implements StatsContracts.Presenter, StatsContracts.
     public void onFailure(String message) {
         view.hideProgress();
         view.onFailure(message);
+    }
+
+
+    private class UserProfileObserver extends DisposableObserver<UserProfileModel> {
+
+        @Override
+        public void onNext(UserProfileModel userProfileModel) {
+            if(userProfileModel.getAccountId() != null) {
+                view.onSuccess(userProfileModel);
+            }
+            else {
+                view.onFailure("User not found.");
+            }
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            view.onFailure(e.getMessage());
+        }
+
+        @Override
+        public void onComplete() {
+            view.hideProgress();
+        }
     }
 }
