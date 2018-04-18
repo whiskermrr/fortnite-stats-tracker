@@ -3,6 +3,7 @@ package com.example.mrr.fortnitetracker.view;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -23,6 +24,9 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
     @BindView(R.id.tText)
     TextView tText;
 
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+
     @Inject
     StatsContracts.Presenter presenter;
 
@@ -42,12 +46,12 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
 
     @Override
     public void showProgress() {
-
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
-
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
