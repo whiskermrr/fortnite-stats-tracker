@@ -33,7 +33,10 @@ public class StatsPresenter implements StatsContracts.Presenter, StatsContracts.
     @Override
     public void onFinished(UserProfileModel userProfile) {
         view.hideProgress();
-        view.onSuccess(userProfile);
+        if(userProfile.getAccountId() != null)
+            view.onSuccess(userProfile);
+        else
+            view.onFailure("User not found.");
     }
 
     @Override
@@ -47,12 +50,7 @@ public class StatsPresenter implements StatsContracts.Presenter, StatsContracts.
 
         @Override
         public void onNext(UserProfileModel userProfileModel) {
-            if(userProfileModel.getAccountId() != null) {
-                view.onSuccess(userProfileModel);
-            }
-            else {
-                view.onFailure("User not found.");
-            }
+            StatsPresenter.this.onFinished(userProfileModel);
         }
 
         @Override

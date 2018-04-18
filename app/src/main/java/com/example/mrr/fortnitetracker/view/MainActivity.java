@@ -1,7 +1,9 @@
 package com.example.mrr.fortnitetracker.view;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.mrr.fortnitetracker.FortniteTrackerApplication;
@@ -30,11 +32,10 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        MainActivityComponent component = DaggerMainActivityComponent.builder()
+        DaggerMainActivityComponent.builder()
                 .mainActivityModule(new MainActivityModule(this))
                 .fortniteApplicationComponent(FortniteTrackerApplication.get(this).getComponent())
-                .build();
-        component.inject(this);
+                .build().inject(this);
 
         presenter.getUserStats("pc", "whiskermrr");
     }
