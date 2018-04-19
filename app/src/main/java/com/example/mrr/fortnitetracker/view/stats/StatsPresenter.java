@@ -1,4 +1,4 @@
-package com.example.mrr.fortnitetracker.view;
+package com.example.mrr.fortnitetracker.view.stats;
 
 import com.example.mrr.fortnitetracker.Model.UserProfileModel;
 

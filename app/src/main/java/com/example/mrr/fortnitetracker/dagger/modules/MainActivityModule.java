@@ -2,9 +2,9 @@ package com.example.mrr.fortnitetracker.dagger.modules;
 
 import com.example.mrr.fortnitetracker.Network.FortniteApiService;
 import com.example.mrr.fortnitetracker.dagger.scopes.MainActivityScope;
-import com.example.mrr.fortnitetracker.view.StatsContracts;
-import com.example.mrr.fortnitetracker.view.StatsInteractor;
-import com.example.mrr.fortnitetracker.view.StatsPresenter;
+import com.example.mrr.fortnitetracker.view.stats.StatsContracts;
+import com.example.mrr.fortnitetracker.view.stats.StatsInteractor;
+import com.example.mrr.fortnitetracker.view.stats.StatsPresenter;
 
 import dagger.Module;
 import dagger.Provides;

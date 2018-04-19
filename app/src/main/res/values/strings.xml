@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FortniteTracker</string>
+    <string name="com.twitter.sdk.android.CONSUMER_KEY"> eM8ecJin8jhR800Viby0nj9Hn</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">YpfuJzyMRbpNFm83qlEFLymEMeY5KlZtmYIGJKLDTR9ZwArywr</string>
 </resources>
