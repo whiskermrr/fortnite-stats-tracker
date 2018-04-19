@@ -3,6 +3,8 @@ package com.example.mrr.fortnitetracker.Network;
 import com.twitter.sdk.android.core.TwitterApiClient;
 import com.twitter.sdk.android.core.TwitterSession;
 
+import okhttp3.OkHttpClient;
+
 
 public class RxTwitterApiClient extends TwitterApiClient {
 
@@ -10,8 +12,8 @@ public class RxTwitterApiClient extends TwitterApiClient {
         super();
     }
 
-    public RxTwitterApiClient(TwitterSession session) {
-        super(session);
+    public RxTwitterApiClient(OkHttpClient client) {
+        super(client);
     }
 
     public RxTwitterApiService getRxService() {

@@ -19,10 +19,5 @@ public interface StatsContracts {
 
     interface Interactor {
         Observable<UserProfileModel> getProfile(String platform, String username);
-
-        interface OnStatsFinishedListener {
-            void onFinished(UserProfileModel userProfile);
-            void onFailure(String message);
-        }
     }
 }

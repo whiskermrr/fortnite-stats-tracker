@@ -14,12 +14,11 @@ import com.example.mrr.fortnitetracker.Network.RxTwitterApiService;
 import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.dagger.components.DaggerMainActivityComponent;
 import com.example.mrr.fortnitetracker.dagger.modules.MainActivityModule;
+import com.example.mrr.fortnitetracker.view.news.NewsContracts;
+import com.example.mrr.fortnitetracker.view.news.NewsInteractor;
+import com.example.mrr.fortnitetracker.view.news.NewsPresenter;
 import com.example.mrr.fortnitetracker.view.stats.StatsContracts;
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.models.Tweet;
 
 import java.util.List;
@@ -29,7 +28,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements StatsContracts.View {
+public class MainActivity extends AppCompatActivity implements StatsContracts.View, NewsContracts.View {
 
     @BindView(R.id.tText)
     TextView tText;
@@ -39,6 +38,12 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
 
     @Inject
     StatsContracts.Presenter presenter;
+
+    @Inject
+    RxTwitterApiService apiService;
+
+    NewsPresenter newsPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,25 +58,8 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
 
         //presenter.getUserStats("pc", "whiskermrr");
 
-        final TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
-        RxTwitterApiClient apiClient = new RxTwitterApiClient();
-        TwitterCore.getInstance().addGuestApiClient(apiClient);
-        RxTwitterApiService apiService = apiClient.getRxService();
-        apiService.getNews("fortnitegame").enqueue(new Callback<List<Tweet>>() {
-            @Override
-            public void success(Result<List<Tweet>> result) {
-                Toast.makeText(MainActivity.this,
-                        result.data.get(0).text
-                        , Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void failure(TwitterException exception) {
-                Toast.makeText(MainActivity.this, "FAILed", Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        newsPresenter = new NewsPresenter(this, new NewsInteractor(apiService));
+        newsPresenter.getNews();
     }
 
     @Override
@@ -82,6 +70,11 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
     @Override
     public void hideProgress() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onSuccess(List<Tweet> tweets) {
+        tText.setText(tweets.get(0).text);
     }
 
     @Override
