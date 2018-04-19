@@ -55,7 +55,7 @@ public class StatsPresenter implements StatsContracts.Presenter, StatsContracts.
 
         @Override
         public void onError(Throwable e) {
-            view.onFailure(e.getMessage());
+            StatsPresenter.this.onFailure(e.getMessage());
         }
 
         @Override

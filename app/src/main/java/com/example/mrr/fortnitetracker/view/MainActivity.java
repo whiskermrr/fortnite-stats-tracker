@@ -1,6 +1,5 @@
 package com.example.mrr.fortnitetracker.view;
 
-import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +10,6 @@ import com.example.mrr.fortnitetracker.FortniteTrackerApplication;
 import com.example.mrr.fortnitetracker.Model.UserProfileModel;
 import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.dagger.components.DaggerMainActivityComponent;
-import com.example.mrr.fortnitetracker.dagger.components.MainActivityComponent;
 import com.example.mrr.fortnitetracker.dagger.modules.MainActivityModule;
 
 import javax.inject.Inject;
