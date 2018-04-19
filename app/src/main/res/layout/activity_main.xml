@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".view.MainActivity">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:max="100"
+        android:backgroundTint="@color/colorPrimary"
+        android:indeterminateTint="#1a09d6"
+        android:visibility="gone"
+        />
+
     <TextView
         android:id="@+id/tText"
         android:layout_width="wrap_content"

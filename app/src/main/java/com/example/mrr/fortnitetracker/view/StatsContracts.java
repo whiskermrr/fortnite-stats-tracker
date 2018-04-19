@@ -2,6 +2,8 @@ package com.example.mrr.fortnitetracker.view;
 
 import com.example.mrr.fortnitetracker.Model.UserProfileModel;
 
+import io.reactivex.Observable;
+
 public interface StatsContracts {
 
     interface View {
@@ -16,7 +18,7 @@ public interface StatsContracts {
     }
 
     interface Interactor {
-        void getUserStats(String platform, String username, OnStatsFinishedListener listener);
+        Observable<UserProfileModel> getProfile(String platform, String username);
 
         interface OnStatsFinishedListener {
             void onFinished(UserProfileModel userProfile);

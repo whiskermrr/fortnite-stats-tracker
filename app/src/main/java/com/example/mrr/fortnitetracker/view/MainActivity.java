@@ -2,13 +2,14 @@ package com.example.mrr.fortnitetracker.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.mrr.fortnitetracker.FortniteTrackerApplication;
 import com.example.mrr.fortnitetracker.Model.UserProfileModel;
 import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.dagger.components.DaggerMainActivityComponent;
-import com.example.mrr.fortnitetracker.dagger.components.MainActivityComponent;
 import com.example.mrr.fortnitetracker.dagger.modules.MainActivityModule;
 
 import javax.inject.Inject;
@@ -21,6 +22,9 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
     @BindView(R.id.tText)
     TextView tText;
 
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+
     @Inject
     StatsContracts.Presenter presenter;
 
@@ -30,23 +34,22 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        MainActivityComponent component = DaggerMainActivityComponent.builder()
+        DaggerMainActivityComponent.builder()
                 .mainActivityModule(new MainActivityModule(this))
                 .fortniteApplicationComponent(FortniteTrackerApplication.get(this).getComponent())
-                .build();
-        component.inject(this);
+                .build().inject(this);
 
         presenter.getUserStats("pc", "whiskermrr");
     }
 
     @Override
     public void showProgress() {
-
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
-
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
