@@ -13,8 +13,6 @@ import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.dagger.components.DaggerMainActivityComponent;
 import com.example.mrr.fortnitetracker.dagger.modules.MainActivityModule;
 import com.example.mrr.fortnitetracker.view.news.NewsContracts;
-import com.example.mrr.fortnitetracker.view.news.NewsInteractor;
-import com.example.mrr.fortnitetracker.view.news.NewsPresenter;
 import com.example.mrr.fortnitetracker.view.stats.StatsContracts;
 import com.twitter.sdk.android.core.models.Tweet;
 
@@ -35,9 +33,6 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
 
     @Inject
     StatsContracts.Presenter presenter;
-
-    @Inject
-    RxTwitterApiService apiService;
 
 
     @Override
