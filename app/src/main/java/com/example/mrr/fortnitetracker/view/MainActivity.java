@@ -5,11 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mrr.fortnitetracker.FortniteTrackerApplication;
 import com.example.mrr.fortnitetracker.Model.UserProfileModel;
-import com.example.mrr.fortnitetracker.Network.RxTwitterApiClient;
 import com.example.mrr.fortnitetracker.Network.RxTwitterApiService;
 import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.dagger.components.DaggerMainActivityComponent;
@@ -18,7 +16,6 @@ import com.example.mrr.fortnitetracker.view.news.NewsContracts;
 import com.example.mrr.fortnitetracker.view.news.NewsInteractor;
 import com.example.mrr.fortnitetracker.view.news.NewsPresenter;
 import com.example.mrr.fortnitetracker.view.stats.StatsContracts;
-import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.models.Tweet;
 
 import java.util.List;
@@ -42,8 +39,6 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
     @Inject
     RxTwitterApiService apiService;
 
-    NewsPresenter newsPresenter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +51,7 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
                 .fortniteApplicationComponent(FortniteTrackerApplication.get(this).getComponent())
                 .build().inject(this);
 
-        //presenter.getUserStats("pc", "whiskermrr");
-
-        newsPresenter = new NewsPresenter(this, new NewsInteractor(apiService));
-        newsPresenter.getNews();
+        presenter.getUserStats("pc", "whiskermrr");
     }
 
     @Override
