@@ -7,7 +7,6 @@ import com.example.mrr.fortnitetracker.Utils.ProjectUtils;
 import com.example.mrr.fortnitetracker.dagger.scopes.FortniteApplicationScope;
 
 import java.io.File;
-import java.io.IOException;
 
 import dagger.Module;
 import dagger.Provides;
@@ -33,22 +32,19 @@ public class NetworkModule {
     @Provides
     @FortniteApplicationScope
     public Interceptor interceptor(final Context context) {
-        return new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Response response = chain.proceed(chain.request());
-                if(ProjectUtils.isNetworkAvailable(context)) {
-                    int age = 180;
-                    return response.newBuilder()
-                            .header("Cache-Control", "public, max-age=" + age)
-                            .build();
-                }
-                else {
-                    int stale = 3600 * 24 * 14;
-                    return response.newBuilder()
-                            .header("Cache-Control", "only-if-cached, max-stale=" + stale)
-                            .build();
-                }
+        return chain -> {
+            Response response = chain.proceed(chain.request());
+            if(ProjectUtils.isNetworkAvailable(context)) {
+                int age = 180;
+                return response.newBuilder()
+                        .header("Cache-Control", "public, max-age=" + age)
+                        .build();
+            }
+            else {
+                int stale = 3600 * 24 * 14;
+                return response.newBuilder()
+                        .header("Cache-Control", "only-if-cached, max-stale=" + stale)
+                        .build();
             }
         };
     }
@@ -62,18 +58,12 @@ public class NetworkModule {
     @Provides
     @FortniteApplicationScope
     public File file(Context context) {
-        //return new File(context.getCacheDir(), "okhttp_cache");
         return context.getDir("okhttp_cache", Context.MODE_PRIVATE);
     }
 
     @Provides
     @FortniteApplicationScope
     public HttpLoggingInterceptor httpLoggingInterceptor() {
-        return new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                Log.v("LOGGING INTERCEPTOR", message);
-            }
-        }).setLevel(HttpLoggingInterceptor.Level.BASIC);
+        return new HttpLoggingInterceptor(message -> Log.v("LOGGING INTERCEPTOR", message)).setLevel(HttpLoggingInterceptor.Level.BASIC);
     }
 }

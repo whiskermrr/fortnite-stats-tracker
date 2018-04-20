@@ -1,4 +1,4 @@
-package com.example.mrr.fortnitetracker.view;
+package com.example.mrr.fortnitetracker.view.stats;
 
 import com.example.mrr.fortnitetracker.Model.UserProfileModel;
 
@@ -8,7 +8,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class StatsPresenter implements StatsContracts.Presenter, StatsContracts.Interactor.OnStatsFinishedListener {
+public class StatsPresenter implements StatsContracts.Presenter {
 
     private StatsContracts.View view;
     private StatsContracts.Interactor interactor;
@@ -30,8 +30,7 @@ public class StatsPresenter implements StatsContracts.Presenter, StatsContracts.
     }
 
 
-    @Override
-    public void onFinished(UserProfileModel userProfile) {
+    private void onFinished(UserProfileModel userProfile) {
         view.hideProgress();
         if(userProfile.getAccountId() != null)
             view.onSuccess(userProfile);
@@ -39,8 +38,7 @@ public class StatsPresenter implements StatsContracts.Presenter, StatsContracts.
             view.onFailure("User not found.");
     }
 
-    @Override
-    public void onFailure(String message) {
+    private void onFailure(String message) {
         view.hideProgress();
         view.onFailure(message);
     }

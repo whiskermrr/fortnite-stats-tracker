@@ -7,6 +7,6 @@ import javax.inject.Scope;
 
 @Scope
 @Retention(RetentionPolicy.CLASS)
-public @interface MainActivityScope {
+public @interface ActivityScope {
 
 }
