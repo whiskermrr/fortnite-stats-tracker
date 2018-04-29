@@ -2,6 +2,8 @@ package com.example.mrr.fortnitetracker.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     @Inject
     StatsContracts.Presenter presenter;
 
@@ -39,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
 
         DaggerMainActivityComponent.builder()
                 .mainActivityModule(new MainActivityModule(this))
@@ -46,6 +52,12 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
                 .build().inject(this);
 
         presenter.getUserStats("pc", "whiskermrr");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
     }
 
     @Override

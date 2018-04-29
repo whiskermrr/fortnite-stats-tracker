@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".view.MainActivity">
 
+    <include android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        />
+
     <ProgressBar
         android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyleHorizontal"
