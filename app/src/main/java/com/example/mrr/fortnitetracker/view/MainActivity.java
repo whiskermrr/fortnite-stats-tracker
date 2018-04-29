@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.example.mrr.fortnitetracker.FortniteTrackerApplication;
 import com.example.mrr.fortnitetracker.Model.UserProfileModel;
-import com.example.mrr.fortnitetracker.Network.RxTwitterApiService;
 import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.dagger.components.DaggerMainActivityComponent;
 import com.example.mrr.fortnitetracker.dagger.modules.MainActivityModule;
