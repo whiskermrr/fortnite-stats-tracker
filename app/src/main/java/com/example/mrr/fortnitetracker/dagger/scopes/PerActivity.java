@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import javax.inject.Scope;
 
 @Scope
-@Retention(RetentionPolicy.CLASS)
-public @interface ActivityScope {
+@Retention(RetentionPolicy.RUNTIME)
+public @interface PerActivity {
 
 }
