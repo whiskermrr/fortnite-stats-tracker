@@ -15,18 +15,6 @@
                     layout="@layout/toolbar"
                     />
 
-                <ProgressBar
-                    android:id="@+id/progress_bar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:indeterminate="true"
-                    android:max="100"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:indeterminateTint="@color/colorPrimaryDark"
-                    android:visibility="gone"
-                    />
-
                 <FrameLayout
                     android:id="@+id/content_frame"
                     android:layout_width="match_parent"

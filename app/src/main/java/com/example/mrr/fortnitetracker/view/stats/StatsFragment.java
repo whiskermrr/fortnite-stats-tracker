@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,8 +22,8 @@ import dagger.android.support.AndroidSupportInjection;
 
 public class StatsFragment extends Fragment implements StatsContracts.View {
 
-    @BindView(R.id.tText)
-    TextView tText;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     @Inject
     StatsContracts.Presenter presenter;
@@ -50,12 +51,12 @@ public class StatsFragment extends Fragment implements StatsContracts.View {
 
     @Override
     public void showProgress() {
-
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
-
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
