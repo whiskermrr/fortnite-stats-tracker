@@ -2,7 +2,8 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -15,5 +16,10 @@
         android:indeterminateTint="@color/colorPrimaryDark"
         android:visibility="gone"
         />
+
+    <TextView
+        android:text="HEY"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
