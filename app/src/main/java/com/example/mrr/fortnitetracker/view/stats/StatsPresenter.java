@@ -31,7 +31,6 @@ public class StatsPresenter implements StatsContracts.Presenter {
 
 
     private void onFinished(UserProfileModel userProfile) {
-        view.hideProgress();
         if(userProfile.getAccountId() != null)
             view.onSuccess(userProfile);
         else
