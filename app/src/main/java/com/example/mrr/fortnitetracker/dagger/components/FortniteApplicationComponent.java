@@ -1,17 +1,24 @@
 package com.example.mrr.fortnitetracker.dagger.components;
 
-import com.example.mrr.fortnitetracker.Network.FortniteApiService;
-import com.example.mrr.fortnitetracker.Network.RxTwitterApiService;
-import com.example.mrr.fortnitetracker.dagger.modules.FortniteApiServiceModule;
-import com.example.mrr.fortnitetracker.dagger.modules.TwitterApiModule;
+import android.app.Application;
+
+import com.example.mrr.fortnitetracker.FortniteTrackerApplication;
+import com.example.mrr.fortnitetracker.dagger.modules.NetworkModule;
 import com.example.mrr.fortnitetracker.dagger.scopes.FortniteApplicationScope;
 
+import dagger.BindsInstance;
 import dagger.Component;
+import dagger.android.AndroidInjectionModule;
 
 @FortniteApplicationScope
-@Component(modules = { FortniteApiServiceModule.class, TwitterApiModule.class })
+@Component(modules = {AndroidInjectionModule.class, NetworkModule.class, ActivityBuilder.class })
 public interface FortniteApplicationComponent {
 
-    FortniteApiService getFortniteApiService();
-    RxTwitterApiService getRxTwitterApiService();
+    @Component.Builder
+    interface Builder {
+        @BindsInstance Builder application(Application application);
+        FortniteApplicationComponent build();
+    }
+
+    void inject(FortniteTrackerApplication application);
 }

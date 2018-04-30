@@ -1,40 +1,51 @@
 package com.example.mrr.fortnitetracker.dagger.modules;
 
 import com.example.mrr.fortnitetracker.Network.FortniteApiService;
-import com.example.mrr.fortnitetracker.dagger.scopes.ActivityScope;
-import com.example.mrr.fortnitetracker.view.stats.StatsContracts;
-import com.example.mrr.fortnitetracker.view.stats.StatsInteractor;
-import com.example.mrr.fortnitetracker.view.stats.StatsPresenter;
+import com.example.mrr.fortnitetracker.Network.RxTwitterApiClient;
+import com.example.mrr.fortnitetracker.Network.RxTwitterApiService;
+import com.example.mrr.fortnitetracker.dagger.components.StatsFragmentComponent;
+import com.example.mrr.fortnitetracker.dagger.scopes.FortniteApplicationScope;
+import com.example.mrr.fortnitetracker.dagger.scopes.PerActivity;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.twitter.sdk.android.core.TwitterCore;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-@Module
-@ActivityScope
+@Module(subcomponents = { StatsFragmentComponent.class })
 public class MainActivityModule {
 
-    private final StatsContracts.View view;
-
-
-    public MainActivityModule(StatsContracts.View view) {
-        this.view = view;
+    @Provides
+    @PerActivity
+    public FortniteApiService fortniteApiService(Retrofit retrofit) {
+        return retrofit.create(FortniteApiService.class);
     }
 
     @Provides
-    @ActivityScope
-    public StatsContracts.Interactor statsInteractor(FortniteApiService apiService) {
-        return new StatsInteractor(apiService);
+    @PerActivity
+    public Retrofit retrofit(OkHttpClient okHttpClient) {
+        return new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(okHttpClient)
+                .baseUrl("https://api.fortnitetracker.com/v1/profile/")
+                .build();
     }
 
     @Provides
-    @ActivityScope
-    public StatsContracts.Presenter statsPresenter(StatsContracts.View view, StatsContracts.Interactor interactor) {
-        return new StatsPresenter(view, interactor);
+    @PerActivity
+    public RxTwitterApiClient apiClient(OkHttpClient okHttpClient) {
+        RxTwitterApiClient apiClient = new RxTwitterApiClient(okHttpClient);
+        TwitterCore.getInstance().addGuestApiClient(apiClient);
+        return apiClient;
     }
 
     @Provides
-    @ActivityScope
-    public StatsContracts.View view() {
-        return view;
+    @PerActivity
+    public RxTwitterApiService apiService(RxTwitterApiClient apiClient) {
+        return apiClient.getRxService();
     }
 }

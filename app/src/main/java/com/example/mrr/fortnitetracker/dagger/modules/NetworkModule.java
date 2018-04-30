@@ -16,7 +16,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 
-@Module(includes = ContextModule.class)
+@Module(includes = AppModule.class)
 public class NetworkModule {
 
     @Provides
