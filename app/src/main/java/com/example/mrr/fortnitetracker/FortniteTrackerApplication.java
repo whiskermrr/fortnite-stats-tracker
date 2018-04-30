@@ -4,13 +4,18 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.example.mrr.fortnitetracker.dagger.components.DaggerFortniteApplicationComponent;
-import com.example.mrr.fortnitetracker.dagger.components.FortniteApplicationComponent;
-import com.example.mrr.fortnitetracker.dagger.modules.ContextModule;
 import com.twitter.sdk.android.core.Twitter;
 
-public class FortniteTrackerApplication extends Application {
+import javax.inject.Inject;
 
-    FortniteApplicationComponent component;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
+
+public class FortniteTrackerApplication extends Application implements HasActivityInjector {
+
+    @Inject
+    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
 
     @Override
     public void onCreate() {
@@ -18,16 +23,14 @@ public class FortniteTrackerApplication extends Application {
 
         Twitter.initialize(this);
 
-        component = DaggerFortniteApplicationComponent.builder()
-                .contextModule(new ContextModule(this))
-                .build();
+        DaggerFortniteApplicationComponent.builder()
+                .application(this)
+                .build()
+                .inject(this);
     }
 
-    public FortniteApplicationComponent getComponent() {
-        return component;
-    }
-
-    public static FortniteTrackerApplication get(Activity activity) {
-        return (FortniteTrackerApplication) activity.getApplication();
+    @Override
+    public AndroidInjector<Activity> activityInjector() {
+        return dispatchingAndroidInjector;
     }
 }

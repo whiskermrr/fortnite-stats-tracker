@@ -4,11 +4,13 @@ import com.example.mrr.fortnitetracker.dagger.modules.MainActivityModule;
 import com.example.mrr.fortnitetracker.dagger.scopes.PerActivity;
 import com.example.mrr.fortnitetracker.view.MainActivity;
 
-import dagger.Component;
+import dagger.Subcomponent;
+import dagger.android.AndroidInjector;
 
-@Component(modules = MainActivityModule.class, dependencies = FortniteApplicationComponent.class)
+@Subcomponent(modules = { MainActivityModule.class, FragmentBuilder.class })
 @PerActivity
-public interface MainActivityComponent {
+public interface MainActivityComponent extends AndroidInjector<MainActivity> {
 
-    void inject(MainActivity mainActivity);
+    @Subcomponent.Builder
+    abstract class Builder extends AndroidInjector.Builder<MainActivity>{}
 }

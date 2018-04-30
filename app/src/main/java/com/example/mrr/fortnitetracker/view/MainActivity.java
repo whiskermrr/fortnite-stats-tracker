@@ -2,6 +2,8 @@ package com.example.mrr.fortnitetracker.view;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -10,27 +12,21 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import com.example.mrr.fortnitetracker.FortniteTrackerApplication;
-import com.example.mrr.fortnitetracker.Model.UserProfileModel;
 import com.example.mrr.fortnitetracker.R;
-import com.example.mrr.fortnitetracker.dagger.components.DaggerMainActivityComponent;
-import com.example.mrr.fortnitetracker.dagger.modules.MainActivityModule;
-import com.example.mrr.fortnitetracker.view.news.NewsContracts;
-import com.example.mrr.fortnitetracker.view.stats.StatsContracts;
-import com.twitter.sdk.android.core.models.Tweet;
-
-import java.util.List;
+import com.example.mrr.fortnitetracker.view.stats.StatsFragment;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 
-public class MainActivity extends AppCompatActivity implements StatsContracts.View, NewsContracts.View, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HasSupportFragmentInjector {
 
 
     @BindView(R.id.progress_bar)
@@ -46,11 +42,12 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
     DrawerLayout drawerLayout;
 
     @Inject
-    StatsContracts.Presenter presenter;
+    DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -61,12 +58,7 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
         }
 
-        DaggerMainActivityComponent.builder()
-                .mainActivityModule(new MainActivityModule(this))
-                .fortniteApplicationComponent(FortniteTrackerApplication.get(this).getComponent())
-                .build().inject(this);
-
-        presenter.getUserStats("pc", "whiskermrr");
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
 
@@ -90,33 +82,28 @@ public class MainActivity extends AppCompatActivity implements StatsContracts.Vi
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        item.setChecked(true);
-        drawerLayout.closeDrawers();
+
+        int id = item.getItemId();
+
+        Fragment fragment = null;
+
+        if(id == R.id.nav_stats) {
+            fragment = new StatsFragment();
+        }
+
+        if(fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
     @Override
-    public void showProgress() {
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideProgress() {
-        progressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onSuccess(List<Tweet> tweets) {
-
-    }
-
-    @Override
-    public void onSuccess(UserProfileModel userProfile) {
-
-    }
-
-    @Override
-    public void onFailure(String message) {
-
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return dispatchingAndroidInjector;
     }
 }
