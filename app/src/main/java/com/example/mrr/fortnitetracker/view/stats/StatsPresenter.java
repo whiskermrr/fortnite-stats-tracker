@@ -29,6 +29,11 @@ public class StatsPresenter implements StatsContracts.Presenter {
         disposables.add(observable.subscribeWith(new UserProfileObserver()));
     }
 
+    @Override
+    public void unsubscribe() {
+        disposables.clear();
+    }
+
 
     private void onFinished(UserProfileModel userProfile) {
         if(userProfile.getAccountId() != null)

@@ -15,6 +15,7 @@ public interface StatsContracts {
 
     interface Presenter {
         void getUserStats(String platform, String username);
+        void unsubscribe();
     }
 
     interface Interactor {

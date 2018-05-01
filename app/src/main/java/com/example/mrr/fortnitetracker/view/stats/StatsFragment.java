@@ -4,10 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mrr.fortnitetracker.Model.UserProfileModel;
@@ -24,28 +27,50 @@ public class StatsFragment extends Fragment implements StatsContracts.View {
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
+    @BindView(R.id.bSearch)
+    Button bSearch;
+
+    @BindView(R.id.tText)
+    TextView tText;
+
     @Inject
     StatsContracts.Presenter presenter;
+
+    UserProfileModel userProfileModel;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        AndroidSupportInjection.inject(this);
+        setRetainInstance(true);
+        userProfileModel = new UserProfileModel();
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_stats, container, false);
         ButterKnife.bind(this, view);
+        bSearch.setOnClickListener(click ->
+            presenter.getUserStats("pc", "whiskermrr")
+        );
         return view;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        presenter.getUserStats("pc", "whiskermrr");
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
     public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
         super.onAttach(context);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        presenter.unsubscribe();
     }
 
     @Override
@@ -60,7 +85,9 @@ public class StatsFragment extends Fragment implements StatsContracts.View {
 
     @Override
     public void onSuccess(UserProfileModel userProfile) {
+        userProfileModel = userProfile;
         Toast.makeText(getActivity(), userProfile.getAccountId(), Toast.LENGTH_LONG).show();
+        tText.setText(userProfile.getAccountId());
     }
 
     @Override
