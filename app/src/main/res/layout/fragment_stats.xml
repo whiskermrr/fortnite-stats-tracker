@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorStatsBackground">
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -27,185 +28,216 @@
     <android.support.v7.widget.CardView
         android:id="@+id/card_solo"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="280dp"
         android:elevation="5dp"
         android:layout_margin="10dp"
         >
 
-        <GridLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:columnOrderPreserved="false"
-            android:rowCount="3"
-            android:columnCount="3"
-            >
+            android:orientation="vertical"
+            android:weightSum="1">
 
-            <LinearLayout
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:orientation="vertical"
-                android:padding="5dp"
+            <FrameLayout
+                android:layout_weight="0.2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/colorSoloBlue">
+
+                <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
+                    android:text="SOLO"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textSize="24sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:text="Score: 84,560"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </FrameLayout>
+
+            <GridLayout
+                android:layout_weight="0.8"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:columnOrderPreserved="false"
+                android:rowCount="3"
+                android:columnCount="3"
                 >
 
-                <TextView
-                    style="@style/StatsHeaderText"
-                    android:text="983"
-                    />
-                <TextView
-                    style="@style/StatsBottomText"
-                    android:text="Matches Played"
-                     />
+                <LinearLayout
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    >
 
-            </LinearLayout>
+                    <TextView
+                        style="@style/StatsHeaderText"
+                        android:text="983"
+                        />
+                    <TextView
+                        style="@style/StatsBottomText"
+                        android:text="Matches Played"
+                        />
 
-            <LinearLayout
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:orientation="vertical"
-                android:padding="5dp"
-                >
+                </LinearLayout>
 
-                <TextView
-                    style="@style/StatsHeaderText"
-                    android:text="76"
-                    />
-                <TextView
-                    style="@style/StatsBottomText"
-                    android:text="Wins"
-                     />
+                <LinearLayout
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    >
 
-            </LinearLayout>
+                    <TextView
+                        style="@style/StatsHeaderText"
+                        android:text="76"
+                        />
+                    <TextView
+                        style="@style/StatsBottomText"
+                        android:text="Wins"
+                        />
 
-            <LinearLayout
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:orientation="vertical"
-                android:padding="5dp"
-                >
+                </LinearLayout>
 
-                <TextView
-                    style="@style/StatsHeaderText"
-                    android:text="7.9%"
-                    />
-                <TextView
-                    style="@style/StatsBottomText"
-                    android:text="Win Percentage"
-                     />
+                <LinearLayout
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    >
 
-            </LinearLayout>
+                    <TextView
+                        style="@style/StatsHeaderText"
+                        android:text="7.9%"
+                        />
+                    <TextView
+                        style="@style/StatsBottomText"
+                        android:text="Win Percentage"
+                        />
 
-            <LinearLayout
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:orientation="vertical"
-                android:padding="5dp"
-                >
+                </LinearLayout>
 
-                <TextView
-                    style="@style/StatsHeaderText"
-                    android:text="1753"
-                    />
-                <TextView
-                    style="@style/StatsBottomText"
-                    android:text="Kills"
-                    />
+                <LinearLayout
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    >
 
-            </LinearLayout>
+                    <TextView
+                        style="@style/StatsHeaderText"
+                        android:text="1753"
+                        />
+                    <TextView
+                        style="@style/StatsBottomText"
+                        android:text="Kills"
+                        />
 
-            <LinearLayout
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:orientation="vertical"
-                android:padding="5dp"
-                >
+                </LinearLayout>
 
-                <TextView
-                    style="@style/StatsHeaderText"
-                    android:text="1.91"
-                    />
-                <TextView
-                    style="@style/StatsBottomText"
-                    android:text="K/D Ratio"
-                    />
+                <LinearLayout
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    >
 
-            </LinearLayout>
+                    <TextView
+                        style="@style/StatsHeaderText"
+                        android:text="1.91"
+                        />
+                    <TextView
+                        style="@style/StatsBottomText"
+                        android:text="K/D Ratio"
+                        />
 
-            <LinearLayout
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:orientation="vertical"
-                android:padding="5dp"
-                >
+                </LinearLayout>
 
-                <TextView
-                    style="@style/StatsHeaderText"
-                    android:text="2.11"
-                    />
-                <TextView
-                    style="@style/StatsBottomText"
-                    android:text="Kills per Match"
-                    />
+                <LinearLayout
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    >
 
-            </LinearLayout>
+                    <TextView
+                        style="@style/StatsHeaderText"
+                        android:text="2.11"
+                        />
+                    <TextView
+                        style="@style/StatsBottomText"
+                        android:text="Kills per Match"
+                        />
 
-            <LinearLayout
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:orientation="vertical"
-                android:padding="5dp"
-                >
+                </LinearLayout>
 
-                <TextView
-                    style="@style/StatsHeaderText"
-                    android:text="213"
-                    />
-                <TextView
-                    style="@style/StatsBottomText"
-                    android:text="Top 10"
-                    />
+                <LinearLayout
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    >
 
-            </LinearLayout>
+                    <TextView
+                        style="@style/StatsHeaderText"
+                        android:text="213"
+                        />
+                    <TextView
+                        style="@style/StatsBottomText"
+                        android:text="Top 10"
+                        />
 
-            <LinearLayout
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:orientation="vertical"
-                android:padding="5dp"
-                >
+                </LinearLayout>
 
-                <TextView
-                    style="@style/StatsHeaderText"
-                    android:text="439"
-                    />
-                <TextView
-                    style="@style/StatsBottomText"
-                    android:text="Top 25"
-                    />
+                <LinearLayout
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    >
 
-            </LinearLayout>
+                    <TextView
+                        style="@style/StatsHeaderText"
+                        android:text="439"
+                        />
+                    <TextView
+                        style="@style/StatsBottomText"
+                        android:text="Top 25"
+                        />
 
-            <LinearLayout
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:orientation="vertical"
-                android:padding="5dp"
-                >
+                </LinearLayout>
 
-                <TextView
-                    style="@style/StatsHeaderText"
-                    android:text="86.4"
-                    />
-                <TextView
-                    style="@style/StatsBottomText"
-                    android:text="Hours Played"
-                    />
+                <LinearLayout
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    >
 
-            </LinearLayout>
-        </GridLayout>
+                    <TextView
+                        style="@style/StatsHeaderText"
+                        android:text="86.4"
+                        />
+                    <TextView
+                        style="@style/StatsBottomText"
+                        android:text="Hours Played"
+                        />
 
-
-
+                </LinearLayout>
+            </GridLayout>
+        </LinearLayout>
     </android.support.v7.widget.CardView>
-
 
 </LinearLayout>

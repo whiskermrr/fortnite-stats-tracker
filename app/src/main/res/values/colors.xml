@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF0</color>
     <color name="colorWhite">#FAFAFA</color>
     <color name="colorDarkOceanBlue">#355282</color>
+    <color name="colorSoloBlue">#19C2FE</color>
+    <color name="colorStatsBackground">#E5ECF6</color>
+    <color name="colorDarkFactoryBlue">#708BB4</color>
 </resources>
