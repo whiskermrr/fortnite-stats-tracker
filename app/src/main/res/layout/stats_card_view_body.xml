@@ -1,0 +1,182 @@
+<GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/stats_card_view"
+    android:layout_weight="0.8"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:columnOrderPreserved="false"
+    android:rowCount="3"
+    android:columnCount="3"
+    >
+
+    <LinearLayout
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:orientation="vertical"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/stats_matches_played"
+            style="@style/StatsHeaderText"
+            android:text="@string/default_stats_number"
+            />
+        <TextView
+            style="@style/StatsBottomText"
+            android:text="@string/matches_played"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:orientation="vertical"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/stats_wins"
+            style="@style/StatsHeaderText"
+            android:text="@string/default_stats_number"
+            />
+        <TextView
+            style="@style/StatsBottomText"
+            android:text="@string/wins"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:orientation="vertical"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/stats_percentage"
+            style="@style/StatsHeaderText"
+            android:text="@string/default_stats_number"
+            />
+        <TextView
+            style="@style/StatsBottomText"
+            android:text="@string/win_percentage"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:orientation="vertical"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/stats_kills"
+            style="@style/StatsHeaderText"
+            android:text="@string/default_stats_number"
+            />
+        <TextView
+            style="@style/StatsBottomText"
+            android:text="@string/kills"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:orientation="vertical"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/stats_ratio"
+            style="@style/StatsHeaderText"
+            android:text="@string/default_stats_number"
+            />
+        <TextView
+            style="@style/StatsBottomText"
+            android:text="@string/k_d_ratio"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:orientation="vertical"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/stats_kills_per_match"
+            style="@style/StatsHeaderText"
+            android:text="@string/default_stats_number"
+            />
+        <TextView
+            style="@style/StatsBottomText"
+            android:text="@string/kills_per_match"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:orientation="vertical"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/stats_top_10"
+            style="@style/StatsHeaderText"
+            android:text="@string/default_stats_number"
+            />
+        <TextView
+            style="@style/StatsBottomText"
+            android:text="@string/top_10"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:orientation="vertical"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/stats_top_25"
+            style="@style/StatsHeaderText"
+            android:text="@string/default_stats_number"
+            />
+        <TextView
+            style="@style/StatsBottomText"
+            android:text="@string/top_25"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:orientation="vertical"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/stats_hours_played"
+            style="@style/StatsHeaderText"
+            android:text="@string/default_stats_number"
+            />
+        <TextView
+            style="@style/StatsBottomText"
+            android:text="@string/hours_played"
+            />
+
+    </LinearLayout>
+</GridLayout>
