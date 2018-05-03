@@ -16,4 +16,18 @@
     <string name="twitter">Twitter</string>
     <string name="news">News</string>
     <string name="about">About</string>
+    <string name="matches_played">Matches Played</string>
+    <string name="wins">Wins</string>
+    <string name="win_percentage">Win Percentage</string>
+    <string name="k_d_ratio">K/D Ratio</string>
+    <string name="kills">Kills</string>
+    <string name="kills_per_match">Kills per Match</string>
+    <string name="top_10">Top 10</string>
+    <string name="top_25">Top 25</string>
+    <string name="hours_played">Hours Played</string>
+    <string name="default_stats_number">0</string>
+    <string name="solo">SOLO</string>
+    <string name="duo">DUO</string>
+    <string name="squad">SQUAD</string>
+    <string name="score_0">Score: 0</string>
 </resources>

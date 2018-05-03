@@ -4,4 +4,10 @@
     <color name="colorPrimaryDark">#761FA1</color>
     <color name="colorAccent">#FF0</color>
     <color name="colorWhite">#FAFAFA</color>
+    <color name="colorDarkOceanBlue">#355282</color>
+    <color name="colorSoloBlue">#19C2FE</color>
+    <color name="colorStatsBackground">#E5ECF6</color>
+    <color name="colorDarkFactoryBlue">#708BB4</color>
+    <color name="colorTurkishOrange">#EC9157</color>
+    <color name="colorLightFortniteViolet">#B83CF2</color>
 </resources>

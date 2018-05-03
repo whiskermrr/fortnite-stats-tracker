@@ -4,13 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mrr.fortnitetracker.Model.UserProfileModel;
@@ -30,8 +28,6 @@ public class StatsFragment extends Fragment implements StatsContracts.View {
     @BindView(R.id.bSearch)
     Button bSearch;
 
-    @BindView(R.id.tText)
-    TextView tText;
 
     @Inject
     StatsContracts.Presenter presenter;
@@ -87,7 +83,6 @@ public class StatsFragment extends Fragment implements StatsContracts.View {
     public void onSuccess(UserProfileModel userProfile) {
         userProfileModel = userProfile;
         Toast.makeText(getActivity(), userProfile.getAccountId(), Toast.LENGTH_LONG).show();
-        tText.setText(userProfile.getAccountId());
     }
 
     @Override
