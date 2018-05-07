@@ -1,14 +1,17 @@
 package com.example.mrr.fortnitetracker.view.stats;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -26,10 +29,6 @@ public class StatsFragment extends Fragment implements StatsContracts.View {
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
-    @BindView(R.id.bSearch)
-    Button bSearch;
-
-
     @Inject
     StatsContracts.Presenter presenter;
 
@@ -40,6 +39,7 @@ public class StatsFragment extends Fragment implements StatsContracts.View {
         super.onCreate(savedInstanceState);
         AndroidSupportInjection.inject(this);
         setRetainInstance(true);
+        setHasOptionsMenu(true);
         userProfileModel = new UserProfileModel();
     }
 
@@ -48,9 +48,6 @@ public class StatsFragment extends Fragment implements StatsContracts.View {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_stats, container, false);
         ButterKnife.bind(this, view);
-        bSearch.setOnClickListener(click ->
-            presenter.getUserStats("pc", "whiskermrr")
-        );
         return view;
     }
 
@@ -64,10 +61,35 @@ public class StatsFragment extends Fragment implements StatsContracts.View {
         super.onAttach(context);
     }
 
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         presenter.unsubscribe();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.main_menu, menu);
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+
+        if(searchManager != null) {
+            SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    return false;
+                }
+            });
+        }
     }
 
     @Override
