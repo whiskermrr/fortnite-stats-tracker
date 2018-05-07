@@ -30,4 +30,5 @@
     <string name="duo">DUO</string>
     <string name="squad">SQUAD</string>
     <string name="score_0">Score: 0</string>
+    <string name="search_hint">Enter username</string>
 </resources>

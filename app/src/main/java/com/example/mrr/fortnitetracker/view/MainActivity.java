@@ -9,11 +9,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.mrr.fortnitetracker.R;
-import com.example.mrr.fortnitetracker.view.stats.StatsFragment;
+import com.example.mrr.fortnitetracker.view.stats.StatsSearchFragment;
 
 import javax.inject.Inject;
 
@@ -74,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Fragment fragment = null;
 
         if(id == R.id.nav_stats) {
-            fragment = new StatsFragment();
+            fragment = new StatsSearchFragment();
         }
 
         if(fragment != null) {
