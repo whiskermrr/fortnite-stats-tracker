@@ -1,11 +1,11 @@
 package com.example.mrr.fortnitetracker.dagger.modules;
 
-import com.example.mrr.fortnitetracker.Network.FortniteApiService;
 import com.example.mrr.fortnitetracker.dagger.scopes.PerFragment;
 import com.example.mrr.fortnitetracker.view.stats.StatsContracts;
 import com.example.mrr.fortnitetracker.view.stats.StatsFragment;
 import com.example.mrr.fortnitetracker.view.stats.StatsInteractor;
 import com.example.mrr.fortnitetracker.view.stats.StatsPresenter;
+import com.example.rxjava_fortnite_api.FortniteApi;
 
 import dagger.Module;
 import dagger.Provides;
@@ -21,8 +21,8 @@ public class StatsFragmentModule {
 
     @Provides
     @PerFragment
-    public StatsContracts.Interactor interactor(FortniteApiService apiService) {
-        return new StatsInteractor(apiService);
+    public StatsContracts.Interactor interactor(FortniteApi fortniteApi) {
+        return new StatsInteractor(fortniteApi);
     }
 
     @Provides

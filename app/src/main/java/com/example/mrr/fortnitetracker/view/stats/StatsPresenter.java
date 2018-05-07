@@ -1,8 +1,7 @@
 package com.example.mrr.fortnitetracker.view.stats;
 
-import com.example.mrr.fortnitetracker.Model.UserProfileModel;
+import com.example.rxjava_fortnite_api.models.stats.BattleRoyaleStats;
 
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
@@ -21,12 +20,16 @@ public class StatsPresenter implements StatsContracts.Presenter {
     }
 
     @Override
-    public void getUserStats(String platform, String username) {
+    public void getUserStats(String username) {
         view.showProgress();
-        final Observable<UserProfileModel> observable = interactor.getProfile(platform, username)
+        disposables.add(
+                interactor.getUserStats(username)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-        disposables.add(observable.subscribeWith(new UserProfileObserver()));
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(StatsPresenter.this::onFinished,
+                        StatsPresenter.this::onFailure
+                )
+        );
     }
 
     @Override
@@ -35,29 +38,30 @@ public class StatsPresenter implements StatsContracts.Presenter {
     }
 
 
-    private void onFinished(UserProfileModel userProfile) {
-        if(userProfile.getAccountId() != null)
-            view.onSuccess(userProfile);
+    private void onFinished(BattleRoyaleStats battleRoyaleStats) {
+        view.hideProgress();
+        if(battleRoyaleStats != null)
+            view.onSuccess(battleRoyaleStats);
         else
             view.onFailure("User not found.");
     }
 
-    private void onFailure(String message) {
+    private void onFailure(Throwable throwable) {
         view.hideProgress();
-        view.onFailure(message);
+        view.onFailure(throwable.getMessage());
     }
 
 
-    private class UserProfileObserver extends DisposableObserver<UserProfileModel> {
+    private class UserProfileObserver extends DisposableObserver<BattleRoyaleStats> {
 
         @Override
-        public void onNext(UserProfileModel userProfileModel) {
-            StatsPresenter.this.onFinished(userProfileModel);
+        public void onNext(BattleRoyaleStats battleRoyaleStats) {
+            StatsPresenter.this.onFinished(battleRoyaleStats);
         }
 
         @Override
-        public void onError(Throwable e) {
-            StatsPresenter.this.onFailure(e.getMessage());
+        public void onError(Throwable throwable) {
+            StatsPresenter.this.onFailure(throwable);
         }
 
         @Override

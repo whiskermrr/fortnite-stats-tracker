@@ -1,7 +1,5 @@
 package com.example.mrr.fortnitetracker.view;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,9 +9,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
-import android.support.v7.widget.SearchView;
 
 import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.view.stats.StatsFragment;

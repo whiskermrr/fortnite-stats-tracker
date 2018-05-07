@@ -15,8 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.mrr.fortnitetracker.Model.UserProfileModel;
 import com.example.mrr.fortnitetracker.R;
+import com.example.rxjava_fortnite_api.models.stats.BattleRoyaleStats;
 
 import javax.inject.Inject;
 
@@ -32,7 +32,7 @@ public class StatsFragment extends Fragment implements StatsContracts.View {
     @Inject
     StatsContracts.Presenter presenter;
 
-    UserProfileModel userProfileModel;
+    BattleRoyaleStats battleRoyaleStats;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class StatsFragment extends Fragment implements StatsContracts.View {
         AndroidSupportInjection.inject(this);
         setRetainInstance(true);
         setHasOptionsMenu(true);
-        userProfileModel = new UserProfileModel();
+        battleRoyaleStats = new BattleRoyaleStats();
     }
 
     @Nullable
@@ -48,12 +48,8 @@ public class StatsFragment extends Fragment implements StatsContracts.View {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_stats, container, false);
         ButterKnife.bind(this, view);
+        presenter.getUserStats("whiskermrr");
         return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -103,9 +99,9 @@ public class StatsFragment extends Fragment implements StatsContracts.View {
     }
 
     @Override
-    public void onSuccess(UserProfileModel userProfile) {
-        userProfileModel = userProfile;
-        Toast.makeText(getActivity(), userProfile.getAccountId(), Toast.LENGTH_LONG).show();
+    public void onSuccess(BattleRoyaleStats battleRoyaleStats) {
+        this.battleRoyaleStats = battleRoyaleStats;
+        Toast.makeText(getActivity(), String.valueOf(battleRoyaleStats.getSquad().getKills()), Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -1,22 +1,20 @@
 package com.example.mrr.fortnitetracker.view.stats;
 
-import com.example.mrr.fortnitetracker.Model.UserProfileModel;
-import com.example.mrr.fortnitetracker.Network.FortniteApiService;
+import com.example.rxjava_fortnite_api.FortniteApi;
+import com.example.rxjava_fortnite_api.models.stats.BattleRoyaleStats;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public class StatsInteractor implements StatsContracts.Interactor {
 
-    private FortniteApiService apiService;
+    private FortniteApi fortniteApi;
 
-    public StatsInteractor(FortniteApiService apiService) {
-        this.apiService = apiService;
+    public StatsInteractor(FortniteApi fortniteApi) {
+        this.fortniteApi = fortniteApi;
     }
 
     @Override
-    public Observable<UserProfileModel> getProfile(String platform, String username) {
-        return apiService.getProfile(platform, username);
+    public Single<BattleRoyaleStats> getUserStats(String username) {
+        return fortniteApi.getUserBattleRoyaleStats(username);
     }
-
-
 }

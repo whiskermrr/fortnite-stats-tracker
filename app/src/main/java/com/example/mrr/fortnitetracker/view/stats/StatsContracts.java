@@ -1,24 +1,24 @@
 package com.example.mrr.fortnitetracker.view.stats;
 
-import com.example.mrr.fortnitetracker.Model.UserProfileModel;
+import com.example.rxjava_fortnite_api.models.stats.BattleRoyaleStats;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public interface StatsContracts {
 
     interface View {
         void showProgress();
         void hideProgress();
-        void onSuccess(UserProfileModel userProfile);
+        void onSuccess(BattleRoyaleStats battleRoyaleStats);
         void onFailure(String message);
     }
 
     interface Presenter {
-        void getUserStats(String platform, String username);
+        void getUserStats(String username);
         void unsubscribe();
     }
 
     interface Interactor {
-        Observable<UserProfileModel> getProfile(String platform, String username);
+        Single<BattleRoyaleStats> getUserStats(String username);
     }
 }
