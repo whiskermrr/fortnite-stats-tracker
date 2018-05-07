@@ -3,6 +3,7 @@ package com.example.mrr.fortnitetracker.view;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -90,5 +91,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return dispatchingAndroidInjector;
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if(fragmentManager.getFragments() != null) {
+            for(Fragment fragment : fragmentManager.getFragments()) {
+                FragmentManager childFragmentManager = fragment.getChildFragmentManager();
+                if(childFragmentManager.getBackStackEntryCount() > 0) {
+                    childFragmentManager.popBackStack();
+                }
+            }
+        }
+        else {
+            super.onBackPressed();
+        }
     }
 }

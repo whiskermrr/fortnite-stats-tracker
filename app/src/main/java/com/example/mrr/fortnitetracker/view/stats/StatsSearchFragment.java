@@ -120,9 +120,5 @@ public class StatsSearchFragment extends Fragment implements StatsContracts.View
                 .replace(R.id.stats_frame, fragment)
                 .addToBackStack(null)
                 .commit();
-
-        fragmentManager.popBackStack();
     }
-
-
 }
