@@ -105,7 +105,6 @@ public class StatsSearchFragment extends Fragment implements StatsContracts.View
 
     @Override
     public void onSuccess(BattleRoyaleStats battleRoyaleStats) {
-        Toast.makeText(getActivity(), String.valueOf(battleRoyaleStats.getSquad().getKills()), Toast.LENGTH_LONG).show();
         openStatsFragment(battleRoyaleStats);
     }
 
@@ -115,7 +114,11 @@ public class StatsSearchFragment extends Fragment implements StatsContracts.View
     }
 
     public void openStatsFragment(BattleRoyaleStats battleRoyaleStats) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("stats", battleRoyaleStats);
         StatsFragment fragment = new StatsFragment();
+        fragment.setArguments(bundle);
+
         fragmentManager.beginTransaction()
                 .replace(R.id.stats_frame, fragment)
                 .addToBackStack(null)

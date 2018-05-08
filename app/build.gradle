@@ -30,7 +30,7 @@ dependencies {
     implementation 'com.android.support:cardview-v7:27.1.1'
 
     // fortnite-api
-    implementation 'com.whiskermrr:rxjava-fortnite-api:0.2.4'
+    implementation 'com.whiskermrr:rxjava-fortnite-api:0.2.5'
 
     // dagger
     implementation 'com.google.dagger:dagger:2.15'
