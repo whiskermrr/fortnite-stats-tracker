@@ -97,10 +97,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         for(Fragment fragment : fragmentManager.getFragments()) {
-            FragmentManager childFragmentManager = fragment.getChildFragmentManager();
-            if(childFragmentManager.getBackStackEntryCount() > 0) {
-                childFragmentManager.popBackStack();
-                return;
+            if(fragment.isVisible()) {
+                FragmentManager childFragmentManager = fragment.getChildFragmentManager();
+                if(childFragmentManager.getBackStackEntryCount() > 0) {
+                    childFragmentManager.popBackStack();
+                    return;
+                }
             }
         }
         super.onBackPressed();
