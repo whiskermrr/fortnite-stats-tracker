@@ -3,7 +3,7 @@ package com.example.mrr.fortnitetracker.dagger.components;
 import android.support.v4.app.Fragment;
 
 
-import com.example.mrr.fortnitetracker.view.stats.StatsFragment;
+import com.example.mrr.fortnitetracker.view.stats.StatsSearchFragment;
 
 import dagger.Binds;
 import dagger.Module;
@@ -16,7 +16,7 @@ public abstract class FragmentBuilder {
 
     @Binds
     @IntoMap
-    @FragmentKey(StatsFragment.class)
+    @FragmentKey(StatsSearchFragment.class)
     abstract AndroidInjector.Factory<? extends Fragment> bindStatsFragment(StatsFragmentComponent.Builder builder);
 
 }

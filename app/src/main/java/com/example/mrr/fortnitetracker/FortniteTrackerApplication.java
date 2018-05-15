@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.example.mrr.fortnitetracker.dagger.components.DaggerFortniteApplicationComponent;
+import com.example.rxjava_fortnite_api.FortniteApi;
 import com.twitter.sdk.android.core.Twitter;
 
 import javax.inject.Inject;
@@ -17,6 +18,9 @@ public class FortniteTrackerApplication extends Application implements HasActivi
     @Inject
     DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
 
+    @Inject
+    FortniteApi fortniteApi;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -27,6 +31,8 @@ public class FortniteTrackerApplication extends Application implements HasActivi
                 .application(this)
                 .build()
                 .inject(this);
+
+        fortniteApi.authenticate();
     }
 
     @Override

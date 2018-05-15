@@ -6,25 +6,6 @@
     android:orientation="vertical"
     android:background="@color/colorStatsBackground">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:max="100"
-        android:backgroundTint="@color/colorPrimary"
-        android:indeterminateTint="@color/colorPrimaryDark"
-        android:visibility="gone"
-        />
-
-    <Button
-        android:id="@+id/bSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SEARCH"
-        />
-
     <android.support.v7.widget.CardView
         android:id="@+id/card_solo"
         android:layout_width="match_parent"
@@ -39,10 +20,13 @@
             android:orientation="vertical"
             android:weightSum="1">
 
-            <include layout="@layout/solo_stats_card_view_header">
+            <include layout="@layout/solo_stats_card_view_header"
+                android:id="@+id/layout_header_solo">
             </include>
 
-            <include layout="@layout/stats_card_view_body" />
+            <include layout="@layout/stats_card_view_body"
+                android:id="@+id/layout_body_solo">
+            </include>
 
         </LinearLayout>
     </android.support.v7.widget.CardView>

@@ -3,17 +3,17 @@ package com.example.mrr.fortnitetracker.view;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.mrr.fortnitetracker.R;
-import com.example.mrr.fortnitetracker.view.stats.StatsFragment;
+import com.example.mrr.fortnitetracker.view.stats.StatsSearchFragment;
 
 import javax.inject.Inject;
 
@@ -55,14 +55,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -82,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Fragment fragment = null;
 
         if(id == R.id.nav_stats) {
-            fragment = new StatsFragment();
+            fragment = new StatsSearchFragment();
         }
 
         if(fragment != null) {
@@ -99,5 +91,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return dispatchingAndroidInjector;
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        for(Fragment fragment : fragmentManager.getFragments()) {
+            if(fragment.isVisible()) {
+                FragmentManager childFragmentManager = fragment.getChildFragmentManager();
+                if(childFragmentManager.getBackStackEntryCount() > 0) {
+                    childFragmentManager.popBackStack();
+                    return;
+                }
+            }
+        }
+        super.onBackPressed();
     }
 }

@@ -1,92 +1,96 @@
 package com.example.mrr.fortnitetracker.view.stats;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mrr.fortnitetracker.Model.UserProfileModel;
 import com.example.mrr.fortnitetracker.R;
+import com.example.rxjava_fortnite_api.models.stats.BattleRoyaleStats;
+import com.example.rxjava_fortnite_api.models.stats.StatsModel;
 
-import javax.inject.Inject;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.support.AndroidSupportInjection;
 
-public class StatsFragment extends Fragment implements StatsContracts.View {
+public class StatsFragment extends Fragment {
 
-    @BindView(R.id.progress_bar)
-    ProgressBar progressBar;
+    private BattleRoyaleStats battleRoyaleStats;
 
-    @BindView(R.id.bSearch)
-    Button bSearch;
+    @BindView(R.id.layout_body_solo)
+    View layoutSoloBody;
 
-
-    @Inject
-    StatsContracts.Presenter presenter;
-
-    UserProfileModel userProfileModel;
+    @BindView(R.id.layout_header_solo)
+    View layoutHeaderSolo;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AndroidSupportInjection.inject(this);
         setRetainInstance(true);
-        userProfileModel = new UserProfileModel();
+        battleRoyaleStats = (BattleRoyaleStats) getArguments().getSerializable("stats");
+        if(battleRoyaleStats != null) {
+            Toast.makeText(getActivity(), String.valueOf(battleRoyaleStats.getSquad().getKills()), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_stats, container, false);
         ButterKnife.bind(this, view);
-        bSearch.setOnClickListener(click ->
-            presenter.getUserStats("pc", "whiskermrr")
-        );
+        populateBody(layoutSoloBody, battleRoyaleStats.getSolo());
         return view;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
+    private void populateBody(View view, StatsModel stats) {
+        // TODO: populate include layout
+        TextView tMatchesPlayed = view.findViewById(R.id.stats_matches_played);
+        TextView tWins = view.findViewById(R.id.stats_wins);
+        TextView tPercentage = view.findViewById(R.id.stats_percentage);
+        TextView tKills = view.findViewById(R.id.stats_kills);
+        TextView tKDRatio = view.findViewById(R.id.stats_ratio);
+        TextView tKillsPerMatch = view.findViewById(R.id.stats_kills_per_match);
+        TextView tTop10 = view.findViewById(R.id.stats_top_10);
+        TextView tTop25 = view.findViewById(R.id.stats_top_25);
+        TextView tHours = view.findViewById(R.id.stats_hours_played);
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
+        tMatchesPlayed.setText(String.valueOf(stats.getMatches()));
+        tWins.setText(String.valueOf(stats.getWins()));
+        String winPercentage = String.format(Locale.US, "%.1f", stats.getWinPercentage()) + "%";
+        tPercentage.setText(winPercentage);
+        tKills.setText(String.valueOf(stats.getKills()));
+        tKDRatio.setText(String.format(Locale.US, "%.2f", stats.getKDRatio()));
+        tKillsPerMatch.setText(String.format(Locale.US, "%.2f", stats.getKillsPerMatch()));
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        presenter.unsubscribe();
-    }
+        String top10 = "";
+        String top25 = "";
 
-    @Override
-    public void showProgress() {
-        progressBar.setVisibility(View.VISIBLE);
-    }
+        switch (stats.getMode()) {
+            case "_p2":
+                top10 = String.valueOf(stats.getTop10());
+                top25 = String.valueOf(stats.getTop25());
+                break;
+            case "_p10":
+                top10 = String.valueOf(stats.getTop5());
+                top25 = String.valueOf(stats.getTop12());
+                break;
+            case "_p9":
+                top10 = String.valueOf(stats.getTop3());
+                top25 = String.valueOf(stats.getTop6());
+                break;
+            case "_p":
+                // TODO: calculation for lifeTime stats
+                break;
+        }
 
-    @Override
-    public void hideProgress() {
-        progressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onSuccess(UserProfileModel userProfile) {
-        userProfileModel = userProfile;
-        Toast.makeText(getActivity(), userProfile.getAccountId(), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onFailure(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+        tTop10.setText(top10);
+        tTop25.setText(top25);
+        tHours.setText(String.valueOf(stats.getTime()));
     }
 }
