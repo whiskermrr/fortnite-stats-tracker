@@ -1,34 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorStatsBackground">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_solo"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:elevation="5dp"
-        android:layout_margin="10dp"
-        >
+        android:layout_height="wrap_content">
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_solo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="1">
+            android:layout_height="280dp"
+            android:elevation="5dp"
+            android:layout_margin="10dp"
+            >
 
-            <include layout="@layout/solo_stats_card_view_header"
-                android:id="@+id/layout_header_solo">
-            </include>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="1">
 
-            <include layout="@layout/stats_card_view_body"
-                android:id="@+id/layout_body_solo">
-            </include>
+                <include layout="@layout/solo_stats_card_view_header"
+                    android:id="@+id/layout_header_solo">
+                </include>
 
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+                <include layout="@layout/stats_card_view_body"
+                    android:id="@+id/layout_body_solo">
+                </include>
 
-</LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_duo"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:elevation="5dp"
+            android:layout_margin="10dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <include layout="@layout/duo_stats_card_view_header"
+                    android:id="@+id/layout_header_duo">
+                </include>
+
+                <include layout="@layout/stats_card_view_body"
+                    android:id="@+id/layout_body_duo">
+                </include>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_squad"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:elevation="5dp"
+            android:layout_margin="10dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <include layout="@layout/squad_stats_card_view_header"
+                    android:id="@+id/layout_header_squad">
+                </include>
+
+                <include layout="@layout/stats_card_view_body"
+                    android:id="@+id/layout_body_squad">
+                </include>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</ScrollView>
