@@ -1,6 +1,9 @@
 package com.example.mrr.fortnitetracker.view.stats;
 
 import com.example.rxjava_fortnite_api.models.stats.BattleRoyaleStats;
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
+
+import java.net.SocketTimeoutException;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -40,15 +43,20 @@ public class StatsPresenter implements StatsContracts.Presenter {
 
     private void onFinished(BattleRoyaleStats battleRoyaleStats) {
         view.hideProgress();
-        if(battleRoyaleStats != null)
-            view.onSuccess(battleRoyaleStats);
-        else
-            view.onFailure("User not found.");
+        view.onSuccess(battleRoyaleStats);
     }
 
     private void onFailure(Throwable throwable) {
+        String errorMessage = throwable.getMessage();
         view.hideProgress();
-        view.onFailure(throwable.getMessage());
+        if(throwable instanceof HttpException) {
+            if(((HttpException) throwable).response().code() == 404) {
+                errorMessage = "User not found.";
+            }
+        } else if(throwable instanceof SocketTimeoutException) {
+            errorMessage = "Connection problem. Please try again.";
+        }
+        view.onFailure(errorMessage);
     }
 
 

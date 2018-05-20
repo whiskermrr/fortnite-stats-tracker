@@ -64,7 +64,7 @@ public class NetworkModule {
     @Provides
     @FortniteApplicationScope
     public HttpLoggingInterceptor httpLoggingInterceptor() {
-        return new HttpLoggingInterceptor(message -> Log.v("LOGGING INTERCEPTOR", message)).setLevel(HttpLoggingInterceptor.Level.BASIC);
+        return new HttpLoggingInterceptor(message -> Log.v("LOGGING INTERCEPTOR", message)).setLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
 
