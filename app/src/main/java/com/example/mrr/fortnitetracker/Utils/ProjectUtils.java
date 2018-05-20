@@ -12,7 +12,8 @@ public class ProjectUtils {
 
         if(connectivityManager != null) {
             NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-            return networkInfo.isConnected();
+            if(networkInfo != null)
+                return networkInfo.isConnected();
         }
 
         return false;

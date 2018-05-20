@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.mrr.fortnitetracker.Utils.ProjectUtils;
 import com.example.mrr.fortnitetracker.dagger.components.DaggerFortniteApplicationComponent;
 import com.example.rxjava_fortnite_api.FortniteApi;
 import com.example.rxjava_fortnite_api.models.auth.AuthenticationToken;
@@ -55,10 +56,12 @@ public class FortniteTrackerApplication extends Application implements HasActivi
         if(json != null) {
             AuthenticationToken token = new Gson().fromJson(json, AuthenticationToken.class);
             fortniteApi.setAuthenticationToken(token);
-            fortniteApi.requestRefreshTokenCompletable()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new TokenCompletableObserver());
+            if(ProjectUtils.isNetworkAvailable(this)) {
+                fortniteApi.requestRefreshTokenCompletable()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new TokenCompletableObserver());
+            }
         }
         else {
             fortniteApi.authenticateCompletable()
