@@ -58,7 +58,7 @@ public class NetworkModule {
     @Provides
     @FortniteApplicationScope
     public File file(Context context) {
-        return context.getDir("okhttp_cache", Context.MODE_PRIVATE);
+        return new File(context.getCacheDir(), "ok_http_fortnite_cache");
     }
 
     @Provides
