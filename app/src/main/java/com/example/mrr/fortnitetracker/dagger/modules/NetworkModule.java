@@ -21,14 +21,14 @@ public class NetworkModule {
 
     @Provides
     @FortniteApplicationScope
-    public OkHttpClient okHttpClient(Cache cache, HttpLoggingInterceptor interceptor) {
+    public OkHttpClient okHttpClient(Cache cache, HttpLoggingInterceptor interceptor, Interceptor networkInterceptor) {
         return new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
-                //.addNetworkInterceptor(networkInterceptor)
+                .addNetworkInterceptor(networkInterceptor)
                 .cache(cache)
                 .build();
     }
-/*
+
     @Provides
     @FortniteApplicationScope
     public Interceptor interceptor(final Context context) {
@@ -48,7 +48,7 @@ public class NetworkModule {
             }
         };
     }
-*/
+
     @Provides
     @FortniteApplicationScope
     public Cache cache(File cacheFile) {
