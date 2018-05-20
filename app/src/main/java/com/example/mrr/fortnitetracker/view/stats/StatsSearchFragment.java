@@ -13,12 +13,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.dagger.modules.StatsSearchFragmentModule;
 import com.example.rxjava_fortnite_api.models.stats.BattleRoyaleStats;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -33,6 +40,9 @@ public class StatsSearchFragment extends Fragment implements StatsContracts.View
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
+    @BindView(R.id.table_recent_searches)
+    TableLayout tableRecentSearches;
+
     @Inject
     StatsContracts.Presenter presenter;
 
@@ -40,10 +50,13 @@ public class StatsSearchFragment extends Fragment implements StatsContracts.View
     @Named(StatsSearchFragmentModule.STATS_FRAGMENT_MANAGER)
     FragmentManager fragmentManager;
 
+    private List<String> recentSearches;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AndroidSupportInjection.inject(this);
+        recentSearches = new ArrayList<>();
         setRetainInstance(true);
         setHasOptionsMenu(true);
     }
@@ -53,6 +66,14 @@ public class StatsSearchFragment extends Fragment implements StatsContracts.View
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_stats, container, false);
         ButterKnife.bind(this, view);
+        recentSearches.add("whiskermrr");
+        recentSearches.add("arczitsu");
+        recentSearches.add("dark");
+        recentSearches.add("Wziuuum");
+        recentSearches.add("Ninja");
+        recentSearches.add("Terry 5L");
+        recentSearches.add("miodeg");
+        populateRecentSearchesTable();
         return view;
     }
 
@@ -123,5 +144,34 @@ public class StatsSearchFragment extends Fragment implements StatsContracts.View
                 .replace(R.id.stats_frame, fragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    private void populateRecentSearchesTable() {
+
+        for(String username : recentSearches) {
+            View view = new View(getActivity());
+            view.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, 2));
+            tableRecentSearches.addView(view);
+            tableRecentSearches.addView(prepareRecentSearchesRow(username));
+        }
+    }
+
+    private TableRow prepareRecentSearchesRow(final String username) {
+        final TableRow row = (TableRow) LayoutInflater
+                .from(getActivity())
+                .inflate(R.layout.recent_searches_table_row, null);
+
+        TextView tUsername = row.findViewById(R.id.row_username);
+        tUsername.setText(username);
+        tUsername.setOnClickListener(view ->
+            presenter.getUserStats(username)
+        );
+
+        (row.findViewById(R.id.row_delete)).setOnClickListener(view -> {
+            recentSearches.remove(username);
+            tableRecentSearches.removeView(row);
+        });
+
+        return row;
     }
 }
