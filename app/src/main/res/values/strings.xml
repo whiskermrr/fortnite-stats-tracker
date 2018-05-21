@@ -31,4 +31,6 @@
     <string name="squad">SQUAD</string>
     <string name="score_0">Score: 0</string>
     <string name="search_hint">Enter username</string>
+    <string name="fortnie_stats_tracker">Fortnie Stats Tracker</string>
+    <string name="recent_searches">Recent Searches</string>
 </resources>

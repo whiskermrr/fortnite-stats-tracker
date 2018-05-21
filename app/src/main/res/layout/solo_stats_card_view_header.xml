@@ -10,18 +10,18 @@
         android:text="@string/solo"
         android:layout_marginTop="5dp"
         android:layout_marginStart="5dp"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextView
+    <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
         android:id="@+id/stats_header_score"
         android:text="@string/score_0"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="15dp"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:layout_gravity="end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

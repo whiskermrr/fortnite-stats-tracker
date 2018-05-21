@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:background="@color/colorWhite">
+
+    <TextView
+        android:id="@+id/row_username"
+        android:textSize="18sp"
+        android:padding="5dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_weight="0.95"
+        />
+
+    <ImageButton
+        android:id="@+id/row_delete"
+        android:layout_gravity="end"
+        android:layout_weight="0.05"
+        android:background="@color/colorWhite"
+        android:padding="5dp"
+        android:src="@drawable/ic_clear"
+        />
+
+</TableRow>

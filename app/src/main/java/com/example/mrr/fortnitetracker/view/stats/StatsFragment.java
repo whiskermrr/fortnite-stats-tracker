@@ -14,6 +14,7 @@ import com.example.mrr.fortnitetracker.R;
 import com.example.rxjava_fortnite_api.models.stats.BattleRoyaleStats;
 import com.example.rxjava_fortnite_api.models.stats.StatsModel;
 
+import java.text.NumberFormat;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -23,11 +24,23 @@ public class StatsFragment extends Fragment {
 
     private BattleRoyaleStats battleRoyaleStats;
 
-    @BindView(R.id.layout_body_solo)
-    View layoutSoloBody;
-
     @BindView(R.id.layout_header_solo)
     View layoutHeaderSolo;
+
+    @BindView(R.id.layout_body_solo)
+    View layoutBodySolo;
+
+    @BindView(R.id.layout_header_duo)
+    View layoutHeaderDuo;
+
+    @BindView(R.id.layout_body_duo)
+    View layoutBodyDuo;
+
+    @BindView(R.id.layout_header_squad)
+    View layoutHeaderSquad;
+
+    @BindView(R.id.layout_body_squad)
+    View layoutBodySquad;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,8 +57,19 @@ public class StatsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_stats, container, false);
         ButterKnife.bind(this, view);
-        populateBody(layoutSoloBody, battleRoyaleStats.getSolo());
+        populateBody(layoutBodySolo, battleRoyaleStats.getSolo());
+        populateHeader(layoutHeaderSolo, battleRoyaleStats.getSolo());
+        populateBody(layoutBodyDuo, battleRoyaleStats.getDuo());
+        populateHeader(layoutHeaderDuo, battleRoyaleStats.getDuo());
+        populateBody(layoutBodySquad, battleRoyaleStats.getSquad());
+        populateHeader(layoutHeaderSquad, battleRoyaleStats.getSquad());
         return view;
+    }
+
+    private void populateHeader(View view, StatsModel stats) {
+        TextView tScore = view.findViewById(R.id.stats_header_score);
+        String score = "Score: " + NumberFormat.getNumberInstance(Locale.US).format(stats.getScore());
+        tScore.setText(score);
     }
 
     private void populateBody(View view, StatsModel stats) {

@@ -21,14 +21,14 @@ public class NetworkModule {
 
     @Provides
     @FortniteApplicationScope
-    public OkHttpClient okHttpClient(Cache cache, HttpLoggingInterceptor interceptor) {
+    public OkHttpClient okHttpClient(Cache cache, HttpLoggingInterceptor interceptor, Interceptor networkInterceptor) {
         return new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
-                //.addNetworkInterceptor(networkInterceptor)
+                .addNetworkInterceptor(networkInterceptor)
                 .cache(cache)
                 .build();
     }
-/*
+
     @Provides
     @FortniteApplicationScope
     public Interceptor interceptor(final Context context) {
@@ -48,7 +48,7 @@ public class NetworkModule {
             }
         };
     }
-*/
+
     @Provides
     @FortniteApplicationScope
     public Cache cache(File cacheFile) {
@@ -58,13 +58,13 @@ public class NetworkModule {
     @Provides
     @FortniteApplicationScope
     public File file(Context context) {
-        return context.getDir("okhttp_cache", Context.MODE_PRIVATE);
+        return new File(context.getCacheDir(), "ok_http_fortnite_cache");
     }
 
     @Provides
     @FortniteApplicationScope
     public HttpLoggingInterceptor httpLoggingInterceptor() {
-        return new HttpLoggingInterceptor(message -> Log.v("LOGGING INTERCEPTOR", message)).setLevel(HttpLoggingInterceptor.Level.BASIC);
+        return new HttpLoggingInterceptor(message -> Log.v("LOGGING INTERCEPTOR", message)).setLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
 

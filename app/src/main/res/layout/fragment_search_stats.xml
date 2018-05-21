@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:weightSum="1"
     android:background="@color/colorStatsBackground">
 
     <ProgressBar
@@ -21,6 +22,64 @@
     <FrameLayout
         android:id="@+id/stats_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
+    <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
+        android:textSize="32sp"
+        android:layout_marginTop="25dp"
+        android:textColor="@color/colorLightFortniteViolet"
+        android:textAlignment="center"
+        android:text="@string/fortnie_stats_tracker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_marginTop="25dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <RelativeLayout
+            android:layout_weight="0.15"
+            android:layout_width="0dip"
+            android:layout_height="match_parent">
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_weight="0.70"
+            android:layout_width="0dip"
+            android:layout_height="match_parent">
+
+            <TableLayout
+                android:id="@+id/table_recent_searches"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp">
+
+                <TableRow android:background="@color/colorAccent">
+
+                    <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
+                        android:id="@+id/text_recent_searches"
+                        android:textAlignment="center"
+                        android:padding="5dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="21sp"
+                        android:text="@string/recent_searches"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+
+            </TableLayout>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_weight="0.15"
+            android:layout_width="0dip"
+            android:layout_height="match_parent">
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>
