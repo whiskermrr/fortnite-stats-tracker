@@ -26,8 +26,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class FortniteTrackerApplication extends Application implements HasActivityInjector {
 
-    public static String APPLICATION_SHARED_PREFERENCES = "com.example.mrr.FortniteTrackerApplication";
-    public static String PREFERENCES_AUTH_TOKEN = "authToken";
+    public final static String APPLICATION_SHARED_PREFERENCES = "com.example.mrr.FortniteTrackerApplication";
+    public final static String PREFERENCES_AUTH_TOKEN = "authToken";
 
     @Inject
     DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
@@ -35,8 +35,10 @@ public class FortniteTrackerApplication extends Application implements HasActivi
     @Inject
     FortniteApi fortniteApi;
 
+    @Inject
+    SharedPreferences preferences;
+
     private CompositeDisposable disposables;
-    private SharedPreferences preferences;
 
     @Override
     public void onCreate() {

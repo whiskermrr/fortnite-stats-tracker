@@ -4,21 +4,25 @@ import com.example.rxjava_fortnite_api.models.stats.BattleRoyaleStats;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
 import java.net.SocketTimeoutException;
+import java.util.ArrayList;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class StatsPresenter implements StatsContracts.Presenter {
 
     private StatsContracts.View view;
-    private StatsContracts.Interactor interactor;
+    private StatsContracts.Interactor statsInteractor;
+    private StatsContracts.SPInteractor sharedPreferencesInteractor;
     private CompositeDisposable disposables;
 
-    public StatsPresenter(StatsContracts.View view, StatsContracts.Interactor interactor) {
+    public StatsPresenter(StatsContracts.View view,
+                          StatsContracts.Interactor statsInteractor,
+                          StatsContracts.SPInteractor sharedPreferencesInteractor) {
         this.view = view;
-        this.interactor = interactor;
+        this.statsInteractor = statsInteractor;
+        this.sharedPreferencesInteractor = sharedPreferencesInteractor;
         disposables = new CompositeDisposable();
     }
 
@@ -26,13 +30,23 @@ public class StatsPresenter implements StatsContracts.Presenter {
     public void getUserStats(String username) {
         view.showProgress();
         disposables.add(
-                interactor.getUserStats(username)
+                statsInteractor.getUserStats(username)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(StatsPresenter.this::onFinished,
                         StatsPresenter.this::onFailure
                 )
         );
+    }
+
+    @Override
+    public void saveRecentSearches(ArrayList<String> recentSearches) {
+        sharedPreferencesInteractor.saveRecentSearchesToSharedPreferences(recentSearches);
+    }
+
+    @Override
+    public ArrayList<String> getRecentSearches() {
+        return sharedPreferencesInteractor.getRecentSearchesFromSharedPreferences();
     }
 
     @Override
@@ -60,21 +74,4 @@ public class StatsPresenter implements StatsContracts.Presenter {
     }
 
 
-    private class UserProfileObserver extends DisposableObserver<BattleRoyaleStats> {
-
-        @Override
-        public void onNext(BattleRoyaleStats battleRoyaleStats) {
-            StatsPresenter.this.onFinished(battleRoyaleStats);
-        }
-
-        @Override
-        public void onError(Throwable throwable) {
-            StatsPresenter.this.onFailure(throwable);
-        }
-
-        @Override
-        public void onComplete() {
-            view.hideProgress();
-        }
-    }
 }
