@@ -55,7 +55,6 @@ public class TwitterPresenter implements TwitterContracts.Presenter {
 
         @Override
         public void onComplete() {
-            view.hideProgress();
         }
     }
 }
