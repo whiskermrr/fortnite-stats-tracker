@@ -15,6 +15,7 @@ public class TwitterPresenter implements TwitterContracts.Presenter {
     private TwitterContracts.View view;
     private TwitterContracts.Interactor interactor;
     private CompositeDisposable disposables;
+    private Long maxId = null;
 
     public TwitterPresenter(TwitterContracts.View view, TwitterContracts.Interactor interactor) {
         this.view = view;
@@ -25,7 +26,7 @@ public class TwitterPresenter implements TwitterContracts.Presenter {
     @Override
     public void getTweets() {
         view.showProgress();
-        final Observable<List<Tweet>> observable = interactor.getTweets()
+        final Observable<List<Tweet>> observable = interactor.getTweets(maxId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         disposables.add(observable.subscribeWith(new NewsObserver()));
@@ -33,6 +34,7 @@ public class TwitterPresenter implements TwitterContracts.Presenter {
 
     private void onFinished(List<Tweet> tweets) {
         view.hideProgress();
+        maxId = tweets.get(tweets.size() - 1).id - 1;
         view.onSuccess(tweets);
     }
 

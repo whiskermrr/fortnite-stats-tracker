@@ -1,10 +1,14 @@
 package com.example.mrr.fortnitetracker.dagger.modules;
 
 
+import android.content.Context;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
 
 import com.example.mrr.fortnitetracker.Network.RxTwitterApiService;
+import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.dagger.scopes.PerFragment;
+import com.example.mrr.fortnitetracker.view.adapters.CustomTwitterAdapter;
 import com.example.mrr.fortnitetracker.view.twitter.TwitterContracts;
 import com.example.mrr.fortnitetracker.view.twitter.TwitterFragment;
 import com.example.mrr.fortnitetracker.view.twitter.TwitterInteractor;
@@ -43,6 +47,18 @@ public class TwitterFragmentModule {
     @PerFragment
     FragmentManager fragmentManager(TwitterFragment twitterFragment) {
         return twitterFragment.getChildFragmentManager();
+    }
+
+    @Provides
+    @PerFragment
+    CustomTwitterAdapter adapter(Context context) {
+        return new CustomTwitterAdapter(context, R.style.tw__TweetLightStyle);
+    }
+
+    @Provides
+    @PerFragment
+    LinearLayoutManager linearLayoutManager(TwitterFragment twitterFragment) {
+        return new LinearLayoutManager(twitterFragment.getActivity());
     }
 }
 

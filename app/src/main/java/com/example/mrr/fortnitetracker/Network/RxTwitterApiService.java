@@ -13,5 +13,7 @@ public interface RxTwitterApiService {
     @GET("/1.1//statuses/user_timeline.json")
     Call<List<Tweet>> getNews(
             @Query("screen_name") String username,
-            @Query("exclude_replies") Boolean excludeReplies);
+            @Query("exclude_replies") Boolean excludeReplies,
+            @Query("max_id") Long maxId
+    );
 }

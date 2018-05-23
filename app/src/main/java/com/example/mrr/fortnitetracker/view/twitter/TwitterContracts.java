@@ -21,6 +21,6 @@ public interface TwitterContracts {
 
     interface Interactor {
 
-        Observable<List<Tweet>> getTweets();
+        Observable<List<Tweet>> getTweets(Long maxId);
     }
 }

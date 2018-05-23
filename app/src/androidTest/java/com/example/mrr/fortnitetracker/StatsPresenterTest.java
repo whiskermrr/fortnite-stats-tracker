@@ -1,7 +1,7 @@
 package com.example.mrr.fortnitetracker;
 
 
-import com.example.mrr.fortnitetracker.Model.UserProfileModel;
+import com.example.mrr.fortnitetracker.model.UserProfileModel;
 import com.example.mrr.fortnitetracker.view.stats.StatsContracts;
 import com.example.mrr.fortnitetracker.view.stats.StatsPresenter;
 

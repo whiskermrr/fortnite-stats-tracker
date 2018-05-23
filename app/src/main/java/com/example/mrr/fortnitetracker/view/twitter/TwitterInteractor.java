@@ -19,9 +19,9 @@ public class TwitterInteractor implements TwitterContracts.Interactor {
     }
 
     @Override
-    public Observable<List<Tweet>> getTweets() {
+    public Observable<List<Tweet>> getTweets(Long maxId) {
         return Observable.create( subscriber -> {
-            apiService.getNews("fortnitegame", true).enqueue(new Callback<List<Tweet>>() {
+            apiService.getNews("fortnitegame", true, maxId).enqueue(new Callback<List<Tweet>>() {
                 @Override
                 public void success(Result<List<Tweet>> result) {
                     subscriber.onNext(result.data);

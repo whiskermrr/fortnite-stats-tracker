@@ -1,4 +1,4 @@
-package com.example.mrr.fortnitetracker.Model;
+package com.example.mrr.fortnitetracker.model;
 
 import java.util.List;
 import java.util.Map;

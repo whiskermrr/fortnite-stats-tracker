@@ -56,7 +56,6 @@ public class StatsSearchFragment extends Fragment implements StatsContracts.View
         super.onCreate(savedInstanceState);
         AndroidSupportInjection.inject(this);
         recentSearches = new ArrayList<>();
-        setRetainInstance(true);
         setHasOptionsMenu(true);
     }
 
