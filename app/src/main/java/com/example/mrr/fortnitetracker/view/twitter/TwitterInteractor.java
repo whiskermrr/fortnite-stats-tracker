@@ -1,4 +1,4 @@
-package com.example.mrr.fortnitetracker.view.news;
+package com.example.mrr.fortnitetracker.view.twitter;
 
 import com.example.mrr.fortnitetracker.Network.RxTwitterApiService;
 import com.twitter.sdk.android.core.Callback;
@@ -10,11 +10,11 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-public class NewsInteractor implements NewsContracts.Interactor {
+public class TwitterInteractor implements TwitterContracts.Interactor {
 
     private RxTwitterApiService apiService;
 
-    public NewsInteractor(RxTwitterApiService apiService) {
+    public TwitterInteractor(RxTwitterApiService apiService) {
         this.apiService = apiService;
     }
 

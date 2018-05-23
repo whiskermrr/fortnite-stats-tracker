@@ -1,4 +1,4 @@
-package com.example.mrr.fortnitetracker.view.news;
+package com.example.mrr.fortnitetracker.view.twitter;
 
 import com.twitter.sdk.android.core.models.Tweet;
 
@@ -10,13 +10,13 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class NewsPresenter implements NewsContracts.Presenter {
+public class TwitterPresenter implements TwitterContracts.Presenter {
 
-    private NewsContracts.View view;
-    private NewsContracts.Interactor interactor;
+    private TwitterContracts.View view;
+    private TwitterContracts.Interactor interactor;
     private CompositeDisposable disposables;
 
-    public NewsPresenter(NewsContracts.View view, NewsContracts.Interactor interactor) {
+    public TwitterPresenter(TwitterContracts.View view, TwitterContracts.Interactor interactor) {
         this.view = view;
         this.interactor = interactor;
         disposables = new CompositeDisposable();
@@ -45,12 +45,12 @@ public class NewsPresenter implements NewsContracts.Presenter {
 
         @Override
         public void onNext(List<Tweet> tweets) {
-            NewsPresenter.this.onFinished(tweets);
+            TwitterPresenter.this.onFinished(tweets);
         }
 
         @Override
         public void onError(Throwable e) {
-            NewsPresenter.this.onFailure(e.getMessage());
+            TwitterPresenter.this.onFailure(e.getMessage());
         }
 
         @Override

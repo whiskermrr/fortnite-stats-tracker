@@ -1,4 +1,4 @@
-package com.example.mrr.fortnitetracker.view.news;
+package com.example.mrr.fortnitetracker.view.twitter;
 
 import com.twitter.sdk.android.core.models.Tweet;
 
@@ -6,7 +6,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-public interface NewsContracts {
+public interface TwitterContracts {
 
     interface View {
         void showProgress();

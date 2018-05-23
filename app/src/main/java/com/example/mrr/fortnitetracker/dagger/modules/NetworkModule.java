@@ -52,7 +52,7 @@ public class NetworkModule {
     @Provides
     @FortniteApplicationScope
     public Cache cache(File cacheFile) {
-        return new Cache(cacheFile, 2 * 1000 * 1000);
+        return new Cache(cacheFile, 20 * 1000 * 1000);
     }
 
     @Provides
