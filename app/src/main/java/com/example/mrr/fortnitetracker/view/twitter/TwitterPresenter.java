@@ -1,4 +1,4 @@
-package com.example.mrr.fortnitetracker.view.news;
+package com.example.mrr.fortnitetracker.view.twitter;
 
 import com.twitter.sdk.android.core.models.Tweet;
 
@@ -10,22 +10,23 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class NewsPresenter implements NewsContracts.Presenter {
+public class TwitterPresenter implements TwitterContracts.Presenter {
 
-    private NewsContracts.View view;
-    private NewsContracts.Interactor interactor;
+    private TwitterContracts.View view;
+    private TwitterContracts.Interactor interactor;
     private CompositeDisposable disposables;
+    private Long maxId = null;
 
-    public NewsPresenter(NewsContracts.View view, NewsContracts.Interactor interactor) {
+    public TwitterPresenter(TwitterContracts.View view, TwitterContracts.Interactor interactor) {
         this.view = view;
         this.interactor = interactor;
         disposables = new CompositeDisposable();
     }
 
     @Override
-    public void getNews() {
+    public void getTweets() {
         view.showProgress();
-        final Observable<List<Tweet>> observable = interactor.getTweets()
+        final Observable<List<Tweet>> observable = interactor.getTweets(maxId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         disposables.add(observable.subscribeWith(new NewsObserver()));
@@ -33,29 +34,29 @@ public class NewsPresenter implements NewsContracts.Presenter {
 
     private void onFinished(List<Tweet> tweets) {
         view.hideProgress();
+        maxId = tweets.get(tweets.size() - 1).id - 1;
         view.onSuccess(tweets);
     }
 
-    private void onFailure(String message) {
+    private void onFailure(Throwable throwable) {
         view.hideProgress();
-        view.onFailure(message);
+        view.onFailure(throwable.getMessage());
     }
 
     public class NewsObserver extends DisposableObserver<List<Tweet>> {
 
         @Override
         public void onNext(List<Tweet> tweets) {
-            NewsPresenter.this.onFinished(tweets);
+            TwitterPresenter.this.onFinished(tweets);
         }
 
         @Override
-        public void onError(Throwable e) {
-            NewsPresenter.this.onFailure(e.getMessage());
+        public void onError(Throwable throwable) {
+            TwitterPresenter.this.onFailure(throwable);
         }
 
         @Override
         public void onComplete() {
-            view.hideProgress();
         }
     }
 }

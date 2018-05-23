@@ -11,6 +11,7 @@ import com.example.mrr.fortnitetracker.dagger.components.DaggerFortniteApplicati
 import com.example.rxjava_fortnite_api.FortniteApi;
 import com.example.rxjava_fortnite_api.models.auth.AuthenticationToken;
 import com.google.gson.Gson;
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.twitter.sdk.android.core.Twitter;
 
 import javax.inject.Inject;
@@ -55,27 +56,31 @@ public class FortniteTrackerApplication extends Application implements HasActivi
 
         // TODO: internet check
 
-        if(json != null) {
-            AuthenticationToken token = new Gson().fromJson(json, AuthenticationToken.class);
-            fortniteApi.setAuthenticationToken(token);
-            if(ProjectUtils.isNetworkAvailable(this)) {
-                fortniteApi.requestRefreshTokenCompletable()
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new TokenCompletableObserver());
-            }
-        }
-        else {
-            fortniteApi.authenticateCompletable()
+        if(json != null) refreshToken(json);
+        else authenticate();
+    }
+
+    private void saveAuthTokenToSharedPreferences(AuthenticationToken token) {
+        String jsonToken = new Gson().toJson(token);
+        preferences.edit().putString(PREFERENCES_AUTH_TOKEN, jsonToken).apply();
+    }
+
+    private void refreshToken(String json) {
+        AuthenticationToken token = new Gson().fromJson(json, AuthenticationToken.class);
+        fortniteApi.setAuthenticationToken(token);
+        if(ProjectUtils.isNetworkAvailable(this)) {
+            fortniteApi.requestRefreshTokenCompletable()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new TokenCompletableObserver());
         }
     }
 
-    private void saveAuthTokenToSharedPreferences(AuthenticationToken token) {
-        String jsonToken = new Gson().toJson(token);
-        preferences.edit().putString(PREFERENCES_AUTH_TOKEN, jsonToken).apply();
+    private void authenticate() {
+        fortniteApi.authenticateCompletable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new TokenCompletableObserver());
     }
 
     private class TokenCompletableObserver implements CompletableObserver {
@@ -91,8 +96,13 @@ public class FortniteTrackerApplication extends Application implements HasActivi
         }
 
         @Override
-        public void onError(Throwable e) {
-            Log.v("TokenObserverOnError", e.getMessage());
+        public void onError(Throwable throwable) {
+            Log.v("TokenObserverOnError", throwable.getMessage());
+            if(throwable instanceof HttpException) {
+                if( ((HttpException) throwable).response().code() == 400) {
+                    authenticate();
+                }
+            }
         }
     }
 

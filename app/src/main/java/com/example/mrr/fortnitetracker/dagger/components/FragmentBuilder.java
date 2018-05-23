@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 
 
 import com.example.mrr.fortnitetracker.view.stats.StatsSearchFragment;
+import com.example.mrr.fortnitetracker.view.twitter.TwitterFragment;
 
 import dagger.Binds;
 import dagger.Module;
@@ -19,4 +20,8 @@ public abstract class FragmentBuilder {
     @FragmentKey(StatsSearchFragment.class)
     abstract AndroidInjector.Factory<? extends Fragment> bindStatsFragment(StatsFragmentComponent.Builder builder);
 
+    @Binds
+    @IntoMap
+    @FragmentKey(TwitterFragment.class)
+    abstract AndroidInjector.Factory<? extends Fragment> bindTwitterFragment(TwitterFragmentComponent.Builder builder);
 }
