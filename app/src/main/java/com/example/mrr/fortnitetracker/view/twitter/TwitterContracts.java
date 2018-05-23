@@ -16,16 +16,11 @@ public interface TwitterContracts {
     }
 
     interface Presenter {
-        void getNews();
+        void getTweets();
     }
 
     interface Interactor {
 
         Observable<List<Tweet>> getTweets();
-
-        interface OnNewsFinishedListener {
-
-        }
-
     }
 }

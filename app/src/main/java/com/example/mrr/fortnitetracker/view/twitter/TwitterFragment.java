@@ -4,23 +4,38 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
-import com.example.mrr.fortnitetracker.view.stats.StatsContracts;
+import com.example.mrr.fortnitetracker.R;
+import com.example.mrr.fortnitetracker.dagger.modules.TwitterFragmentModule;
 import com.twitter.sdk.android.core.models.Tweet;
 
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import dagger.android.support.AndroidSupportInjection;
+
 
 public class TwitterFragment extends Fragment implements TwitterContracts.View {
 
     @Inject
-    StatsContracts.Presenter presenter;
+    TwitterContracts.Presenter presenter;
+
+    @Inject
+    @Named(TwitterFragmentModule.TWITTER_FRAGMENT_MANAGER)
+    FragmentManager fragmentManager;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,27 +47,30 @@ public class TwitterFragment extends Fragment implements TwitterContracts.View {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_twitter, container, false);
+        ButterKnife.bind(this, view);
+        presenter.getTweets();
+        return view;
     }
 
 
     @Override
     public void showProgress() {
-
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
-
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void onSuccess(List<Tweet> tweets) {
-
+        Toast.makeText(getActivity(), "GOT TWEETS", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onFailure(String message) {
-
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 }

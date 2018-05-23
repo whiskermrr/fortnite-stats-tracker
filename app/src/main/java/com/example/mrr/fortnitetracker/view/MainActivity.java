@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.view.stats.StatsSearchFragment;
+import com.example.mrr.fortnitetracker.view.twitter.TwitterFragment;
 
 import javax.inject.Inject;
 
@@ -75,6 +76,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if(id == R.id.nav_stats) {
             fragment = new StatsSearchFragment();
+        }
+        else if(id == R.id.nav_twitter) {
+            fragment = new TwitterFragment();
         }
 
         if(fragment != null) {

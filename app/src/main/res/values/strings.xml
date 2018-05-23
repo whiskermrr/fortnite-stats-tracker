@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">FortniteTracker</string>
-    <string name="com.twitter.sdk.android.CONSUMER_KEY"> eM8ecJin8jhR800Viby0nj9Hn</string>
-    <string name="com.twitter.sdk.android.CONSUMER_SECRET">YpfuJzyMRbpNFm83qlEFLymEMeY5KlZtmYIGJKLDTR9ZwArywr</string>
+    <string name="com.twitter.sdk.android.CONSUMER_KEY"> dHbAoUA62SFJ8DBEBzuCP6ITe</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">WjFjUy0zJ6pGS7hgv7iqMdIFnSa9OSIw6gAkpFA61GvcNCIQUE</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

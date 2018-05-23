@@ -1,6 +1,5 @@
 package com.example.mrr.fortnitetracker.dagger.components;
 
-
 import com.example.mrr.fortnitetracker.dagger.modules.TwitterFragmentModule;
 import com.example.mrr.fortnitetracker.dagger.scopes.PerFragment;
 import com.example.mrr.fortnitetracker.view.twitter.TwitterFragment;

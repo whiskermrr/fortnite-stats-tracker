@@ -23,7 +23,7 @@ public class TwitterPresenter implements TwitterContracts.Presenter {
     }
 
     @Override
-    public void getNews() {
+    public void getTweets() {
         view.showProgress();
         final Observable<List<Tweet>> observable = interactor.getTweets()
                 .subscribeOn(Schedulers.io())
@@ -36,9 +36,9 @@ public class TwitterPresenter implements TwitterContracts.Presenter {
         view.onSuccess(tweets);
     }
 
-    private void onFailure(String message) {
+    private void onFailure(Throwable throwable) {
         view.hideProgress();
-        view.onFailure(message);
+        view.onFailure(throwable.getMessage());
     }
 
     public class NewsObserver extends DisposableObserver<List<Tweet>> {
@@ -49,8 +49,8 @@ public class TwitterPresenter implements TwitterContracts.Presenter {
         }
 
         @Override
-        public void onError(Throwable e) {
-            TwitterPresenter.this.onFailure(e.getMessage());
+        public void onError(Throwable throwable) {
+            TwitterPresenter.this.onFailure(throwable);
         }
 
         @Override

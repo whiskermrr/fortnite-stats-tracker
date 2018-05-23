@@ -10,6 +10,8 @@ import com.example.mrr.fortnitetracker.view.twitter.TwitterFragment;
 import com.example.mrr.fortnitetracker.view.twitter.TwitterInteractor;
 import com.example.mrr.fortnitetracker.view.twitter.TwitterPresenter;
 
+import javax.inject.Named;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -37,6 +39,7 @@ public class TwitterFragmentModule {
     }
 
     @Provides
+    @Named(TWITTER_FRAGMENT_MANAGER)
     @PerFragment
     FragmentManager fragmentManager(TwitterFragment twitterFragment) {
         return twitterFragment.getChildFragmentManager();
