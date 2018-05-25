@@ -11,14 +11,21 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.mrr.fortnitetracker.R;
+import com.example.rxjava_fortnite_api.Utils.FortniteApiConstants;
 import com.example.rxjava_fortnite_api.models.blogs.Blog;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.support.AndroidSupportInjection;
 
 public class NewsFragment extends Fragment implements NewsContracts.View {
+
+    @Inject
+    NewsContracts.Presenter presenter;
 
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
@@ -26,6 +33,8 @@ public class NewsFragment extends Fragment implements NewsContracts.View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AndroidSupportInjection.inject(this);
+        setRetainInstance(true);
     }
 
     @Nullable
@@ -33,6 +42,7 @@ public class NewsFragment extends Fragment implements NewsContracts.View {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         ButterKnife.bind(this, view);
+        presenter.getNews(FortniteApiConstants.PATCH_NOTES);
         return view;
     }
 
