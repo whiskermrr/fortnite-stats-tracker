@@ -43,6 +43,11 @@ public class TwitterPresenter implements TwitterContracts.Presenter {
         view.onFailure(throwable.getMessage());
     }
 
+    @Override
+    public void unsubscribe() {
+        disposables.clear();
+    }
+
     public class NewsObserver extends DisposableObserver<List<Tweet>> {
 
         @Override

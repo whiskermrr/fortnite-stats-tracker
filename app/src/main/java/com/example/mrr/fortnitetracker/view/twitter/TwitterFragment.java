@@ -77,6 +77,12 @@ public class TwitterFragment extends Fragment implements TwitterContracts.View {
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        presenter.unsubscribe();
+    }
+
 
     @Override
     public void showProgress() {
