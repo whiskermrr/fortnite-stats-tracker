@@ -15,6 +15,7 @@ public class NewsPresenter implements NewsContracts.Presenter {
     private CompositeDisposable disposables;
     private int offset = 0;
     private int postPerPage = 10;
+    private int totalBlogs = 0;
 
     public NewsPresenter(NewsContracts.View view, NewsContracts.Interactor interactor) {
         this.view = view;
@@ -25,7 +26,8 @@ public class NewsPresenter implements NewsContracts.Presenter {
     private void onFinished(BlogHolder blogHolder) {
         view.hideProgress();
         if(blogHolder.getBlogList() != null) {
-            offset = blogHolder.getBlogList().size();
+            totalBlogs = blogHolder.getBlogTotal();
+            offset += blogHolder.getBlogList().size();
             view.onSuccess(blogHolder.getBlogList());
         }
     }
@@ -34,9 +36,11 @@ public class NewsPresenter implements NewsContracts.Presenter {
         view.onFailure(throwable.getMessage());
     }
 
-
     @Override
     public void getNews(String newsType) {
+        if(totalBlogs < offset)
+            return;
+
         view.showProgress();
         disposables.add(
                 interactor.getNews(newsType, postPerPage, offset, Locale.US.toString())
