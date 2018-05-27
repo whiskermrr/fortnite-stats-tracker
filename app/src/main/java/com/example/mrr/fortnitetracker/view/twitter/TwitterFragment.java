@@ -55,7 +55,6 @@ public class TwitterFragment extends Fragment implements TwitterContracts.View {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AndroidSupportInjection.inject(this);
-        setRetainInstance(true);
     }
 
     @Nullable
@@ -64,6 +63,7 @@ public class TwitterFragment extends Fragment implements TwitterContracts.View {
         View view = inflater.inflate(R.layout.fragment_twitter, container, false);
         ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(linearLayout);
+        recyclerView.setAdapter(tweetsAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -75,6 +75,12 @@ public class TwitterFragment extends Fragment implements TwitterContracts.View {
         });
         presenter.getTweets();
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        presenter.unsubscribe();
     }
 
 
@@ -90,13 +96,7 @@ public class TwitterFragment extends Fragment implements TwitterContracts.View {
 
     @Override
     public void onSuccess(List<Tweet> tweets) {
-        if(tweetsAdapter.getItemCount() == 0) {
-            tweetsAdapter = new CustomTwitterAdapter(getActivity(), tweets, R.style.tw__TweetLightStyle);
-            recyclerView.setAdapter(tweetsAdapter);
-        }
-        else {
-            tweetsAdapter.addOlderTweets(tweets);
-        }
+        tweetsAdapter.addOlderTweets(tweets);
     }
 
     @Override

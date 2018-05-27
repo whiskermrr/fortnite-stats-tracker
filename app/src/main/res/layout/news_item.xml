@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="14dp"
+    android:layout_marginEnd="14dp"
+    android:layout_marginTop="7dp"
+    android:layout_marginBottom="7dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="5dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.example.mrr.fortnitetracker.layout_components.NewsImageView
+            android:id="@+id/news_image_view"
+            android:layout_gravity="top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
+            android:id="@+id/news_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:textAlignment="center"
+            android:padding="5dp"
+            />
+
+        <TextView
+            android:id="@+id/news_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="5dp"
+            />
+
+        <TextView
+            android:id="@+id/news_short_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="5dp"
+            />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

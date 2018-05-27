@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.example.mrr.fortnitetracker.R;
+import com.example.mrr.fortnitetracker.view.news.NewsFragment;
 import com.example.mrr.fortnitetracker.view.stats.StatsSearchFragment;
 import com.example.mrr.fortnitetracker.view.twitter.TwitterFragment;
 
@@ -79,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if(id == R.id.nav_twitter) {
             fragment = new TwitterFragment();
+        }
+        else if(id == R.id.nav_news) {
+            fragment = new NewsFragment();
         }
 
         if(fragment != null) {

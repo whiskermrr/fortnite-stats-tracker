@@ -17,6 +17,7 @@ public interface TwitterContracts {
 
     interface Presenter {
         void getTweets();
+        void unsubscribe();
     }
 
     interface Interactor {
