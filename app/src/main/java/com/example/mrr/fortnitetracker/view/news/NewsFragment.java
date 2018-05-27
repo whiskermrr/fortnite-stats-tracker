@@ -52,8 +52,6 @@ public class NewsFragment extends Fragment implements NewsContracts.View {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AndroidSupportInjection.inject(this);
-        disposables = new CompositeDisposable();
-        setRetainInstance(true);
     }
 
     @Nullable
@@ -61,9 +59,10 @@ public class NewsFragment extends Fragment implements NewsContracts.View {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         ButterKnife.bind(this, view);
-        presenter.getNews(null);
+        disposables = new CompositeDisposable();
         newsRecyclerView.setLayoutManager(layoutManager);
         newsRecyclerView.setAdapter(newsAdapter);
+        presenter.getNews(null);
         disposables.add(
                 newsAdapter.clickEvent()
                         .subscribe(this::openNewsDetailsFragment)

@@ -55,7 +55,6 @@ public class TwitterFragment extends Fragment implements TwitterContracts.View {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AndroidSupportInjection.inject(this);
-        setRetainInstance(true);
     }
 
     @Nullable
