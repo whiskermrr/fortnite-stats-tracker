@@ -62,6 +62,14 @@ public class NewsFragment extends Fragment implements NewsContracts.View {
         disposables = new CompositeDisposable();
         newsRecyclerView.setLayoutManager(layoutManager);
         newsRecyclerView.setAdapter(newsAdapter);
+        newsRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if(layoutManager.findLastCompletelyVisibleItemPosition() == newsAdapter.getItemCount() - 1) {
+                    presenter.getNews(null);
+                }
+            }
+        });
         presenter.getNews(null);
         disposables.add(
                 newsAdapter.clickEvent()
