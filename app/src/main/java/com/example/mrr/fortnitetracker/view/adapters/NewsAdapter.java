@@ -36,11 +36,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         clickSubject = PublishSubject.create();
     }
 
-    public NewsAdapter(Context context, LinkedList<Blog> blogs) {
-        inflater = LayoutInflater.from(context);
-        this.blogs = blogs;
-    }
-
     public void addBlogs(List<Blog> newBlogs) {
         for(Blog blog : newBlogs) {
             blogs.add(blog);

@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.view.adapters.NewsAdapter;
-import com.example.rxjava_fortnite_api.Utils.FortniteApiConstants;
 import com.example.rxjava_fortnite_api.models.blogs.Blog;
 
 import java.util.List;
