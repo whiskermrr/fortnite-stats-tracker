@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.AndroidSupportInjection;
+import io.reactivex.disposables.CompositeDisposable;
 
 public class NewsFragment extends Fragment implements NewsContracts.View {
 
@@ -36,16 +38,22 @@ public class NewsFragment extends Fragment implements NewsContracts.View {
     @Inject
     LinearLayoutManager layoutManager;
 
+    @Inject
+    FragmentManager fragmentManager;
+
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
     @BindView(R.id.news_recycler_view)
     RecyclerView newsRecyclerView;
 
+    private CompositeDisposable disposables;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AndroidSupportInjection.inject(this);
+        disposables = new CompositeDisposable();
         setRetainInstance(true);
     }
 
@@ -54,10 +62,39 @@ public class NewsFragment extends Fragment implements NewsContracts.View {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         ButterKnife.bind(this, view);
-        presenter.getNews(FortniteApiConstants.ANNOUNCEMENTS);
+        presenter.getNews(null);
         newsRecyclerView.setLayoutManager(layoutManager);
         newsRecyclerView.setAdapter(newsAdapter);
+        disposables.add(
+                newsAdapter.clickEvent()
+                        .subscribe(this::openNewsDetailsFragment)
+        );
         return view;
+    }
+
+    private void openNewsDetailsFragment(Blog blog) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("blog", blog);
+        NewsDetailsFragment fragment = new NewsDetailsFragment();
+        fragment.setArguments(bundle);
+
+        if(fragmentManager.getBackStackEntryCount() > 0) {
+            fragmentManager.popBackStack(
+                    fragmentManager.getBackStackEntryAt(0).getId(),
+                    FragmentManager.POP_BACK_STACK_INCLUSIVE
+            );
+        }
+
+        fragmentManager.beginTransaction()
+                .replace(R.id.news_frame, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        presenter.unsubscribe();
     }
 
     @Override
@@ -72,7 +109,6 @@ public class NewsFragment extends Fragment implements NewsContracts.View {
 
     @Override
     public void onSuccess(List<Blog> blogList) {
-        Toast.makeText(getActivity(), blogList.get(0).getTitle(), Toast.LENGTH_SHORT).show();
         newsAdapter.addBlogs(blogList);
     }
 

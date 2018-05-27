@@ -1,6 +1,7 @@
 package com.example.mrr.fortnitetracker.dagger.modules;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.example.mrr.fortnitetracker.dagger.scopes.PerFragment;
@@ -45,5 +46,11 @@ public class NewsFragmentModule {
     @PerFragment
     LinearLayoutManager linearLayoutManager(NewsFragment newsFragment) {
         return new LinearLayoutManager(newsFragment.getActivity());
+    }
+
+    @Provides
+    @PerFragment
+    FragmentManager fragmentManager(NewsFragment newsFragment) {
+        return newsFragment.getChildFragmentManager();
     }
 }
