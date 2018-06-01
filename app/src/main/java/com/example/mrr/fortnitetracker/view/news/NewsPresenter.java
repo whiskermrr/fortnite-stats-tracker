@@ -33,6 +33,7 @@ public class NewsPresenter implements NewsContracts.Presenter {
     }
 
     private void onFailure(Throwable throwable) {
+        view.hideProgress();
         view.onFailure(throwable.getMessage());
     }
 
