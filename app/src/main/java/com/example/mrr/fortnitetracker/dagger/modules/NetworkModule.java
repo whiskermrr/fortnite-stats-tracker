@@ -7,12 +7,17 @@ import com.example.mrr.fortnitetracker.Utils.ProjectUtils;
 import com.example.mrr.fortnitetracker.dagger.scopes.FortniteApplicationScope;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
+
+import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
+import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 
@@ -21,9 +26,14 @@ public class NetworkModule {
 
     @Provides
     @FortniteApplicationScope
-    public OkHttpClient okHttpClient(Cache cache, HttpLoggingInterceptor interceptor, Interceptor networkInterceptor) {
+    public OkHttpClient okHttpClient(Cache cache,
+                                     HttpLoggingInterceptor interceptor,
+                                     @Named("NetworkInterceptor") Interceptor networkInterceptor,
+                                     @Named("OfflineCacheInterceptor") Interceptor offlineCacheInterceptor
+    ) {
         return new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
+                .addInterceptor(offlineCacheInterceptor)
                 .addNetworkInterceptor(networkInterceptor)
                 .cache(cache)
                 .build();
@@ -31,21 +41,50 @@ public class NetworkModule {
 
     @Provides
     @FortniteApplicationScope
-    public Interceptor interceptor(final Context context) {
+    @Named("NetworkInterceptor")
+    public Interceptor networkInterceptor(final Context context) {
         return chain -> {
             Response response = chain.proceed(chain.request());
+            CacheControl cacheControl;
+
             if(ProjectUtils.isNetworkAvailable(context)) {
-                int age = 180;
-                return response.newBuilder()
-                        .header("Cache-Control", "public, max-age=" + age)
+                cacheControl = new CacheControl.Builder()
+                        .maxAge(180, TimeUnit.SECONDS)
                         .build();
             }
             else {
-                int stale = 3600 * 24 * 14;
-                return response.newBuilder()
-                        .header("Cache-Control", "only-if-cached, max-stale=" + stale)
+                cacheControl = new CacheControl.Builder()
+                        .maxStale(7, TimeUnit.DAYS)
                         .build();
             }
+
+            return response.newBuilder()
+                    .removeHeader("Pragma")
+                    .removeHeader("Cache-Control")
+                    .header("Cache-Control", cacheControl.toString())
+                    .build();
+        };
+    }
+
+    @Provides
+    @FortniteApplicationScope
+    @Named("OfflineCacheInterceptor")
+    public Interceptor offlineInterceptor(final Context context) {
+        return chain -> {
+            Request request = chain.request();
+
+            if(!ProjectUtils.isNetworkAvailable(context)) {
+                CacheControl cacheControl = new CacheControl.Builder()
+                        .maxStale(7, TimeUnit.DAYS)
+                        .build();
+
+                request = request.newBuilder()
+                        .removeHeader("Pragma")
+                        .removeHeader("Cache-Control")
+                        .cacheControl(cacheControl)
+                        .build();
+            }
+            return chain.proceed(request);
         };
     }
 
