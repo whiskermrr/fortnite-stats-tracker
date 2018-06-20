@@ -1,5 +1,6 @@
 package com.example.mrr.fortnitetracker.view.news;
 
+import com.example.mrr.fortnitetracker.mappers.NewsTitleMapper;
 import com.example.rxjava_fortnite_api.FortniteApi;
 import com.example.rxjava_fortnite_api.models.blogs.BlogHolder;
 
@@ -16,6 +17,7 @@ public class NewsInteractor implements NewsContracts.Interactor {
 
     @Override
     public Single<BlogHolder> getNews(String newsType, int postPerPage, int offset, String locale) {
-        return fortniteApi.getBlogs(newsType, postPerPage, offset, locale);
+        return fortniteApi.getBlogs(newsType, postPerPage, offset, locale)
+                .flatMap(NewsTitleMapper::transform);
     }
 }
