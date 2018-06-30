@@ -47,9 +47,6 @@ public class StatsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         battleRoyaleStats = (BattleRoyaleStats) getArguments().getSerializable("stats");
-        if(battleRoyaleStats != null) {
-            Toast.makeText(getActivity(), String.valueOf(battleRoyaleStats.getSquad().getKills()), Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Nullable
