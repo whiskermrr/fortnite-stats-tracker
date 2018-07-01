@@ -1,13 +1,12 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/header_frame_layout"
     android:layout_weight="0.2"
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:background="@color/colorLightFortniteViolet">
+    android:layout_height="0dp">
 
     <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
         android:id="@+id/stats_header_mode"
-        android:text="@string/squad"
         android:layout_marginTop="5dp"
         android:layout_marginStart="5dp"
         android:textSize="28sp"
@@ -16,7 +15,6 @@
 
     <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
         android:id="@+id/stats_header_score"
-        android:text="@string/score_0"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
         android:textColor="@color/colorWhite"
