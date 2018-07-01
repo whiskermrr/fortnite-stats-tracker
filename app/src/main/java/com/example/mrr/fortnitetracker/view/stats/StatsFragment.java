@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.mrr.fortnitetracker.R;
+import com.example.mrr.fortnitetracker.Utils.ProjectConstants;
 import com.example.rxjava_fortnite_api.models.stats.StatsModel;
 
 import java.text.NumberFormat;
@@ -21,6 +22,8 @@ import butterknife.ButterKnife;
 public class StatsFragment extends Fragment {
 
     private StatsModel stats;
+    private String mode;
+    private int headerBackgroundColor;
 
     @BindView(R.id.layout_stats_header)
     View layoutStatsHeader;
@@ -33,7 +36,10 @@ public class StatsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        stats = (StatsModel) getArguments().getSerializable("stats_mode");
+        Bundle bundle = getArguments();
+        stats = (StatsModel) bundle.getSerializable(ProjectConstants.EXTRA_STATS_MODE);
+        mode = bundle.getString(ProjectConstants.EXTRA_MODE);
+        headerBackgroundColor = bundle.getInt(ProjectConstants.EXTRA_HEADER_BACKGROUND);
     }
 
     @Nullable
@@ -48,27 +54,6 @@ public class StatsFragment extends Fragment {
 
     private void populateHeader() {
         String score = "Score: " + NumberFormat.getNumberInstance(Locale.US).format(stats.getScore());
-        String mode = "";
-        int headerBackgroundColor = getResources().getColor(R.color.colorPrimary);
-
-        switch (stats.getMode()) {
-            case "_p2":
-                headerBackgroundColor = getResources().getColor(R.color.colorSoloBlue);
-                mode = "SOLO";
-                break;
-            case "_p10":
-                headerBackgroundColor = getResources().getColor(R.color.colorTurkishOrange);
-                mode = "DUO";
-                break;
-            case "_p9":
-                headerBackgroundColor = getResources().getColor(R.color.colorLightFortniteViolet);
-                mode = "SQUAD";
-                break;
-            case "_p":
-                // TODO: calculation for lifeTime stats
-                break;
-        }
-
         ((TextView) layoutStatsHeader.findViewById(R.id.stats_header_score)).setText(score);
         ((TextView) layoutStatsHeader.findViewById(R.id.stats_header_mode)).setText(mode);
         layoutStatsHeader.setBackgroundColor(headerBackgroundColor);
@@ -78,7 +63,6 @@ public class StatsFragment extends Fragment {
         String winPercentage = String.format(Locale.US, "%.1f", stats.getWinPercentage()) + "%";
         String top10 = "";
         String top25 = "";
-
 
         switch (stats.getMode()) {
             case "_p2":

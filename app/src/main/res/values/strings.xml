@@ -31,10 +31,6 @@
     <string name="search_hint">Enter username</string>
     <string name="fortnie_stats_tracker">Fortnie Stats Tracker</string>
     <string name="recent_searches">Recent Searches</string>
-    <string name="stats_solo">_p2</string>
-    <string name="stats_duo">_p10</string>
-    <string name="stats_squad">_p9</string>
-    <string name="stats_alltime">_p</string>
 
     <string-array name="tabs_titles">
         <item>SOLO</item>

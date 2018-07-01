@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mrr.fortnitetracker.R;
+import com.example.mrr.fortnitetracker.Utils.ProjectConstants;
 import com.example.mrr.fortnitetracker.layout_components.SlidingTabLayout;
 import com.example.rxjava_fortnite_api.models.stats.BattleRoyaleStats;
 
@@ -32,7 +33,7 @@ public class StatsSlidingTabsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        battleRoyaleStats = (BattleRoyaleStats) getArguments().getSerializable("stats");
+        battleRoyaleStats = (BattleRoyaleStats) getArguments().getSerializable(ProjectConstants.EXTRA_STATS);
     }
 
     @Nullable
@@ -61,12 +62,21 @@ public class StatsSlidingTabsFragment extends Fragment {
             Fragment fragment = new StatsFragment();
             Bundle bundle = new Bundle();
 
-            if(position == 0)
-                bundle.putSerializable("stats_mode", battleRoyaleStats.getSolo());
-            else if(position == 1)
-                bundle.putSerializable("stats_mode", battleRoyaleStats.getDuo());
-            else if(position == 2)
-                bundle.putSerializable("stats_mode", battleRoyaleStats.getSquad());
+            if(position == 0) {
+                bundle.putSerializable(ProjectConstants.EXTRA_STATS_MODE, battleRoyaleStats.getSolo());
+                bundle.putString(ProjectConstants.EXTRA_MODE, getResources().getString(R.string.solo));
+                bundle.putInt(ProjectConstants.EXTRA_HEADER_BACKGROUND, getResources().getColor(R.color.colorSoloBlue));
+            }
+            else if(position == 1) {
+                bundle.putSerializable(ProjectConstants.EXTRA_STATS_MODE, battleRoyaleStats.getDuo());
+                bundle.putString(ProjectConstants.EXTRA_MODE, getResources().getString(R.string.duo));
+                bundle.putInt(ProjectConstants.EXTRA_HEADER_BACKGROUND, getResources().getColor(R.color.colorTurkishOrange));
+            }
+            else if(position == 2) {
+                bundle.putSerializable(ProjectConstants.EXTRA_STATS_MODE, battleRoyaleStats.getSquad());
+                bundle.putString(ProjectConstants.EXTRA_MODE, getResources().getString(R.string.squad));
+                bundle.putInt(ProjectConstants.EXTRA_HEADER_BACKGROUND, getResources().getColor(R.color.colorLightFortniteViolet));
+            }
 
             fragment.setArguments(bundle);
 
