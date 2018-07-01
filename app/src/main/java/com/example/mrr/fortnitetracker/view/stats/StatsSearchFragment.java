@@ -137,7 +137,7 @@ public class StatsSearchFragment extends Fragment implements StatsContracts.View
     public void openStatsFragment(BattleRoyaleStats battleRoyaleStats) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("stats", battleRoyaleStats);
-        StatsFragment fragment = new StatsFragment();
+        Fragment fragment = new StatsSlidingTabsFragment();
         fragment.setArguments(bundle);
 
         if(fragmentManager.getBackStackEntryCount() > 0) {
