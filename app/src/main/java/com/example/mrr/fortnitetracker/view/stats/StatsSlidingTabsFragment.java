@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 public class StatsSlidingTabsFragment extends Fragment {
 
     private BattleRoyaleStats battleRoyaleStats;
+    private String username;
 
     @BindView(R.id.stats_view_pager)
     ViewPager viewPager;
@@ -34,6 +35,7 @@ public class StatsSlidingTabsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         battleRoyaleStats = (BattleRoyaleStats) getArguments().getSerializable(ProjectConstants.EXTRA_STATS);
+        username = getArguments().getString(ProjectConstants.EXTRA_USERNAME);
     }
 
     @Nullable
@@ -77,6 +79,8 @@ public class StatsSlidingTabsFragment extends Fragment {
                 bundle.putString(ProjectConstants.EXTRA_MODE, getResources().getString(R.string.squad));
                 bundle.putInt(ProjectConstants.EXTRA_HEADER_BACKGROUND, getResources().getColor(R.color.colorLightFortniteViolet));
             }
+
+            bundle.putString(ProjectConstants.EXTRA_USERNAME, username);
 
             fragment.setArguments(bundle);
 

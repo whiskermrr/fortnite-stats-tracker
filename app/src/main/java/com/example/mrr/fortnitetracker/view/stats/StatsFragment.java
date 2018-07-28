@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.Utils.ProjectConstants;
+import com.example.mrr.fortnitetracker.layout_components.FortniteTextView;
 import com.example.rxjava_fortnite_api.models.stats.StatsModel;
 
 import java.text.NumberFormat;
@@ -23,6 +24,7 @@ public class StatsFragment extends Fragment {
 
     private StatsModel stats;
     private String mode;
+    private String username;
     private int headerBackgroundColor;
 
     @BindView(R.id.layout_stats_header)
@@ -30,6 +32,9 @@ public class StatsFragment extends Fragment {
 
     @BindView(R.id.layout_stats_body)
     View layoutStatsBody;
+
+    @BindView(R.id.stats_username)
+    FortniteTextView tvUsername;
 
 
     @Override
@@ -39,6 +44,7 @@ public class StatsFragment extends Fragment {
         Bundle bundle = getArguments();
         stats = (StatsModel) bundle.getSerializable(ProjectConstants.EXTRA_STATS_MODE);
         mode = bundle.getString(ProjectConstants.EXTRA_MODE);
+        username = bundle.getString(ProjectConstants.EXTRA_USERNAME);
         headerBackgroundColor = bundle.getInt(ProjectConstants.EXTRA_HEADER_BACKGROUND);
     }
 
@@ -47,13 +53,14 @@ public class StatsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_stats, container, false);
         ButterKnife.bind(this, view);
+        tvUsername.setText(username);
         populateBody();
         populateHeader();
         return view;
     }
 
     private void populateHeader() {
-        String score = "Score: " + NumberFormat.getNumberInstance(Locale.US).format(stats.getScore());
+        String score = getString(R.string.stats_header_score) + NumberFormat.getNumberInstance(Locale.US).format(stats.getScore());
         ((TextView) layoutStatsHeader.findViewById(R.id.stats_header_score)).setText(score);
         ((TextView) layoutStatsHeader.findViewById(R.id.stats_header_mode)).setText(mode);
         layoutStatsHeader.setBackgroundColor(headerBackgroundColor);

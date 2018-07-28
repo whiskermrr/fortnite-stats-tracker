@@ -29,6 +29,7 @@
     <string name="search_hint">Enter username</string>
     <string name="fortnie_stats_tracker">Fortnie Stats Tracker</string>
     <string name="recent_searches">Recent Searches</string>
+    <string name="stats_header_score">Score:</string>
 
     <string-array name="tabs_titles">
         <item>SOLO</item>
