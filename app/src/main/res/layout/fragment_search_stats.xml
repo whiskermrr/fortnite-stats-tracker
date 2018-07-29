@@ -7,16 +7,8 @@
     android:weightSum="1"
     android:background="@color/colorStatsBackground">
 
-    <ProgressBar
+    <include layout="@layout/progress_bar"
         android:id="@+id/progress_bar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:max="100"
-        android:backgroundTint="@color/colorPrimary"
-        android:indeterminateTint="@color/colorPrimaryDark"
-        android:visibility="gone"
         />
 
     <FrameLayout
