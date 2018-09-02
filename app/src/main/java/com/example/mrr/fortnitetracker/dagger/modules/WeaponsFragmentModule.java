@@ -1,5 +1,7 @@
 package com.example.mrr.fortnitetracker.dagger.modules;
 
+import android.content.Context;
+
 import com.example.mrr.fortnitetracker.dagger.scopes.PerFragment;
 import com.example.mrr.fortnitetracker.view.weapons.WeaponsContracts;
 import com.example.mrr.fortnitetracker.view.weapons.WeaponsFileInteractor;
@@ -20,8 +22,8 @@ public class WeaponsFragmentModule {
 
     @Provides
     @PerFragment
-    public WeaponsContracts.Interactor weaponInteractor() {
-        return new WeaponsFileInteractor();
+    public WeaponsContracts.Interactor weaponInteractor(Context context) {
+        return new WeaponsFileInteractor(context);
     }
 
     @Provides

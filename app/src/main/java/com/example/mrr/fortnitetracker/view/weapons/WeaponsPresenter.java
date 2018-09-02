@@ -1,6 +1,8 @@
 package com.example.mrr.fortnitetracker.view.weapons;
 
+import com.example.mrr.fortnitetracker.mappers.WeaponsMapper;
 import com.example.mrr.fortnitetracker.models.Weapon;
+import com.example.mrr.fortnitetracker.models.WeaponsHolder;
 
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class WeaponsPresenter implements WeaponsContracts.Presenter {
     public void getWeapons() {
         disposables.add(
                 interactor.getWeaponsFromFile()
+                        .flatMap(WeaponsMapper::transform)
                         .subscribeOn(Schedulers.computation())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -33,9 +36,9 @@ public class WeaponsPresenter implements WeaponsContracts.Presenter {
         );
     }
 
-    private void onFinished(List<Weapon> weapons) {
+    private void onFinished(WeaponsHolder weaponHolder) {
         view.hideProgress();
-        view.onSuccess(weapons);
+        view.onSuccess(weaponHolder);
     }
 
     private void onFailure(Throwable throwable) {

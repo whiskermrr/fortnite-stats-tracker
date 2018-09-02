@@ -1,6 +1,7 @@
 package com.example.mrr.fortnitetracker.view.weapons;
 
 import com.example.mrr.fortnitetracker.models.Weapon;
+import com.example.mrr.fortnitetracker.models.WeaponsHolder;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import io.reactivex.Single;
 public interface WeaponsContracts {
 
     interface View {
-        void onSuccess(List<Weapon> weapons);
+        void onSuccess(WeaponsHolder weapons);
         void onFailure(String message);
         void showProgress();
         void hideProgress();

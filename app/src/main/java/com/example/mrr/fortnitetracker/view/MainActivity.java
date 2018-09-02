@@ -16,6 +16,7 @@ import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.view.news.NewsFragment;
 import com.example.mrr.fortnitetracker.view.stats.StatsSearchFragment;
 import com.example.mrr.fortnitetracker.view.twitter.TwitterFragment;
+import com.example.mrr.fortnitetracker.view.weapons.WeaponsFragment;
 
 import javax.inject.Inject;
 
@@ -83,6 +84,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if(id == R.id.nav_news) {
             fragment = new NewsFragment();
+        }
+        else if(id == R.id.nav_patch_notes) {
+            fragment = new WeaponsFragment();
         }
 
         if(fragment != null) {

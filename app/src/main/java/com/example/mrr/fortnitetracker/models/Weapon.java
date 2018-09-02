@@ -1,91 +1,111 @@
 package com.example.mrr.fortnitetracker.models;
 
-import com.example.mrr.fortnitetracker.models.enums.BulletType;
-import com.example.mrr.fortnitetracker.models.enums.Rarity;
-import com.example.mrr.fortnitetracker.models.enums.WeaponType;
+import com.google.gson.annotations.SerializedName;
 
 public class Weapon {
 
-    private WeaponType weaponType;
-    private BulletType bulletType;
-    private Rarity rarity;
-    private float dps;
-    private int damage;
-    private float fireRate;
-    private int magazineSize;
-    private float reloadTime;
-    private int structureDamage;
+    @SerializedName("weapon_type")
+    private String weaponType;
+    @SerializedName("bullet_type")
+    private String bulletType;
+    @SerializedName("image_url")
+    private String imageUrl;
+    @SerializedName("image_file_name")
+    private String imageFileName;
+    @SerializedName("rarity")
+    private String rarity;
+    @SerializedName("dps")
+    private String dps;
+    @SerializedName("damage")
+    private String damage;
+    @SerializedName("fire_rate")
+    private String fireRate;
+    @SerializedName("magazine_size")
+    private String magazineSize;
+    @SerializedName("reload_time")
+    private String reloadTime;
+    @SerializedName("structure_damage")
+    private String structureDamage;
+    @SerializedName("name")
     private String name;
 
-    public WeaponType getWeaponType() {
+    public String getWeaponType() {
         return weaponType;
     }
 
-    public void setWeaponType(WeaponType weaponType) {
+    public void setWeaponType(String weaponType) {
         this.weaponType = weaponType;
     }
 
-    public BulletType getBulletType() {
+    public String getBulletType() {
         return bulletType;
     }
 
-    public void setBulletType(BulletType bulletType) {
+    public void setBulletType(String bulletType) {
         this.bulletType = bulletType;
     }
 
-    public Rarity getRarity() {
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getRarity() {
         return rarity;
     }
 
-    public void setRarity(Rarity rarity) {
+    public void setRarity(String rarity) {
         this.rarity = rarity;
     }
 
-    public float getDps() {
+    public String getDps() {
         return dps;
     }
 
-    public void setDps(float dps) {
+    public void setDps(String dps) {
         this.dps = dps;
     }
 
-    public int getDamage() {
+    public String getDamage() {
         return damage;
     }
 
-    public void setDamage(int damage) {
+    public void setDamage(String damage) {
         this.damage = damage;
     }
 
-    public float getFireRate() {
+    public String getFireRate() {
         return fireRate;
     }
 
-    public void setFireRate(float fireRate) {
+    public void setFireRate(String fireRate) {
         this.fireRate = fireRate;
     }
 
-    public int getMagazineSize() {
+    public String getMagazineSize() {
         return magazineSize;
     }
 
-    public void setMagazineSize(int magazineSize) {
+    public void setMagazineSize(String magazineSize) {
         this.magazineSize = magazineSize;
     }
 
-    public float getReloadTime() {
+    public String getReloadTime() {
         return reloadTime;
     }
 
-    public void setReloadTime(float reloadTime) {
+    public void setReloadTime(String reloadTime) {
         this.reloadTime = reloadTime;
     }
 
-    public int getStructureDamage() {
+    public String getStructureDamage() {
         return structureDamage;
     }
 
-    public void setStructureDamage(int structureDamage) {
+    public void setStructureDamage(String structureDamage) {
         this.structureDamage = structureDamage;
     }
 
@@ -95,6 +115,14 @@ public class Weapon {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 }
 
