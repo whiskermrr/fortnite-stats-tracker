@@ -107,7 +107,7 @@ public class WeaponTypeSection extends StatelessSection {
         @BindView(R.id.tvWeaponHeader)
         TextView tvWeaponHeader;
 
-        public WeaponHeaderViewHolder(View itemView) {
+        private WeaponHeaderViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -118,7 +118,7 @@ public class WeaponTypeSection extends StatelessSection {
         @BindView(R.id.ibWeapon)
         ImageButton ibWeapon;
 
-        public WeaponViewHolder(View itemView) {
+        private WeaponViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
