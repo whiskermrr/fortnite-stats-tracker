@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.nav_stats);
+        replaceFragments(new StatsSearchFragment());
     }
 
     @Override
@@ -89,15 +91,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragment = new WeaponsFragment();
         }
 
+        replaceFragments(fragment);
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    public void replaceFragments(Fragment fragment) {
         if(fragment != null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_frame, fragment)
                     .commit();
         }
-
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     @Override

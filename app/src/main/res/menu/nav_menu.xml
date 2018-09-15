@@ -12,7 +12,7 @@
         <item
             android:id="@+id/nav_patch_notes"
             android:icon="@drawable/ic_patch_notes"
-            android:title="@string/patch_notes" />
+            android:title="@string/weapons" />
         <item
             android:id="@+id/nav_twitter"
             android:icon="@drawable/ic_twitter"
