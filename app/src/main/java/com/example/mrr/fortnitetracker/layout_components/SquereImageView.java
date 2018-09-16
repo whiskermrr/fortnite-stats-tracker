@@ -3,16 +3,16 @@ package com.example.mrr.fortnitetracker.layout_components;
 import android.content.Context;
 import android.util.AttributeSet;
 
-public class SquareImageButton extends android.support.v7.widget.AppCompatImageButton {
-    public SquareImageButton(Context context) {
+public class SquereImageView extends android.support.v7.widget.AppCompatImageView {
+    public SquereImageView(Context context) {
         super(context);
     }
 
-    public SquareImageButton(Context context, AttributeSet attrs) {
+    public SquereImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public SquareImageButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SquereImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
