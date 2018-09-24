@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.Utils.ProjectConstants;
 import com.example.mrr.fortnitetracker.dagger.modules.StatsSearchFragmentModule;
+import com.example.mrr.fortnitetracker.view.MainActivity;
 import com.example.rxjava_fortnite_api.models.stats.BattleRoyaleStats;
 
 import java.util.ArrayList;
@@ -142,17 +143,7 @@ public class StatsSearchFragment extends Fragment implements StatsContracts.View
         Fragment fragment = new StatsSlidingTabsFragment();
         fragment.setArguments(bundle);
 
-        if(fragmentManager.getBackStackEntryCount() > 0) {
-            fragmentManager.popBackStack(
-                    fragmentManager.getBackStackEntryAt(0).getId(),
-                    FragmentManager.POP_BACK_STACK_INCLUSIVE
-            );
-        }
-
-        fragmentManager.beginTransaction()
-                .replace(R.id.stats_frame, fragment)
-                .addToBackStack(null)
-                .commit();
+        ((MainActivity) getActivity()).replaceFragment(fragment);
     }
 
     private void populateRecentSearchesTable() {
