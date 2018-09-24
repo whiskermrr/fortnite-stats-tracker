@@ -16,6 +16,7 @@ import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.view.news.NewsFragment;
 import com.example.mrr.fortnitetracker.view.stats.StatsSearchFragment;
 import com.example.mrr.fortnitetracker.view.twitter.TwitterFragment;
+import com.example.mrr.fortnitetracker.view.weapons.WeaponsFragment;
 
 import javax.inject.Inject;
 
@@ -27,6 +28,9 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HasSupportFragmentInjector {
+
+    public static final String KEY_LAST_SHOWN_FRAGMENT_ID = "KEY_LAST_SHOWN_FRAGMENT_ID";
+    private int selectedItemId = 0;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -54,7 +58,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
         }
 
+        if(savedInstanceState != null) {
+            selectedItemId = savedInstanceState.getInt(KEY_LAST_SHOWN_FRAGMENT_ID);
+        } else {
+            selectedItemId = R.id.nav_stats;
+            replaceFragmentWithoutBackstack(new StatsSearchFragment());
+        }
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(selectedItemId);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(KEY_LAST_SHOWN_FRAGMENT_ID, selectedItemId);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -64,36 +81,62 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        int id = item.getItemId();
-
+        selectedItemId = item.getItemId();
         Fragment fragment = null;
 
-        if(id == R.id.nav_stats) {
+        if(selectedItemId == R.id.nav_stats) {
             fragment = new StatsSearchFragment();
         }
-        else if(id == R.id.nav_twitter) {
+        else if(selectedItemId == R.id.nav_twitter) {
             fragment = new TwitterFragment();
         }
-        else if(id == R.id.nav_news) {
+        else if(selectedItemId == R.id.nav_news) {
             fragment = new NewsFragment();
         }
+        else if(selectedItemId == R.id.nav_patch_notes) {
+            fragment = new WeaponsFragment();
+        }
 
+        replaceFragment(fragment);
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    public void replaceFragment(Fragment fragment) {
+        if(fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+            fragmentManager
+                    .beginTransaction()
+                    .addToBackStack(fragment.getClass().getSimpleName())
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
+        }
+    }
+
+    public void replaceFragmentWithoutBackstack(Fragment fragment) {
         if(fragment != null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_frame, fragment)
                     .commit();
         }
+    }
 
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
+    public void addFragment(Fragment fragment) {
+        if(fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .addToBackStack(fragment.getClass().getSimpleName())
+                    .add(R.id.content_frame, fragment)
+                    .commit();
+        }
     }
 
     @Override

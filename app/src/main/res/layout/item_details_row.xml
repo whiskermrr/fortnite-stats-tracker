@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent">
+
+    <TextView
+        android:id="@+id/row_description"
+        android:textSize="18sp"
+        android:padding="5dp"
+        android:textColor="@color/colorDarkFactoryBlue"
+        android:textAlignment="textStart"
+        android:textStyle="bold"
+        android:layout_weight="0.5"
+        />
+
+    <TextView
+        android:id="@+id/row_details"
+        android:textSize="18sp"
+        android:padding="5dp"
+        android:textColor="@color/colorDarkFactoryBlue"
+        android:textAlignment="textStart"
+        android:layout_weight="0.5"
+        />
+
+</TableRow>

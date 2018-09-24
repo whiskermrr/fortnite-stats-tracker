@@ -53,7 +53,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        holder.setPosition(position);
         Picasso.with(context).load(blogs.get(position).getTrendingImage()).into(holder.newsImage);
         holder.tTitle.setText(blogs.get(position).getTitle());
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US);
@@ -84,7 +83,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         TextView tTitle;
         TextView tDate;
         TextView tShortContent;
-        int position;
 
         NewsViewHolder(View itemView) {
             super(itemView);
@@ -93,11 +91,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             tDate = itemView.findViewById(R.id.news_date);
             tShortContent = itemView.findViewById(R.id.news_short_content);
 
-            itemView.setOnClickListener(view -> clickSubject.onNext(blogs.get(position)));
-        }
-
-        void setPosition(int position) {
-            this.position = position;
+            itemView.setOnClickListener(view -> clickSubject.onNext(blogs.get(getAdapterPosition())));
         }
     }
 }

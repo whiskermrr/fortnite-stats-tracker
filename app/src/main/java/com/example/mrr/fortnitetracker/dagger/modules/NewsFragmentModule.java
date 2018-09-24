@@ -47,10 +47,4 @@ public class NewsFragmentModule {
     LinearLayoutManager linearLayoutManager(NewsFragment newsFragment) {
         return new LinearLayoutManager(newsFragment.getActivity());
     }
-
-    @Provides
-    @PerFragment
-    FragmentManager fragmentManager(NewsFragment newsFragment) {
-        return newsFragment.getChildFragmentManager();
-    }
 }
