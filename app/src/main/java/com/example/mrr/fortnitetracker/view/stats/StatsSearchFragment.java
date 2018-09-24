@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mrr.fortnitetracker.R;
+import com.example.mrr.fortnitetracker.Utils.ProjectConstants;
 import com.example.mrr.fortnitetracker.dagger.modules.StatsSearchFragmentModule;
 import com.example.rxjava_fortnite_api.models.stats.BattleRoyaleStats;
 
@@ -136,8 +137,9 @@ public class StatsSearchFragment extends Fragment implements StatsContracts.View
 
     public void openStatsFragment(BattleRoyaleStats battleRoyaleStats) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("stats", battleRoyaleStats);
-        StatsFragment fragment = new StatsFragment();
+        bundle.putSerializable(ProjectConstants.EXTRA_STATS, battleRoyaleStats);
+        bundle.putString(ProjectConstants.EXTRA_USERNAME, username);
+        Fragment fragment = new StatsSlidingTabsFragment();
         fragment.setArguments(bundle);
 
         if(fragmentManager.getBackStackEntryCount() > 0) {

@@ -23,11 +23,9 @@
     <string name="top_10">Top 10</string>
     <string name="top_25">Top 25</string>
     <string name="hours_played">Hours Played</string>
-    <string name="default_stats_number">0</string>
     <string name="solo">SOLO</string>
     <string name="duo">DUO</string>
     <string name="squad">SQUAD</string>
-    <string name="score_0">Score: 0</string>
     <string name="search_hint">Enter username</string>
     <string name="fortnie_stats_tracker">Fortnie Stats Tracker</string>
     <string name="recent_searches">Recent Searches</string>
@@ -40,5 +38,11 @@
         <item>Magazine Size</item>
         <item>Reload Time</item>
         <item>Structure Damage</item>
+    <string name="stats_header_score">Score:</string>
+
+    <string-array name="tabs_titles">
+        <item>SOLO</item>
+        <item>DUO</item>
+        <item>SQUAD</item>
     </string-array>
 </resources>
