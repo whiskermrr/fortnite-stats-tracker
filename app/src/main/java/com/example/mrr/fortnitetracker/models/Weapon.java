@@ -2,7 +2,9 @@ package com.example.mrr.fortnitetracker.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Weapon {
+import java.io.Serializable;
+
+public class Weapon implements Serializable {
 
     @SerializedName("weapon_type")
     private String weaponType;

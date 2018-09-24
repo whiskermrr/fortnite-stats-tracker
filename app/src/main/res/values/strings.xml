@@ -31,4 +31,14 @@
     <string name="search_hint">Enter username</string>
     <string name="fortnie_stats_tracker">Fortnie Stats Tracker</string>
     <string name="recent_searches">Recent Searches</string>
+
+    <string-array name="weapon_details">
+        <item>DPS</item>
+        <item>Damage</item>
+        <item>Fire Rate</item>
+        <item>Bullet Type</item>
+        <item>Magazine Size</item>
+        <item>Reload Time</item>
+        <item>Structure Damage</item>
+    </string-array>
 </resources>

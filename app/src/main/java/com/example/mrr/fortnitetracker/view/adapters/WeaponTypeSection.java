@@ -8,7 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.mrr.fortnitetracker.R;
-import com.example.mrr.fortnitetracker.Utils.FTConstants;
+import com.example.mrr.fortnitetracker.Utils.ProjectUtils;
 import com.example.mrr.fortnitetracker.models.Weapon;
 import com.squareup.picasso.Picasso;
 
@@ -18,13 +18,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters;
 import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection;
+import io.reactivex.subjects.PublishSubject;
 
 public class WeaponTypeSection extends StatelessSection {
 
     private Context context;
     private List<Weapon> weapons;
+    private PublishSubject<Weapon> publishSubject;
 
-    public WeaponTypeSection(Context context, List<Weapon> weapons) {
+    public WeaponTypeSection(Context context, List<Weapon> weapons, PublishSubject<Weapon> publishSubject) {
         super(SectionParameters.builder()
                 .itemResourceId(R.layout.weapon_body)
                 .headerResourceId(R.layout.weapon_header)
@@ -32,6 +34,7 @@ public class WeaponTypeSection extends StatelessSection {
         );
         this.context = context;
         this.weapons = weapons;
+        this.publishSubject = publishSubject;
     }
 
     @Override
@@ -59,34 +62,14 @@ public class WeaponTypeSection extends StatelessSection {
     public void onBindItemViewHolder(RecyclerView.ViewHolder holder, int position) {
         WeaponViewHolder weaponHolder = (WeaponViewHolder) holder;
         final Weapon weapon = weapons.get(position);
-        int colorResourceId;
-        switch(weapon.getRarity()) {
-            case FTConstants.RARITY_COMMON:
-                colorResourceId = R.color.colorRarityCommon;
-                break;
-            case FTConstants.RARITY_UNCOMMON:
-                colorResourceId = R.color.colorRarityUncommon;
-                break;
-            case FTConstants.RARITY_RARE:
-                colorResourceId = R.color.colorRarityRare;
-                break;
-            case FTConstants.RARITY_EPIC:
-                colorResourceId = R.color.colorRarityEpic;
-                break;
-            case FTConstants.RARITY_LEGENDARY:
-                colorResourceId = R.color.colorRarityLegendary;
-                break;
-            default:
-                colorResourceId = R.color.colorRarityCommon;
-                break;
+        int colorResourceId = ProjectUtils.getColorResourceIdByWeaponRarity(weapon.getRarity());
 
-        }
+        weaponHolder.ibWeapon.setOnClickListener(view ->
+                    publishSubject.onNext(weapons.get(position))
+        );
+
         weaponHolder.ibWeapon.setBackgroundColor(ContextCompat.getColor(context, colorResourceId));
-        int weaponImageId = context.getResources()
-                .getIdentifier(
-                        weapon.getImageFileName().replace(".png", ""),
-                        "drawable", context.getPackageName()
-                );
+        int weaponImageId = ProjectUtils.getDrawableIdByFileName(context, weapon.getImageFileName());
         if(weaponImageId > 0) {
             Picasso.with(context)
                     .load(weaponImageId)

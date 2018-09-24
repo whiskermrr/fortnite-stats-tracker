@@ -15,9 +15,8 @@ import android.widget.Toast;
 import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.models.Weapon;
 import com.example.mrr.fortnitetracker.models.WeaponsHolder;
+import com.example.mrr.fortnitetracker.view.MainActivity;
 import com.example.mrr.fortnitetracker.view.adapters.WeaponTypeSection;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -25,6 +24,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.AndroidSupportInjection;
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.subjects.PublishSubject;
 
 public class WeaponsFragment extends Fragment implements WeaponsContracts.View {
 
@@ -39,7 +40,13 @@ public class WeaponsFragment extends Fragment implements WeaponsContracts.View {
     @BindView(R.id.weapons_recycler_view)
     RecyclerView recyclerView;
 
+    @Inject
     SectionedRecyclerViewAdapter sectionedRecyclerViewAdapter;
+
+    @Inject
+    PublishSubject<Weapon> clickSubject;
+
+    private CompositeDisposable disposables;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,8 +60,8 @@ public class WeaponsFragment extends Fragment implements WeaponsContracts.View {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weapons, container, false);
         ButterKnife.bind(this, view);
+        disposables = new CompositeDisposable();
         presenter.getWeapons();
-        sectionedRecyclerViewAdapter = new SectionedRecyclerViewAdapter();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), SPAN_COUNT);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -69,24 +76,39 @@ public class WeaponsFragment extends Fragment implements WeaponsContracts.View {
         });
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(sectionedRecyclerViewAdapter);
+
+        disposables.add(
+                clickSubject.subscribe(this::openWeaponDetailsFragment)
+        );
+
         return view;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        disposables.dispose();
         presenter.unsubscribe();
+    }
+
+    public void openWeaponDetailsFragment(Weapon weapon) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(ItemDetailsFragment.KEY_WEAPON, weapon);
+        ItemDetailsFragment fragment = new ItemDetailsFragment();
+        fragment.setArguments(bundle);
+
+        ((MainActivity) getActivity()).replaceFragment(fragment);
     }
 
     @Override
     public void onSuccess(WeaponsHolder weaponsHolder) {
-        sectionedRecyclerViewAdapter.addSection(new WeaponTypeSection(getContext(), weaponsHolder.getAssaultRifles()));
-        sectionedRecyclerViewAdapter.addSection(new WeaponTypeSection(getContext(), weaponsHolder.getMachineGuns()));
-        sectionedRecyclerViewAdapter.addSection(new WeaponTypeSection(getContext(), weaponsHolder.getSmgs()));
-        sectionedRecyclerViewAdapter.addSection(new WeaponTypeSection(getContext(), weaponsHolder.getPistols()));
-        sectionedRecyclerViewAdapter.addSection(new WeaponTypeSection(getContext(), weaponsHolder.getShotguns()));
-        sectionedRecyclerViewAdapter.addSection(new WeaponTypeSection(getContext(), weaponsHolder.getSniperRifles()));
-        sectionedRecyclerViewAdapter.addSection(new WeaponTypeSection(getContext(), weaponsHolder.getExplosiveWeapons()));
+        sectionedRecyclerViewAdapter.addSection(new WeaponTypeSection(getContext(), weaponsHolder.getAssaultRifles(), clickSubject));
+        sectionedRecyclerViewAdapter.addSection(new WeaponTypeSection(getContext(), weaponsHolder.getMachineGuns(), clickSubject));
+        sectionedRecyclerViewAdapter.addSection(new WeaponTypeSection(getContext(), weaponsHolder.getSmgs(), clickSubject));
+        sectionedRecyclerViewAdapter.addSection(new WeaponTypeSection(getContext(), weaponsHolder.getPistols(),clickSubject));
+        sectionedRecyclerViewAdapter.addSection(new WeaponTypeSection(getContext(), weaponsHolder.getShotguns(), clickSubject));
+        sectionedRecyclerViewAdapter.addSection(new WeaponTypeSection(getContext(), weaponsHolder.getSniperRifles(),clickSubject));
+        sectionedRecyclerViewAdapter.addSection(new WeaponTypeSection(getContext(), weaponsHolder.getExplosiveWeapons(), clickSubject));
         sectionedRecyclerViewAdapter.notifyDataSetChanged();
     }
 

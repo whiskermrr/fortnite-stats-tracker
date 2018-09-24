@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -12,7 +14,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="16dp"
-        android:background="@color/colorRarityEpic"
+        tools:background="@color/colorRarityEpic"
         />
 
     <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
@@ -24,27 +26,18 @@
         android:textSize="28sp"
         android:textColor="@color/colorFuckingGray"
         android:textAlignment="center"
-        android:text="Assault Rifle"
+        tools:text="Assault Rifle"
         />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardItemDetails"
+    <TableLayout
+        android:id="@+id/tableItemDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="16dp"
+        android:background="@color/colorStatsBackground"
         app:layout_constraintTop_toBottomOf="@id/tvItemName"
         >
 
-        <GridView
-            android:id="@+id/gridItemStats"
-            android:numColumns="2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            //adapter do itemow i broni
-
-        </GridView>
-
-    </android.support.v7.widget.CardView>
+    </TableLayout>
 
 </android.support.constraint.ConstraintLayout>

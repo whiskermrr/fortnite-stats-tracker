@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             selectedItemId = savedInstanceState.getInt(KEY_LAST_SHOWN_FRAGMENT_ID);
         } else {
             selectedItemId = R.id.nav_stats;
-            replaceFragments(new StatsSearchFragment());
+            replaceFragmentWithoutBackstack(new StatsSearchFragment());
         }
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(selectedItemId);
@@ -102,16 +102,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragment = new WeaponsFragment();
         }
 
-        replaceFragments(fragment);
+        replaceFragment(fragment);
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    public void replaceFragments(Fragment fragment) {
+    public void replaceFragment(Fragment fragment) {
+        if(fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+            fragmentManager
+                    .beginTransaction()
+                    .addToBackStack(fragment.getClass().getSimpleName())
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
+        }
+    }
+
+    public void replaceFragmentWithoutBackstack(Fragment fragment) {
         if(fragment != null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_frame, fragment)
+                    .commit();
+        }
+    }
+
+    public void addFragment(Fragment fragment) {
+        if(fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .addToBackStack(fragment.getClass().getSimpleName())
+                    .add(R.id.content_frame, fragment)
                     .commit();
         }
     }
