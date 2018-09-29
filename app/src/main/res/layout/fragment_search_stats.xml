@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="1"
-    android:background="@color/colorStatsBackground">
+    android:weightSum="1">
 
     <include layout="@layout/progress_bar"
         android:id="@+id/progress_bar"
@@ -17,9 +16,9 @@
         android:layout_height="wrap_content" />
 
     <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
-        android:textSize="32sp"
+        android:textSize="48sp"
         android:layout_marginTop="25dp"
-        android:textColor="@color/colorLightFortniteViolet"
+        android:textColor="@color/colorAccent"
         android:textAlignment="center"
         android:text="@string/fortnie_stats_tracker"
         android:layout_width="match_parent"

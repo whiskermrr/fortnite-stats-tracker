@@ -1,7 +1,6 @@
 package com.example.mrr.fortnitetracker.dagger.modules;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.example.mrr.fortnitetracker.dagger.scopes.PerFragment;
@@ -11,6 +10,8 @@ import com.example.mrr.fortnitetracker.view.news.NewsFragment;
 import com.example.mrr.fortnitetracker.view.news.NewsInteractor;
 import com.example.mrr.fortnitetracker.view.news.NewsPresenter;
 import com.example.rxjava_fortnite_api.FortniteApi;
+
+import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
@@ -40,11 +41,5 @@ public class NewsFragmentModule {
     @PerFragment
     public NewsAdapter adapter(Context context) {
         return new NewsAdapter(context);
-    }
-
-    @Provides
-    @PerFragment
-    LinearLayoutManager linearLayoutManager(NewsFragment newsFragment) {
-        return new LinearLayoutManager(newsFragment.getActivity());
     }
 }

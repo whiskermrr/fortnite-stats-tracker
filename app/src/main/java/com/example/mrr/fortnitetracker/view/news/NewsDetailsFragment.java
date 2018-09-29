@@ -47,7 +47,12 @@ public class NewsDetailsFragment extends Fragment {
 
     private void populateWebView() {
         if(!blog.getCategory().toLowerCase().equals(FortniteApiConstants.PATCH_NOTES)) {
-            String style = getActivity().getResources().getString(R.string.html_web_view_style, blog.getTrendingImage(), blog.getTitle());
+            String style = getActivity().getResources()
+                    .getString(
+                            R.string.html_web_view_style,
+                            blog.getTrendingImage(),
+                            blog.getTitle()
+                    );
             newsWebView.loadDataWithBaseURL(
                     null,
                     style + blog.getContent(),

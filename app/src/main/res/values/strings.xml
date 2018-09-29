@@ -30,6 +30,7 @@
     <string name="fortnie_stats_tracker">Fortnie Stats Tracker</string>
     <string name="recent_searches">Recent Searches</string>
     <string name="stats_header_score">Score:</string>
+    <string name="app_name_caps">FORTNITE STATS TRACKER</string>
 
     <string-array name="weapon_details">
         <item>DPS</item>
