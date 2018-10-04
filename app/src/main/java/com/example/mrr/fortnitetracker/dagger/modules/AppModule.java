@@ -3,6 +3,7 @@ package com.example.mrr.fortnitetracker.dagger.modules;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 
 import com.example.mrr.fortnitetracker.dagger.components.MainActivityComponent;
 import com.example.mrr.fortnitetracker.dagger.scopes.FortniteApplicationScope;
@@ -25,5 +26,11 @@ public class AppModule {
     @FortniteApplicationScope
     public SharedPreferences sharedPreferences(Context context) {
         return context.getSharedPreferences(APPLICATION_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+    }
+
+    @Provides
+    @FortniteApplicationScope
+    public AssetManager assetManager(Context context) {
+        return context.getAssets();
     }
 }
