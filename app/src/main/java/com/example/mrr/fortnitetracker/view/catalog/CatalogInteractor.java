@@ -1,7 +1,8 @@
 package com.example.mrr.fortnitetracker.view.catalog;
 
+import com.example.mrr.fortnitetracker.mappers.CatalogMapper;
+import com.example.mrr.fortnitetracker.models.catalog.CatalogViewModel;
 import com.example.rxjava_fortnite_api.FortniteApi;
-import com.example.rxjava_fortnite_api.models.catalog.Catalog;
 
 import io.reactivex.Single;
 
@@ -15,7 +16,7 @@ public class CatalogInteractor implements CatalogContracts.Interactor {
 
 
     @Override
-    public Single<Catalog> getCatalog() {
-        return fortniteApi.getCatalog();
+    public Single<CatalogViewModel> getCatalog() {
+        return fortniteApi.getCatalog().flatMap(CatalogMapper::transform);
     }
 }

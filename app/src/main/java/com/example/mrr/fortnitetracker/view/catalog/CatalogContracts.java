@@ -1,13 +1,13 @@
 package com.example.mrr.fortnitetracker.view.catalog;
 
-import com.example.rxjava_fortnite_api.models.catalog.Catalog;
+import com.example.mrr.fortnitetracker.models.catalog.CatalogViewModel;
 
 import io.reactivex.Single;
 
 public interface CatalogContracts {
 
     interface View {
-        void onSuccess();
+        void onSuccess(CatalogViewModel catalog);
         void onFailure(String message);
         void showProgress();
         void hideProgress();
@@ -19,6 +19,6 @@ public interface CatalogContracts {
     }
 
     interface Interactor {
-        Single<Catalog> getCatalog();
+        Single<CatalogViewModel> getCatalog();
     }
 }

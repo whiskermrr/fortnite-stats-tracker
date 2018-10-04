@@ -1,7 +1,5 @@
 package com.example.mrr.fortnitetracker.view.catalog;
 
-import javax.inject.Inject;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -26,11 +24,10 @@ public class CatalogPresenter implements CatalogContracts.Presenter {
                 catalogInteractor.getCatalog()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(response -> {
-                            view.onSuccess();
-                        }, error -> {
-                            view.onFailure(error.getMessage());
-                        })
+                        .subscribe(
+                                catalog -> view.onSuccess(catalog),
+                                error -> view.onFailure(error.getMessage())
+                        )
         );
     }
 

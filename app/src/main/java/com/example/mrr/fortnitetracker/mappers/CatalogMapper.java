@@ -14,7 +14,7 @@ import io.reactivex.Single;
 
 public class CatalogMapper {
 
-    public Single<CatalogViewModel> transform(Catalog catalog) {
+    public static Single<CatalogViewModel> transform(Catalog catalog) {
         CatalogViewModel catalogViewModel = new CatalogViewModel();
         catalogViewModel.setDailyPurchaseHrs(catalog.getDailyPurchaseHrs());
         catalogViewModel.setRefreshIntervalHrs(catalog.getRefreshIntervalHrs());
@@ -31,7 +31,7 @@ public class CatalogMapper {
         return Single.just(catalogViewModel);
     }
 
-    private List<CatalogEntryViewModel> transform(Storefront storefront) {
+    private static List<CatalogEntryViewModel> transform(Storefront storefront) {
         List<CatalogEntryViewModel> newEntries = new ArrayList<>();
 
         for(final CatalogEntry catalogEntry : storefront.getCatalogEntries()) {
@@ -56,7 +56,7 @@ public class CatalogMapper {
         return newEntries;
     }
 
-    private String getEntryTypeByRequirementId(String requirementId) {
+    private static String getEntryTypeByRequirementId(String requirementId) {
         if(requirementId.contains(FTConstants.SKIN)) {
             return FTConstants.SKIN;
         } else if(requirementId.contains(FTConstants.GLIDER)) {
@@ -70,7 +70,7 @@ public class CatalogMapper {
         }
     }
 
-    private String convertDevNameToName(String catalogEntryName) {
+    private static String convertDevNameToName(String catalogEntryName) {
         String[] words = catalogEntryName.split("\\s+");
         StringBuilder newName = new StringBuilder();
         boolean append = false;
