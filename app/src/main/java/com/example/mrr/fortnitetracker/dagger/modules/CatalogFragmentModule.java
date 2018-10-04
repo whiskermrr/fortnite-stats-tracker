@@ -30,7 +30,7 @@ public class CatalogFragmentModule {
 
     @Provides
     @PerFragment
-    public CatalogContracts.Interactor interactor(FortniteApi fortniteApi, AssetManager assetManager) {
-        return new CatalogInteractor(fortniteApi, assetManager);
+    public CatalogContracts.Interactor interactor(FortniteApi fortniteApi) {
+        return new CatalogInteractor(fortniteApi);
     }
 }

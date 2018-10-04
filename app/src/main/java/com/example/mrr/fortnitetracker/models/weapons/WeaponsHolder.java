@@ -1,4 +1,4 @@
-package com.example.mrr.fortnitetracker.models;
+package com.example.mrr.fortnitetracker.models.weapons;
 
 import java.util.ArrayList;
 import java.util.List;

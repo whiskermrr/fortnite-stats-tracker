@@ -2,14 +2,13 @@ package com.example.mrr.fortnitetracker.view.weapons;
 
 import android.content.Context;
 
-import com.example.mrr.fortnitetracker.models.Weapon;
+import com.example.mrr.fortnitetracker.models.weapons.Weapon;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 

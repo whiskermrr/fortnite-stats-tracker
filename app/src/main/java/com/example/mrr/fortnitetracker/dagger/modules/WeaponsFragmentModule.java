@@ -1,10 +1,9 @@
 package com.example.mrr.fortnitetracker.dagger.modules;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
 
 import com.example.mrr.fortnitetracker.dagger.scopes.PerFragment;
-import com.example.mrr.fortnitetracker.models.Weapon;
+import com.example.mrr.fortnitetracker.models.weapons.Weapon;
 import com.example.mrr.fortnitetracker.view.weapons.WeaponsContracts;
 import com.example.mrr.fortnitetracker.view.weapons.WeaponsFileInteractor;
 import com.example.mrr.fortnitetracker.view.weapons.WeaponsFragment;

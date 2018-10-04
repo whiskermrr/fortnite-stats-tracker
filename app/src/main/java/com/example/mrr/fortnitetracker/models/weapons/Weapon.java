@@ -1,4 +1,4 @@
-package com.example.mrr.fortnitetracker.models;
+package com.example.mrr.fortnitetracker.models.weapons;
 
 import com.google.gson.annotations.SerializedName;
 

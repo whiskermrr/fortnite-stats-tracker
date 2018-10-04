@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.Utils.ProjectUtils;
-import com.example.mrr.fortnitetracker.models.Weapon;
+import com.example.mrr.fortnitetracker.models.weapons.Weapon;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

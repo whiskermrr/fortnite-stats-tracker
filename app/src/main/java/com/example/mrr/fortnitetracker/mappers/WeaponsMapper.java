@@ -3,13 +3,11 @@ package com.example.mrr.fortnitetracker.mappers;
 import android.util.Pair;
 
 import com.example.mrr.fortnitetracker.Utils.FTConstants;
-import com.example.mrr.fortnitetracker.models.Weapon;
-import com.example.mrr.fortnitetracker.models.WeaponsHolder;
+import com.example.mrr.fortnitetracker.models.weapons.Weapon;
+import com.example.mrr.fortnitetracker.models.weapons.WeaponsHolder;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.Single;
 
