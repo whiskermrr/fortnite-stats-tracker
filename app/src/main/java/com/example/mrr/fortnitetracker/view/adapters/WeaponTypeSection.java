@@ -62,7 +62,7 @@ public class WeaponTypeSection extends StatelessSection {
     public void onBindItemViewHolder(RecyclerView.ViewHolder holder, int position) {
         WeaponViewHolder weaponHolder = (WeaponViewHolder) holder;
         final Weapon weapon = weapons.get(position);
-        int colorResourceId = ProjectUtils.getColorResourceIdByWeaponRarity(weapon.getRarity());
+        int colorResourceId = ProjectUtils.getColorResourceIdByRarity(weapon.getRarity());
 
         weaponHolder.ibWeapon.setOnClickListener(view ->
                     publishSubject.onNext(weapons.get(position))

@@ -59,7 +59,7 @@ public class ItemDetailsFragment extends Fragment {
     }
 
     private void loadImage() {
-        int colorResourceId = ProjectUtils.getColorResourceIdByWeaponRarity(weapon.getRarity());
+        int colorResourceId = ProjectUtils.getColorResourceIdByRarity(weapon.getRarity());
         ivItemImage.setBackgroundColor(ContextCompat.getColor(getContext(), colorResourceId));
 
         int imageDrawableId = ProjectUtils.getDrawableIdByFileName(getContext(), weapon.getImageFileName());

@@ -1,22 +1,21 @@
 package com.example.mrr.fortnitetracker.view.catalog;
 
 import android.content.res.AssetManager;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.models.catalog.CatalogEntryViewModel;
 import com.example.mrr.fortnitetracker.models.catalog.CatalogViewModel;
-
-import java.io.IOException;
-import java.io.InputStream;
+import com.example.mrr.fortnitetracker.view.adapters.StorefrontAdapter;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -32,8 +31,13 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
     @Inject
     AssetManager assetManager;
 
-    @BindView(R.id.tvTest)
-    TextView tvTest;
+    @BindView(R.id.rvWeeklyStorefront)
+    RecyclerView rvWeeklyStorefront;
+
+
+    private StorefrontAdapter weeklyStorefrontAdapter;
+
+    private List<CatalogEntryViewModel> weeklyStorefront;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,41 +51,26 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
         View view = inflater.inflate(R.layout.fragment_catalog, container, false);
         ButterKnife.bind(this, view);
 
+        GridLayoutManager layoutManager = new GridLayoutManager(
+                getContext(), 2);
+
+        weeklyStorefrontAdapter = new StorefrontAdapter(getContext());
+        rvWeeklyStorefront.setLayoutManager(layoutManager);
+        rvWeeklyStorefront.setAdapter(weeklyStorefrontAdapter);
+
         catalogPresenter.getCurrentShop();
 
         return view;
     }
 
+    public void initWeeklyStorefront(List<CatalogEntryViewModel> entries) {
+        weeklyStorefrontAdapter.setCatalogEntries(entries);
+    }
+
     @Override
     public void onSuccess(CatalogViewModel catalog) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for(CatalogEntryViewModel entry : catalog.getWeeklyOffer()) {
-            stringBuilder
-                    .append(entry.getName())
-                    .append(" ")
-                    .append(entry.getDisplayAssetPath())
-                    .append(" ")
-                    .append(entry.getEntryType())
-                    .append(" ")
-                    .append(entry.getPrice())
-                    .append("\n");
-
-            try {
-                InputStream inputStream = assetManager.open(
-                        entry.getEntryType() + "/" + entry.getDisplayAssetPath()
-                );
-
-                Drawable icon = Drawable.createFromStream(inputStream, null);
-                if(icon != null) {
-                    stringBuilder.append("HAS IMAGE").append("\n");
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        tvTest.setText(stringBuilder.toString());
+        weeklyStorefront = catalog.getWeeklyOffer();
+        initWeeklyStorefront(weeklyStorefront.subList(0, 2));
     }
 
     @Override

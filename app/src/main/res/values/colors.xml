@@ -13,13 +13,21 @@
     <color name="colorLightFortniteViolet">#B83CF2</color>
     <color name="colorFuckingGray">#353535</color>
 
+    <!-- Start rarity color -->
     <color name="colorRarityCommon">#CACACA</color>
-    <color name="colorRarityUncommon">#80CF3F</color>
-    <color name="colorRarityRare">#2FD5E8</color>
-    <color name="colorRarityEpic">#BD3FFA</color>
+    <color name="colorRarityUncommon">#60aa3a</color>
+    <color name="colorRarityRare">#49acf2</color>
+    <color name="colorRarityEpic">#b15be2</color>
     <color name="colorRarityLegendary">#FDAE53</color>
+
+    <!-- End rarity color -->
+    <color name="colorRarityLegendaryEnd">#FDAE53</color>
+    <color name="colorRarityEpicEnd">#4b2483</color>
+    <color name="colorRarityRareEnd">#143977</color>
+    <color name="colorRarityUncommonEnd">#175117</color>
+    <color name="colorRarityCommonEnd">#5A5A5A</color>
 
     <!--Transparent 25%-->
     <color name="colorWhiteTransparent">#C0FAFAFA</color>
-
+    <color name="colorBlackTransparent">#40000000</color>
 </resources>

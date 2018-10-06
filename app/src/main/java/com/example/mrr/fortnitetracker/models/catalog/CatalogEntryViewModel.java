@@ -2,9 +2,10 @@ package com.example.mrr.fortnitetracker.models.catalog;
 
 public class CatalogEntryViewModel {
     private String name;
-    private String price;
+    private int price;
     private String displayAssetPath;
     private String entryType;
+    private String rarity;
 
     public CatalogEntryViewModel() {
 
@@ -18,11 +19,11 @@ public class CatalogEntryViewModel {
         this.name = name;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -40,5 +41,13 @@ public class CatalogEntryViewModel {
 
     public void setEntryType(String entryType) {
         this.entryType = entryType;
+    }
+
+    public String getRarity() {
+        return rarity;
+    }
+
+    public void setRarity(String rarity) {
+        this.rarity = rarity;
     }
 }

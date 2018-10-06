@@ -37,4 +37,30 @@ public class FTConstants {
     public final static String SKIN = "AthenaCharacter";
     public final static String PICKAXE = "AthenaPickaxe";
     public final static String DANCE = "AthenaDance";
+
+
+    //Skin rarity prices
+    public final static int LEGENDARY_SKIN_PRICE = 2000;
+    public final static int EPIC_SKIN_PRICE = 1500;
+    public final static int RARE_SKIN_PRICE = 1200;
+    public final static int UNCOMMON_SKIN_PRICE = 800;
+
+
+    //Pickaxe rarity prices
+    public final static int EPIC_PICKAXE_PRICE = 1200;
+    public final static int RARE_PICKAXE_PRICE = 800;
+    public final static int UNCOMMON_PICKAXE_PRICE = 500;
+
+
+    //Glider rarity prices
+    public final static int LEGENDARY_GLIDER_PRICE = 1500;
+    public final static int EPIC_GLIDER_PRICE = 1200;
+    public final static int RARE_GLIDER_PRICE = 800;
+    public final static int UNCOMMON_GLIDER_PRICE = 500;
+
+
+    //Emote & Dance rarity prices
+    public final static int EPIC_EMOTE_PRICE = 800;
+    public final static int RARE_EMOTE_PRICE = 500;
+    public final static int UNCOMMON_EMOTE_PRICE = 200;
 }

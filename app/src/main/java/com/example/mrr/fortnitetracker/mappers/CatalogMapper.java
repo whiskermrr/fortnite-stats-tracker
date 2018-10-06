@@ -1,6 +1,7 @@
 package com.example.mrr.fortnitetracker.mappers;
 
 import com.example.mrr.fortnitetracker.Utils.FTConstants;
+import com.example.mrr.fortnitetracker.Utils.ProjectUtils;
 import com.example.mrr.fortnitetracker.models.catalog.CatalogEntryViewModel;
 import com.example.mrr.fortnitetracker.models.catalog.CatalogViewModel;
 import com.example.rxjava_fortnite_api.models.catalog.Catalog;
@@ -42,14 +43,19 @@ public class CatalogMapper {
             );
 
             if(catalogEntry.getPrices() != null && catalogEntry.getPrices().size() > 0) {
-                newEntry.setPrice(String.valueOf(catalogEntry.getPrices().get(0).getFinalPrice()));
+                newEntry.setPrice(catalogEntry.getPrices().get(0).getFinalPrice());
             } else {
-                newEntry.setPrice("Free");
+                newEntry.setPrice(0);
             }
             newEntry.setEntryType(getEntryTypeByRequirementId(
                     catalogEntry.getRequirements().get(0).getRequiredId()
                     )
             );
+            newEntry.setRarity(
+                    ProjectUtils.getRarityOfCatalogEntry(
+                            newEntry.getEntryType(), newEntry.getPrice())
+            );
+
             newEntries.add(newEntry);
         }
 
