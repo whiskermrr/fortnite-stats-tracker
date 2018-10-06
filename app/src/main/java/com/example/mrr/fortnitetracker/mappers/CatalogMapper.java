@@ -38,7 +38,7 @@ public class CatalogMapper {
             CatalogEntryViewModel newEntry = new CatalogEntryViewModel();
             newEntry.setName(convertDevNameToName(catalogEntry.getDevName()));
             newEntry.setDisplayAssetPath(
-                    newEntry.getName().replace(" ", "") + ".png"
+                    newEntry.getName() + ".png"
             );
 
             if(catalogEntry.getPrices() != null && catalogEntry.getPrices().size() > 0) {
@@ -71,6 +71,7 @@ public class CatalogMapper {
     }
 
     private static String convertDevNameToName(String catalogEntryName) {
+        catalogEntryName = catalogEntryName.replace(",", " ,");
         String[] words = catalogEntryName.split("\\s+");
         StringBuilder newName = new StringBuilder();
         boolean append = false;
