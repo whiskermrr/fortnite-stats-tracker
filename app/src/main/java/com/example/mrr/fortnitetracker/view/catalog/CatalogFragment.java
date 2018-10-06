@@ -1,5 +1,7 @@
 package com.example.mrr.fortnitetracker.view.catalog;
 
+import android.content.res.AssetManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +15,9 @@ import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.models.catalog.CatalogEntryViewModel;
 import com.example.mrr.fortnitetracker.models.catalog.CatalogViewModel;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -23,6 +28,9 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
 
     @Inject
     CatalogContracts.Presenter catalogPresenter;
+
+    @Inject
+    AssetManager assetManager;
 
     @BindView(R.id.tvTest)
     TextView tvTest;
@@ -47,7 +55,7 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
     @Override
     public void onSuccess(CatalogViewModel catalog) {
         StringBuilder stringBuilder = new StringBuilder();
-        for(CatalogEntryViewModel entry : catalog.getDailyOffer()) {
+        for(CatalogEntryViewModel entry : catalog.getWeeklyOffer()) {
             stringBuilder
                     .append(entry.getName())
                     .append(" ")
@@ -57,6 +65,20 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
                     .append(" ")
                     .append(entry.getPrice())
                     .append("\n");
+
+            try {
+                InputStream inputStream = assetManager.open(
+                        entry.getEntryType() + "/" + entry.getDisplayAssetPath()
+                );
+
+                Drawable icon = Drawable.createFromStream(inputStream, null);
+                if(icon != null) {
+                    stringBuilder.append("HAS IMAGE").append("\n");
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         tvTest.setText(stringBuilder.toString());
