@@ -18,10 +18,10 @@
     <color name="colorRarityUncommon">#60aa3a</color>
     <color name="colorRarityRare">#49acf2</color>
     <color name="colorRarityEpic">#b15be2</color>
-    <color name="colorRarityLegendary">#FDAE53</color>
+    <color name="colorRarityLegendary">#d37841</color>
 
     <!-- End rarity color -->
-    <color name="colorRarityLegendaryEnd">#FDAE53</color>
+    <color name="colorRarityLegendaryEnd">#78371d</color>
     <color name="colorRarityEpicEnd">#4b2483</color>
     <color name="colorRarityRareEnd">#143977</color>
     <color name="colorRarityUncommonEnd">#175117</color>
