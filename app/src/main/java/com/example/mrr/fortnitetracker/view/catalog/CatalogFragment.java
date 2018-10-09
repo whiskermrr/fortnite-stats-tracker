@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.models.catalog.CatalogEntryViewModel;
@@ -33,6 +35,9 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
 
     @BindView(R.id.rvWeeklyStorefront)
     RecyclerView rvWeeklyStorefront;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
 
     private StorefrontAdapter weeklyStorefrontAdapter;
@@ -68,6 +73,12 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        catalogPresenter.unsubscribe();
+    }
+
+    @Override
     public void onSuccess(CatalogViewModel catalog) {
         weeklyStorefront = catalog.getWeeklyOffer();
         initWeeklyStorefront(weeklyStorefront.subList(0, 2));
@@ -75,16 +86,16 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
 
     @Override
     public void onFailure(String message) {
-
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showProgress() {
-
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
-
+        progressBar.setVisibility(View.GONE);
     }
 }

@@ -18,14 +18,19 @@ public class CatalogPresenter implements CatalogContracts.Presenter {
     }
 
 
+
     @Override
     public void getCurrentShop() {
+        view.showProgress();
         disposables.add(
                 catalogInteractor.getCatalog()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
-                                catalog -> view.onSuccess(catalog),
+                                catalog -> {
+                                    view.hideProgress();
+                                    view.onSuccess(catalog);
+                                },
                                 error -> view.onFailure(error.getMessage())
                         )
         );
