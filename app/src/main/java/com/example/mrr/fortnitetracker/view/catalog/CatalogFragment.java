@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mrr.fortnitetracker.R;
@@ -36,13 +37,14 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
     @BindView(R.id.rvWeeklyStorefront)
     RecyclerView rvWeeklyStorefront;
 
+    @BindView(R.id.tvFeaturedCycle)
+    TextView tvFeaturedCycle;
+
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
 
     private StorefrontAdapter weeklyStorefrontAdapter;
-
-    private List<CatalogEntryViewModel> weeklyStorefront;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,11 +65,16 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
         rvWeeklyStorefront.setLayoutManager(layoutManager);
         rvWeeklyStorefront.setAdapter(weeklyStorefrontAdapter);
 
+        tvFeaturedCycle.setOnClickListener(event ->
+            catalogPresenter.cycleWeeklyOffer()
+        );
+
         catalogPresenter.getCurrentShop();
 
         return view;
     }
 
+    @Override
     public void initWeeklyStorefront(List<CatalogEntryViewModel> entries) {
         weeklyStorefrontAdapter.setCatalogEntries(entries);
     }
@@ -80,8 +87,6 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
 
     @Override
     public void onSuccess(CatalogViewModel catalog) {
-        weeklyStorefront = catalog.getWeeklyOffer();
-        initWeeklyStorefront(weeklyStorefront.subList(0, 2));
     }
 
     @Override
