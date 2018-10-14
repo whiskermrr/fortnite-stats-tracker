@@ -4,6 +4,85 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
+        android:id="@+id/tvFeaturedShop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="viewStart"
+        android:text="@string/featured_items"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorCatalogGrayTitle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/layoutDiagonal"
+        />
+
+    <com.github.florent37.diagonallayout.DiagonalLayout
+        android:id="@+id/layoutDiagonal"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/tvFeaturedShop"
+        app:layout_constraintBottom_toBottomOf="@id/tvFeaturedShop"
+        app:layout_constraintStart_toEndOf="@id/tvFeaturedShop"
+        app:diagonal_angle="45"
+        app:diagonal_position="right"
+        app:diagonal_direction="right"
+        >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorCatalogGrayTitle"/>
+
+    </com.github.florent37.diagonallayout.DiagonalLayout>
+
+    <com.github.florent37.diagonallayout.DiagonalLayout
+        android:id="@+id/layoutDiagonal2"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/tvFeaturedShop"
+        app:layout_constraintBottom_toBottomOf="@id/tvFeaturedShop"
+        app:layout_constraintStart_toEndOf="@id/tvFeaturedShop"
+        app:diagonal_angle="45"
+        app:diagonal_position="left"
+        app:diagonal_direction="right"
+        >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorCatalogLightGrayTitle"/>
+
+    </com.github.florent37.diagonallayout.DiagonalLayout>
+
+
+    <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
+        android:id="@+id/tvFeaturedCycle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="24sp"
+        android:textAlignment="viewEnd"
+        android:text="@string/tab_to_cycle"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/layoutDiagonal"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/colorCatalogGrayTitle"
+        android:background="@color/colorCatalogLightGrayTitle"
+
+        />
+
+
     <include layout="@layout/progress_bar"
         android:id="@+id/progress_bar"
         app:layout_constraintTop_toTopOf="parent"
@@ -13,8 +92,10 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvWeeklyStorefront"
-        android:layout_margin="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvFeaturedShop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:overScrollMode="never"

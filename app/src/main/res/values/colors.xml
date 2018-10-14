@@ -13,6 +13,9 @@
     <color name="colorLightFortniteViolet">#B83CF2</color>
     <color name="colorFuckingGray">#353535</color>
 
+    <color name="colorCatalogGrayTitle">#657496</color>
+    <color name="colorCatalogLightGrayTitle">#ABBDD5</color>
+
     <!-- Start rarity color -->
     <color name="colorRarityCommon">#CACACA</color>
     <color name="colorRarityUncommon">#60aa3a</color>
