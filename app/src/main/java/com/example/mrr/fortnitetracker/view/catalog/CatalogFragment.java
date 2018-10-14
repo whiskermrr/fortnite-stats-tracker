@@ -23,6 +23,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import dagger.android.support.AndroidSupportInjection;
 
@@ -43,8 +44,18 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
+    @BindViews({
+            R.id.tvFeaturedCycle,
+            R.id.tvFeaturedShop,
+            R.id.layoutDiagonal,
+            R.id.layoutDiagonal2
+    })
+    List<View> featuredItemsTitle;
+
 
     private StorefrontAdapter weeklyStorefrontAdapter;
+
+    public static final ButterKnife.Setter<View, Integer> VISIBILITY = (view, value, index) -> view.setVisibility(value);
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,6 +68,7 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_catalog, container, false);
         ButterKnife.bind(this, view);
+
 
         GridLayoutManager layoutManager = new GridLayoutManager(
                 getContext(), 2);
@@ -96,11 +108,13 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
 
     @Override
     public void showProgress() {
+        ButterKnife.apply(featuredItemsTitle, VISIBILITY, View.GONE);
         progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
+        ButterKnife.apply(featuredItemsTitle, VISIBILITY, View.VISIBLE);
         progressBar.setVisibility(View.GONE);
     }
 }
