@@ -20,6 +20,6 @@
 
 	<dimen name="catalog_diagonal_width">30dp</dimen>
 	<dimen name="item_detail_image_size">160dp</dimen>
-	<dimen name="stats_card_height">280dp</dimen>
+	<dimen name="stats_card_height">320dp</dimen>
 	<dimen name="nav_header_height">192dp</dimen>
 </resources>
