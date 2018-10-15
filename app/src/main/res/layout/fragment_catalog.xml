@@ -8,14 +8,13 @@
         android:id="@+id/tvFeaturedShop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:layout_marginTop="8dp"
+        android:textSize="@dimen/text_size_24"
         android:textAlignment="viewStart"
         android:text="@string/featured_items"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
+        android:paddingStart="@dimen/default_ui_margin"
+        android:paddingEnd="@dimen/default_ui_margin"
+        android:paddingTop="@dimen/ui_margin_2"
+        android:paddingBottom="@dimen/ui_margin_2"
         android:textColor="@color/colorWhite"
         android:background="@color/colorCatalogGrayTitle"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,7 +24,7 @@
 
     <com.github.florent37.diagonallayout.DiagonalLayout
         android:id="@+id/layoutDiagonal"
-        android:layout_width="30dp"
+        android:layout_width="@dimen/catalog_diagonal_width"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="@id/tvFeaturedShop"
         app:layout_constraintBottom_toBottomOf="@id/tvFeaturedShop"
@@ -44,7 +43,7 @@
 
     <com.github.florent37.diagonallayout.DiagonalLayout
         android:id="@+id/layoutDiagonal2"
-        android:layout_width="30dp"
+        android:layout_width="@dimen/catalog_diagonal_width"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="@id/tvFeaturedShop"
         app:layout_constraintBottom_toBottomOf="@id/tvFeaturedShop"
@@ -66,20 +65,18 @@
         android:id="@+id/tvFeaturedCycle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textSize="24sp"
+        android:textSize="@dimen/text_size_24"
         android:textAlignment="viewEnd"
         android:text="@string/tab_to_cycle"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
+        android:paddingStart="@dimen/default_ui_margin"
+        android:paddingEnd="@dimen/default_ui_margin"
+        android:paddingTop="@dimen/ui_margin_2"
+        android:paddingBottom="@dimen/ui_margin_2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/layoutDiagonal"
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/colorCatalogGrayTitle"
         android:background="@color/colorCatalogLightGrayTitle"
-
         />
 
 
@@ -92,10 +89,100 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvWeeklyStorefront"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="@dimen/default_ui_margin"
+        android:layout_marginStart="@dimen/default_ui_margin"
         app:layout_constraintTop_toBottomOf="@id/tvFeaturedShop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:overScrollMode="never"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+    <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
+        android:id="@+id/tvDailyShop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_24"
+        android:layout_marginTop="@dimen/default_ui_margin"
+        android:textAlignment="viewStart"
+        android:text="@string/daily_items"
+        android:paddingStart="@dimen/default_ui_margin"
+        android:paddingEnd="@dimen/default_ui_margin"
+        android:paddingTop="@dimen/ui_margin_2"
+        android:paddingBottom="@dimen/ui_margin_2"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorCatalogGrayTitle"
+        app:layout_constraintTop_toBottomOf="@id/rvWeeklyStorefront"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/layoutDiagonal3"
+        />
+
+    <com.github.florent37.diagonallayout.DiagonalLayout
+        android:id="@+id/layoutDiagonal3"
+        android:layout_width="@dimen/catalog_diagonal_width"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/tvDailyShop"
+        app:layout_constraintBottom_toBottomOf="@id/tvDailyShop"
+        app:layout_constraintStart_toEndOf="@id/tvDailyShop"
+        app:diagonal_angle="45"
+        app:diagonal_position="right"
+        app:diagonal_direction="right"
+        >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorCatalogGrayTitle"/>
+
+    </com.github.florent37.diagonallayout.DiagonalLayout>
+
+    <com.github.florent37.diagonallayout.DiagonalLayout
+        android:id="@+id/layoutDiagonal4"
+        android:layout_width="@dimen/catalog_diagonal_width"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/tvDailyShop"
+        app:layout_constraintBottom_toBottomOf="@id/tvDailyShop"
+        app:layout_constraintStart_toEndOf="@id/tvDailyShop"
+        app:diagonal_angle="45"
+        app:diagonal_position="left"
+        app:diagonal_direction="right"
+        >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorCatalogLightGrayTitle"/>
+
+    </com.github.florent37.diagonallayout.DiagonalLayout>
+
+
+    <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
+        android:id="@+id/tvDailyCycle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_ui_margin"
+        android:textSize="@dimen/text_size_24"
+        android:textAlignment="viewEnd"
+        android:text="@string/tab_to_cycle"
+        android:paddingStart="@dimen/default_ui_margin"
+        android:paddingEnd="@dimen/default_ui_margin"
+        android:paddingTop="@dimen/ui_margin_2"
+        android:paddingBottom="@dimen/ui_margin_2"
+        app:layout_constraintTop_toBottomOf="@id/rvWeeklyStorefront"
+        app:layout_constraintStart_toEndOf="@id/layoutDiagonal3"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/colorCatalogGrayTitle"
+        android:background="@color/colorCatalogLightGrayTitle"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvDailyStorefront"
+        android:layout_marginEnd="@dimen/default_ui_margin"
+        android:layout_marginStart="@dimen/default_ui_margin"
+        app:layout_constraintTop_toBottomOf="@id/tvDailyShop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:overScrollMode="never"

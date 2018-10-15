@@ -33,6 +33,7 @@
     <string name="app_name_caps">FORTNITE STATS TRACKER</string>
     <string name="featured_items">Featured Items</string>
     <string name="tab_to_cycle">Tab to cycle</string>
+    <string name="daily_items">Daily Items</string>
 
     <string-array name="weapon_details">
         <item>DPS</item>

@@ -12,8 +12,10 @@ public class CatalogPresenter implements CatalogContracts.Presenter {
 
     private CatalogContracts.View view;
     private CatalogContracts.Interactor catalogInteractor;
-    private int cycleIndex = 2;
+    private int cycleWeeklyIndex = 2;
+    private int cycleDailyInex = 2;
     private List<CatalogEntryViewModel> weeklyStorefront;
+    private List<CatalogEntryViewModel> dailyStorefront;
 
     private CompositeDisposable disposables;
 
@@ -33,10 +35,13 @@ public class CatalogPresenter implements CatalogContracts.Presenter {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 catalog -> {
-                                    cycleIndex = 2;
+                                    cycleWeeklyIndex = 2;
+                                    cycleDailyInex = 4;
                                     weeklyStorefront = catalog.getWeeklyOffer();
+                                    dailyStorefront = catalog.getDailyOffer();
                                     view.hideProgress();
-                                    view.initWeeklyStorefront(weeklyStorefront.subList(0, cycleIndex));
+                                    view.initWeeklyStorefront(weeklyStorefront.subList(0, cycleWeeklyIndex));
+                                    view.initDailyStorefront(dailyStorefront.subList(0, cycleDailyInex));
                                 },
                                 error -> view.onFailure(error.getMessage())
                         )
@@ -45,11 +50,20 @@ public class CatalogPresenter implements CatalogContracts.Presenter {
 
     @Override
     public void cycleWeeklyOffer() {
-        cycleIndex++;
-        if(cycleIndex > weeklyStorefront.size()) {
-            cycleIndex = 2;
+        cycleWeeklyIndex++;
+        if(cycleWeeklyIndex > weeklyStorefront.size()) {
+            cycleWeeklyIndex = 2;
         }
-        view.initWeeklyStorefront(weeklyStorefront.subList(cycleIndex - 2, cycleIndex));
+        view.initWeeklyStorefront(weeklyStorefront.subList(cycleWeeklyIndex - 2, cycleWeeklyIndex));
+    }
+
+    @Override
+    public void cycleDailyOffer() {
+        cycleDailyInex++;
+        if(cycleDailyInex > dailyStorefront.size()) {
+            cycleDailyInex = 4;
+        }
+        view.initDailyStorefront(dailyStorefront.subList(cycleDailyInex - 4, cycleDailyInex));
     }
 
     @Override

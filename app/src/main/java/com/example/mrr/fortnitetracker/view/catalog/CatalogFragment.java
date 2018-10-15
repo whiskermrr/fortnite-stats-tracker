@@ -38,8 +38,14 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
     @BindView(R.id.rvWeeklyStorefront)
     RecyclerView rvWeeklyStorefront;
 
+    @BindView(R.id.rvDailyStorefront)
+    RecyclerView rvDailyStorefront;
+
     @BindView(R.id.tvFeaturedCycle)
     TextView tvFeaturedCycle;
+
+    @BindView(R.id.tvDailyCycle)
+    TextView tvDailyCycle;
 
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
@@ -54,6 +60,7 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
 
 
     private StorefrontAdapter weeklyStorefrontAdapter;
+    private StorefrontAdapter dailyStorefrontAdapter;
 
     public static final ButterKnife.Setter<View, Integer> VISIBILITY = (view, value, index) -> view.setVisibility(value);
 
@@ -70,15 +77,27 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
         ButterKnife.bind(this, view);
 
 
-        GridLayoutManager layoutManager = new GridLayoutManager(
+        GridLayoutManager layoutWeeklyManager = new GridLayoutManager(
+                getContext(), 2);
+
+        GridLayoutManager layoutDailyManager = new GridLayoutManager(
                 getContext(), 2);
 
         weeklyStorefrontAdapter = new StorefrontAdapter(getContext(), true);
-        rvWeeklyStorefront.setLayoutManager(layoutManager);
+        dailyStorefrontAdapter = new StorefrontAdapter(getContext(), false);
+
+        rvWeeklyStorefront.setLayoutManager(layoutWeeklyManager);
         rvWeeklyStorefront.setAdapter(weeklyStorefrontAdapter);
+
+        rvDailyStorefront.setLayoutManager(layoutDailyManager);
+        rvDailyStorefront.setAdapter(dailyStorefrontAdapter);
 
         tvFeaturedCycle.setOnClickListener(event ->
             catalogPresenter.cycleWeeklyOffer()
+        );
+
+        tvDailyCycle.setOnClickListener(event ->
+            catalogPresenter.cycleDailyOffer()
         );
 
         catalogPresenter.getCurrentShop();
@@ -89,6 +108,11 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
     @Override
     public void initWeeklyStorefront(List<CatalogEntryViewModel> entries) {
         weeklyStorefrontAdapter.setCatalogEntries(entries);
+    }
+
+    @Override
+    public void initDailyStorefront(List<CatalogEntryViewModel> entries) {
+        dailyStorefrontAdapter.setCatalogEntries(entries);
     }
 
     @Override

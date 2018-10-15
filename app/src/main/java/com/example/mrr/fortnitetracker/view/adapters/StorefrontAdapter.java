@@ -40,7 +40,13 @@ public class StorefrontAdapter extends RecyclerView.Adapter<StorefrontAdapter.St
     @NonNull
     @Override
     public StorefrontViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.catalog_item, parent, false);
+        View view;
+        if(isWeekly) {
+            view = LayoutInflater.from(context).inflate(R.layout.catalog_featured_item, parent, false);
+        } else {
+            view = LayoutInflater.from(context).inflate(R.layout.catalog_daily_item, parent, false);
+        }
+
         return new StorefrontViewHolder(view);
     }
 

@@ -13,6 +13,7 @@ public interface CatalogContracts {
         void onSuccess(CatalogViewModel catalog);
         void onFailure(String message);
         void initWeeklyStorefront(List<CatalogEntryViewModel> entries);
+        void initDailyStorefront(List<CatalogEntryViewModel> entries);
         void showProgress();
         void hideProgress();
     }
@@ -20,6 +21,7 @@ public interface CatalogContracts {
     interface Presenter {
         void getCurrentShop();
         void cycleWeeklyOffer();
+        void cycleDailyOffer();
         void unsubscribe();
     }
 

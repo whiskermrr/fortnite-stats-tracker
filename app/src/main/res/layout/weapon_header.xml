@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
+    android:layout_marginTop="@dimen/default_ui_margin"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary">
 
@@ -10,10 +10,10 @@
         android:id="@+id/tvWeaponHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="21sp"
+        android:textSize="@dimen/text_size_21"
         android:text="Assault Rifles"
         android:textColor="@color/colorStatsBackground"
-        android:padding="16dp"
+        android:padding="@dimen/ui_margin_16"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

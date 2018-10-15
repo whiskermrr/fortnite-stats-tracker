@@ -13,7 +13,7 @@
         android:layout_columnWeight="1"
         android:layout_rowWeight="1"
         android:orientation="vertical"
-        android:padding="5dp"
+        android:padding="@dimen/ui_margin_5"
         >
 
         <TextView
@@ -31,7 +31,7 @@
         android:layout_columnWeight="1"
         android:layout_rowWeight="1"
         android:orientation="vertical"
-        android:padding="5dp"
+        android:padding="@dimen/ui_margin_5"
         >
 
         <TextView
@@ -49,7 +49,7 @@
         android:layout_columnWeight="1"
         android:layout_rowWeight="1"
         android:orientation="vertical"
-        android:padding="5dp"
+        android:padding="@dimen/ui_margin_5"
         >
 
         <TextView
@@ -67,7 +67,7 @@
         android:layout_columnWeight="1"
         android:layout_rowWeight="1"
         android:orientation="vertical"
-        android:padding="5dp"
+        android:padding="@dimen/ui_margin_5"
         >
 
         <TextView
@@ -85,7 +85,7 @@
         android:layout_columnWeight="1"
         android:layout_rowWeight="1"
         android:orientation="vertical"
-        android:padding="5dp"
+        android:padding="@dimen/ui_margin_5"
         >
 
         <TextView
@@ -103,7 +103,7 @@
         android:layout_columnWeight="1"
         android:layout_rowWeight="1"
         android:orientation="vertical"
-        android:padding="5dp"
+        android:padding="@dimen/ui_margin_5"
         >
 
         <TextView
@@ -121,7 +121,7 @@
         android:layout_columnWeight="1"
         android:layout_rowWeight="1"
         android:orientation="vertical"
-        android:padding="5dp"
+        android:padding="@dimen/ui_margin_5"
         >
 
         <TextView
@@ -139,7 +139,7 @@
         android:layout_columnWeight="1"
         android:layout_rowWeight="1"
         android:orientation="vertical"
-        android:padding="5dp"
+        android:padding="@dimen/ui_margin_5"
         >
 
         <TextView
@@ -157,7 +157,7 @@
         android:layout_columnWeight="1"
         android:layout_rowWeight="1"
         android:orientation="vertical"
-        android:padding="5dp"
+        android:padding="@dimen/ui_margin_5"
         >
 
         <TextView
