@@ -54,7 +54,11 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
             R.id.tvFeaturedCycle,
             R.id.tvFeaturedShop,
             R.id.layoutDiagonal,
-            R.id.layoutDiagonal2
+            R.id.layoutDiagonal2,
+            R.id.tvDailyShop,
+            R.id.tvDailyCycle,
+            R.id.layoutDiagonal3,
+            R.id.layoutDiagonal4
     })
     List<View> featuredItemsTitle;
 

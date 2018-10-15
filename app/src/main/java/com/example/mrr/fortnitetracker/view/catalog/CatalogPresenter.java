@@ -1,8 +1,7 @@
 package com.example.mrr.fortnitetracker.view.catalog;
 
+import com.example.mrr.fortnitetracker.Utils.Cycler;
 import com.example.mrr.fortnitetracker.models.catalog.CatalogEntryViewModel;
-
-import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -12,10 +11,8 @@ public class CatalogPresenter implements CatalogContracts.Presenter {
 
     private CatalogContracts.View view;
     private CatalogContracts.Interactor catalogInteractor;
-    private int cycleWeeklyIndex = 2;
-    private int cycleDailyInex = 2;
-    private List<CatalogEntryViewModel> weeklyStorefront;
-    private List<CatalogEntryViewModel> dailyStorefront;
+    private Cycler<CatalogEntryViewModel> weeklyStorefrontCycler;
+    private Cycler<CatalogEntryViewModel> dailyStorefrontCycler;
 
     private CompositeDisposable disposables;
 
@@ -23,6 +20,8 @@ public class CatalogPresenter implements CatalogContracts.Presenter {
         this.view = view;
         this.catalogInteractor = catalogInteractor;
         disposables = new CompositeDisposable();
+        weeklyStorefrontCycler = new Cycler<>(2);
+        dailyStorefrontCycler = new Cycler<>(4);
     }
 
 
@@ -35,13 +34,11 @@ public class CatalogPresenter implements CatalogContracts.Presenter {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 catalog -> {
-                                    cycleWeeklyIndex = 2;
-                                    cycleDailyInex = 4;
-                                    weeklyStorefront = catalog.getWeeklyOffer();
-                                    dailyStorefront = catalog.getDailyOffer();
+                                    weeklyStorefrontCycler.setList(catalog.getWeeklyOffer());
+                                    dailyStorefrontCycler.setList(catalog.getDailyOffer());
                                     view.hideProgress();
-                                    view.initWeeklyStorefront(weeklyStorefront.subList(0, cycleWeeklyIndex));
-                                    view.initDailyStorefront(dailyStorefront.subList(0, cycleDailyInex));
+                                    view.initWeeklyStorefront(weeklyStorefrontCycler.getSublist());
+                                    view.initDailyStorefront(dailyStorefrontCycler.getSublist());
                                 },
                                 error -> view.onFailure(error.getMessage())
                         )
@@ -50,20 +47,12 @@ public class CatalogPresenter implements CatalogContracts.Presenter {
 
     @Override
     public void cycleWeeklyOffer() {
-        cycleWeeklyIndex++;
-        if(cycleWeeklyIndex > weeklyStorefront.size()) {
-            cycleWeeklyIndex = 2;
-        }
-        view.initWeeklyStorefront(weeklyStorefront.subList(cycleWeeklyIndex - 2, cycleWeeklyIndex));
+        view.initWeeklyStorefront(weeklyStorefrontCycler.cycle());
     }
 
     @Override
     public void cycleDailyOffer() {
-        cycleDailyInex++;
-        if(cycleDailyInex > dailyStorefront.size()) {
-            cycleDailyInex = 4;
-        }
-        view.initDailyStorefront(dailyStorefront.subList(cycleDailyInex - 4, cycleDailyInex));
+        view.initDailyStorefront(dailyStorefrontCycler.cycle());
     }
 
     @Override
