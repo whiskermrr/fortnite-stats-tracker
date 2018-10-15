@@ -23,10 +23,12 @@ public class StorefrontAdapter extends RecyclerView.Adapter<StorefrontAdapter.St
 
     private List<CatalogEntryViewModel> entries;
     private Context context;
+    private boolean isWeekly;
 
-    public StorefrontAdapter(final Context context) {
+    public StorefrontAdapter(final Context context, boolean isWeekly) {
         entries = new LinkedList<>();
         this.context = context;
+        this.isWeekly = isWeekly;
     }
 
     public void setCatalogEntries(List<CatalogEntryViewModel> newEntries) {
@@ -65,7 +67,12 @@ public class StorefrontAdapter extends RecyclerView.Adapter<StorefrontAdapter.St
         holder.tvCatalogEntry.setText(entry.getName());
 
         try {
-            InputStream inputStream = context.getAssets().open(entry.getEntryType() + "/" + entry.getDisplayAssetPath());
+            InputStream inputStream;
+            if(isWeekly && entry.getEntryType().equals(FTConstants.SKIN)) {
+                inputStream = context.getAssets().open("featured" + "/" + entry.getDisplayAssetPath());
+            } else {
+                inputStream = context.getAssets().open(entry.getEntryType() + "/" + entry.getDisplayAssetPath());
+            }
             Drawable icon = Drawable.createFromStream(inputStream, null);
             holder.ivCatalogEntry.setImageDrawable(icon);
             inputStream.close();

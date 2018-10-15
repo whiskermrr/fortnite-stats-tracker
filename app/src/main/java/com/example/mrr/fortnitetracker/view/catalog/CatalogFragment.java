@@ -73,7 +73,7 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
         GridLayoutManager layoutManager = new GridLayoutManager(
                 getContext(), 2);
 
-        weeklyStorefrontAdapter = new StorefrontAdapter(getContext());
+        weeklyStorefrontAdapter = new StorefrontAdapter(getContext(), true);
         rvWeeklyStorefront.setLayoutManager(layoutManager);
         rvWeeklyStorefront.setAdapter(weeklyStorefrontAdapter);
 
