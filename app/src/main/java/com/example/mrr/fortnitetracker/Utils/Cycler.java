@@ -29,8 +29,8 @@ public class Cycler<T> {
             return this.list;
         }
         List<T> subList = new ArrayList<>();
-        for (int i = 0; i < indexes.length; i++) {
-            subList.add(list.get(indexes[i]));
+        for (int index : indexes) {
+            subList.add(list.get(index));
         }
         return subList;
     }
