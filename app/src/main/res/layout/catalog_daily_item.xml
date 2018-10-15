@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/ui_margin_6"
+    android:layout_marginBottom="@dimen/ui_margin_6"
+    android:layout_marginStart="@dimen/default_ui_margin"
+    android:layout_marginEnd="@dimen/default_ui_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.example.mrr.fortnitetracker.layout_components.PanoramicImageView
+        android:id="@+id/ivCatalogEntry"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="@dimen/ui_margin_3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        />
+
+    <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
+        android:id="@+id/tvCatalogEntry"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/colorWhite"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size_24"
+        android:padding="@dimen/ui_margin_6"
+        android:layout_margin="@dimen/ui_margin_3"
+        android:background="@color/colorBlackTransparent"
+        app:layout_constraintBottom_toBottomOf="@id/ivCatalogEntry"
+        />
+
+</android.support.constraint.ConstraintLayout>

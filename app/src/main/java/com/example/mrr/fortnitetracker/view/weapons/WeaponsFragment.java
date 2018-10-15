@@ -13,8 +13,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.mrr.fortnitetracker.R;
-import com.example.mrr.fortnitetracker.models.Weapon;
-import com.example.mrr.fortnitetracker.models.WeaponsHolder;
+import com.example.mrr.fortnitetracker.models.weapons.Weapon;
+import com.example.mrr.fortnitetracker.models.weapons.WeaponsHolder;
 import com.example.mrr.fortnitetracker.view.MainActivity;
 import com.example.mrr.fortnitetracker.view.adapters.WeaponTypeSection;
 

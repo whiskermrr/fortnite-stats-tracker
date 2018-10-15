@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.mrr.fortnitetracker.R;
+import com.example.mrr.fortnitetracker.dagger.modules.NewsFragmentModule;
 import com.example.mrr.fortnitetracker.view.MainActivity;
 import com.example.mrr.fortnitetracker.view.adapters.NewsAdapter;
 import com.example.rxjava_fortnite_api.models.blogs.Blog;
@@ -20,11 +21,13 @@ import com.example.rxjava_fortnite_api.models.blogs.Blog;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.AndroidSupportInjection;
 import io.reactivex.disposables.CompositeDisposable;
+
 
 public class NewsFragment extends Fragment implements NewsContracts.View {
 
@@ -34,9 +37,6 @@ public class NewsFragment extends Fragment implements NewsContracts.View {
     @Inject
     NewsAdapter newsAdapter;
 
-    @Inject
-    LinearLayoutManager layoutManager;
-
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
@@ -44,6 +44,7 @@ public class NewsFragment extends Fragment implements NewsContracts.View {
     RecyclerView newsRecyclerView;
 
     private CompositeDisposable disposables;
+    private LinearLayoutManager layoutManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class NewsFragment extends Fragment implements NewsContracts.View {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         ButterKnife.bind(this, view);
         disposables = new CompositeDisposable();
+        layoutManager = new LinearLayoutManager(getActivity());
         newsRecyclerView.setLayoutManager(layoutManager);
         newsRecyclerView.setAdapter(newsAdapter);
         newsRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

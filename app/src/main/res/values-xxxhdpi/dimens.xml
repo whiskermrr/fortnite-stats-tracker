@@ -1,0 +1,25 @@
+<resources>
+	<dimen name="default_ui_margin">8dp</dimen>
+	<dimen name="ui_margin_2">2dp</dimen>
+	<dimen name="ui_margin_3">3dp</dimen>
+	<dimen name="ui_margin_5">5dp</dimen>
+	<dimen name="ui_margin_6">6dp</dimen>
+	<dimen name="ui_margin_10">10dp</dimen>
+	<dimen name="ui_margin_16">16dp</dimen>
+	<dimen name="ui_margin_20">20dp</dimen>
+	<dimen name="ui_margin_25">25dp</dimen>
+	<dimen name="ui_margin_40">40dp</dimen>
+
+	<dimen name="text_size_14">14sp</dimen>
+	<dimen name="text_size_18">18sp</dimen>
+	<dimen name="text_size_21">21sp</dimen>
+	<dimen name="text_size_24">24sp</dimen>
+	<dimen name="text_size_28">28sp</dimen>
+	<dimen name="text_size_32">32sp</dimen>
+	<dimen name="text_size_48">48sp</dimen>
+
+	<dimen name="catalog_diagonal_width">30dp</dimen>
+	<dimen name="item_detail_image_size">160dp</dimen>
+	<dimen name="stats_card_height">320dp</dimen>
+	<dimen name="nav_header_height">192dp</dimen>
+</resources>

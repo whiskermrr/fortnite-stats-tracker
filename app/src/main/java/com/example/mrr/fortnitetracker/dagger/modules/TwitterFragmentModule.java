@@ -54,11 +54,5 @@ public class TwitterFragmentModule {
     CustomTwitterAdapter adapter(Context context) {
         return new CustomTwitterAdapter(context, R.style.tw__TweetLightStyle);
     }
-
-    @Provides
-    @PerFragment
-    LinearLayoutManager linearLayoutManager(TwitterFragment twitterFragment) {
-        return new LinearLayoutManager(twitterFragment.getActivity());
-    }
 }
 

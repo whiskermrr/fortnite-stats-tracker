@@ -1,10 +1,7 @@
 package com.example.mrr.fortnitetracker.view.weapons;
 
 import com.example.mrr.fortnitetracker.mappers.WeaponsMapper;
-import com.example.mrr.fortnitetracker.models.Weapon;
-import com.example.mrr.fortnitetracker.models.WeaponsHolder;
-
-import java.util.List;
+import com.example.mrr.fortnitetracker.models.weapons.WeaponsHolder;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;

@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -41,14 +40,13 @@ public class TwitterFragment extends Fragment implements TwitterContracts.View {
     @Inject
     CustomTwitterAdapter tweetsAdapter;
 
-    @Inject
-    LinearLayoutManager linearLayout;
-
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
     @BindView(R.id.twitter_recycler_view)
     RecyclerView recyclerView;
+
+    private LinearLayoutManager linearLayout;
 
 
     @Override
@@ -62,6 +60,7 @@ public class TwitterFragment extends Fragment implements TwitterContracts.View {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_twitter, container, false);
         ButterKnife.bind(this, view);
+        linearLayout = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayout);
         recyclerView.setAdapter(tweetsAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

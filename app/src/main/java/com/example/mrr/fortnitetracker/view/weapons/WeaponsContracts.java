@@ -1,7 +1,7 @@
 package com.example.mrr.fortnitetracker.view.weapons;
 
-import com.example.mrr.fortnitetracker.models.Weapon;
-import com.example.mrr.fortnitetracker.models.WeaponsHolder;
+import com.example.mrr.fortnitetracker.models.weapons.Weapon;
+import com.example.mrr.fortnitetracker.models.weapons.WeaponsHolder;
 
 import java.util.List;
 

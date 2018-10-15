@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.Utils.ProjectUtils;
-import com.example.mrr.fortnitetracker.models.Weapon;
+import com.example.mrr.fortnitetracker.models.weapons.Weapon;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -62,7 +62,7 @@ public class WeaponTypeSection extends StatelessSection {
     public void onBindItemViewHolder(RecyclerView.ViewHolder holder, int position) {
         WeaponViewHolder weaponHolder = (WeaponViewHolder) holder;
         final Weapon weapon = weapons.get(position);
-        int colorResourceId = ProjectUtils.getColorResourceIdByWeaponRarity(weapon.getRarity());
+        int colorResourceId = ProjectUtils.getColorResourceIdByRarity(weapon.getRarity());
 
         weaponHolder.ibWeapon.setOnClickListener(view ->
                     publishSubject.onNext(weapons.get(position))

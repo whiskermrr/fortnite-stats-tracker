@@ -6,8 +6,8 @@
 
     <TextView
         android:id="@+id/row_username"
-        android:textSize="18sp"
-        android:padding="5dp"
+        android:textSize="@dimen/text_size_18"
+        android:padding="@dimen/ui_margin_5"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         android:textAlignment="center"
@@ -19,7 +19,7 @@
         android:layout_gravity="end"
         android:layout_weight="0.05"
         android:background="@color/colorWhite"
-        android:padding="5dp"
+        android:padding="@dimen/ui_margin_5"
         android:src="@drawable/ic_clear"
         />
 

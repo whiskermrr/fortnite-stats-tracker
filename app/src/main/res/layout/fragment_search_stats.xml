@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="1"
-    android:background="@color/colorStatsBackground">
+    android:weightSum="1">
 
     <include layout="@layout/progress_bar"
         android:id="@+id/progress_bar"
@@ -17,16 +16,16 @@
         android:layout_height="wrap_content" />
 
     <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
-        android:textSize="32sp"
-        android:layout_marginTop="25dp"
-        android:textColor="@color/colorLightFortniteViolet"
+        android:textSize="@dimen/text_size_48"
+        android:layout_marginTop="@dimen/ui_margin_25"
+        android:textColor="@color/colorAccent"
         android:textAlignment="center"
         android:text="@string/fortnie_stats_tracker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <LinearLayout
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="@dimen/ui_margin_25"
         android:baselineAligned="false"
         android:orientation="horizontal"
         android:weightSum="1"
@@ -42,22 +41,23 @@
         <RelativeLayout
             android:layout_weight="0.70"
             android:layout_width="0dip"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/ui_margin_40">
 
             <TableLayout
                 android:id="@+id/table_recent_searches"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp">
+                >
 
                 <TableRow android:background="@color/colorAccent">
 
                     <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
                         android:id="@+id/text_recent_searches"
                         android:textAlignment="center"
-                        android:padding="5dp"
+                        android:padding="@dimen/ui_margin_5"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="21sp"
+                        android:textSize="@dimen/text_size_21"
                         android:text="@string/recent_searches"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />

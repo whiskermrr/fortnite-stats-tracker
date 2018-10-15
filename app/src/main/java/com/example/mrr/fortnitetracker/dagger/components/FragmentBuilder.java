@@ -3,6 +3,7 @@ package com.example.mrr.fortnitetracker.dagger.components;
 import android.support.v4.app.Fragment;
 
 
+import com.example.mrr.fortnitetracker.view.catalog.CatalogFragment;
 import com.example.mrr.fortnitetracker.view.news.NewsFragment;
 import com.example.mrr.fortnitetracker.view.stats.StatsSearchFragment;
 import com.example.mrr.fortnitetracker.view.twitter.TwitterFragment;
@@ -36,4 +37,9 @@ abstract class FragmentBuilder {
     @IntoMap
     @FragmentKey(WeaponsFragment.class)
     abstract AndroidInjector.Factory<? extends Fragment> bindWeaponsFragment(WeaponsFragmentComponent.Builder builder);
+
+    @Binds
+    @IntoMap
+    @FragmentKey(CatalogFragment.class)
+    abstract AndroidInjector.Factory<? extends Fragment> bindCatalogFragment(CatalogFragmentComponent.Builder builder);
 }

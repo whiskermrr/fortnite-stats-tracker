@@ -4,6 +4,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fortnite_background"
     android:fitsSystemWindows="true">
         
         <LinearLayout
@@ -30,7 +31,7 @@
             android:fitsSystemWindows="true"
             app:menu="@menu/nav_menu"
             app:headerLayout="@layout/nav_header"
-            app:itemIconTint="@color/colorPrimaryDark"
+            app:itemIconTint="@color/colorFortniteDarkBlue"
             />
 
 </android.support.v4.widget.DrawerLayout>

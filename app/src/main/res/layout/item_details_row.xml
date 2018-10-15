@@ -5,8 +5,8 @@
 
     <TextView
         android:id="@+id/row_description"
-        android:textSize="18sp"
-        android:padding="5dp"
+        android:textSize="@dimen/text_size_18"
+        android:padding="@dimen/ui_margin_5"
         android:textColor="@color/colorDarkFactoryBlue"
         android:textAlignment="textStart"
         android:textStyle="bold"
@@ -15,8 +15,8 @@
 
     <TextView
         android:id="@+id/row_details"
-        android:textSize="18sp"
-        android:padding="5dp"
+        android:textSize="@dimen/text_size_18"
+        android:padding="@dimen/ui_margin_5"
         android:textColor="@color/colorDarkFactoryBlue"
         android:textAlignment="textStart"
         android:layout_weight="0.5"

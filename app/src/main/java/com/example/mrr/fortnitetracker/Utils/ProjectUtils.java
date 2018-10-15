@@ -29,7 +29,7 @@ public class ProjectUtils {
                 );
     }
 
-    public static int getColorResourceIdByWeaponRarity(String rarity) {
+    public static int getColorResourceIdByRarity(String rarity) {
         int colorResourceId;
         switch(rarity) {
             case FTConstants.RARITY_COMMON:
@@ -53,5 +53,48 @@ public class ProjectUtils {
 
         }
         return colorResourceId;
+    }
+
+    public static String getRarityOfCatalogEntry(String entryType, int price) {
+        switch (entryType) {
+            case FTConstants.SKIN:
+                if (price >= FTConstants.LEGENDARY_SKIN_PRICE) {
+                    return FTConstants.RARITY_LEGENDARY;
+                } else if (price >= FTConstants.EPIC_SKIN_PRICE) {
+                    return FTConstants.RARITY_EPIC;
+                } else if (price >= FTConstants.RARE_SKIN_PRICE) {
+                    return FTConstants.RARITY_RARE;
+                } else {
+                    return FTConstants.RARITY_UNCOMMON;
+                }
+            case FTConstants.PICKAXE:
+                if (price >= FTConstants.EPIC_PICKAXE_PRICE) {
+                    return FTConstants.RARITY_EPIC;
+                } else if (price >= FTConstants.RARE_PICKAXE_PRICE) {
+                    return FTConstants.RARITY_RARE;
+                } else {
+                    return FTConstants.RARITY_UNCOMMON;
+                }
+            case FTConstants.GLIDER:
+                if (price >= FTConstants.LEGENDARY_GLIDER_PRICE) {
+                    return FTConstants.RARITY_LEGENDARY;
+                } else if (price >= FTConstants.EPIC_GLIDER_PRICE) {
+                    return FTConstants.RARITY_EPIC;
+                } else if (price >= FTConstants.RARE_GLIDER_PRICE) {
+                    return FTConstants.RARITY_RARE;
+                } else {
+                    return FTConstants.RARITY_UNCOMMON;
+                }
+            case FTConstants.DANCE:
+                if (price >= FTConstants.EPIC_EMOTE_PRICE) {
+                    return FTConstants.RARITY_EPIC;
+                } else if (price >= FTConstants.RARE_EMOTE_PRICE) {
+                    return FTConstants.RARITY_RARE;
+                } else {
+                    return FTConstants.RARITY_UNCOMMON;
+                }
+            default:
+                return FTConstants.RARITY_UNCOMMON;
+        }
     }
 }
