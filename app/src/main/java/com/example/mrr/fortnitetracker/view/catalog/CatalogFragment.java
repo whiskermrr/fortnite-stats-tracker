@@ -120,6 +120,11 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
     }
 
     @Override
+    public void updateTime(String time) {
+        Toast.makeText(getContext(), time, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         catalogPresenter.unsubscribe();

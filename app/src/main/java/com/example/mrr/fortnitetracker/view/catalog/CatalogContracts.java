@@ -14,6 +14,7 @@ public interface CatalogContracts {
         void onFailure(String message);
         void initWeeklyStorefront(List<CatalogEntryViewModel> entries);
         void initDailyStorefront(List<CatalogEntryViewModel> entries);
+        void updateTime(String time);
         void showProgress();
         void hideProgress();
     }
