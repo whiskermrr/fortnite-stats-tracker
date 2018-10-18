@@ -35,6 +35,8 @@
     <string name="tab_to_cycle">Tab to cycle</string>
     <string name="daily_items">Daily Items</string>
 
+    <string name="empty_time">00:00:00</string>
+
     <string-array name="weapon_details">
         <item>DPS</item>
         <item>Damage</item>
