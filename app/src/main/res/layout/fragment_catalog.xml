@@ -160,6 +160,25 @@
 
 
     <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
+        android:id="@+id/tvTimeLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/default_ui_margin"
+        android:textSize="@dimen/text_size_24"
+        android:gravity="center"
+        android:text="@string/empty_time"
+        android:paddingStart="@dimen/default_ui_margin"
+        android:paddingEnd="@dimen/default_ui_margin"
+        android:paddingTop="@dimen/ui_margin_2"
+        android:paddingBottom="@dimen/ui_margin_2"
+        app:layout_constraintTop_toBottomOf="@id/rvWeeklyStorefront"
+        app:layout_constraintStart_toEndOf="@id/layoutDiagonal3"
+        app:layout_constraintBottom_toBottomOf="@id/tvDailyShop"
+        android:textColor="@color/colorCatalogGrayTitle"
+        android:background="@color/colorCatalogLightGrayTitle"
+        />
+
+    <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
         android:id="@+id/tvDailyCycle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -172,7 +191,7 @@
         android:paddingTop="@dimen/ui_margin_2"
         android:paddingBottom="@dimen/ui_margin_2"
         app:layout_constraintTop_toBottomOf="@id/rvWeeklyStorefront"
-        app:layout_constraintStart_toEndOf="@id/layoutDiagonal3"
+        app:layout_constraintStart_toEndOf="@id/tvTimeLeft"
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/colorCatalogGrayTitle"
         android:background="@color/colorCatalogLightGrayTitle"

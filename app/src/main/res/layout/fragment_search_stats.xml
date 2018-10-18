@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:weightSum="1">
 
     <include layout="@layout/progress_bar"
@@ -16,15 +15,18 @@
         android:layout_height="wrap_content" />
 
     <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
+        android:id="@+id/tvTitle"
         android:textSize="@dimen/text_size_48"
         android:layout_marginTop="@dimen/ui_margin_25"
         android:textColor="@color/colorAccent"
         android:textAlignment="center"
         android:text="@string/fortnie_stats_tracker"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
 
     <LinearLayout
+        android:layout_below="@id/tvTitle"
         android:layout_marginTop="@dimen/ui_margin_25"
         android:baselineAligned="false"
         android:orientation="horizontal"
@@ -74,4 +76,4 @@
             android:layout_height="match_parent">
         </RelativeLayout>
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

@@ -50,6 +50,9 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
+    @BindView(R.id.tvTimeLeft)
+    TextView tvTimeLeft;
+
     @BindViews({
             R.id.tvFeaturedCycle,
             R.id.tvFeaturedShop,
@@ -79,7 +82,6 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_catalog, container, false);
         ButterKnife.bind(this, view);
-
 
         GridLayoutManager layoutWeeklyManager = new GridLayoutManager(
                 getContext(), 2);
@@ -117,6 +119,11 @@ public class CatalogFragment extends Fragment implements CatalogContracts.View {
     @Override
     public void initDailyStorefront(List<CatalogEntryViewModel> entries) {
         dailyStorefrontAdapter.setCatalogEntries(entries);
+    }
+
+    @Override
+    public void updateTime(String time) {
+        tvTimeLeft.setText(time);
     }
 
     @Override

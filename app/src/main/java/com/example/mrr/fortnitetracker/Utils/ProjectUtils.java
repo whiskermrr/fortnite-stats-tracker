@@ -6,6 +6,12 @@ import android.net.NetworkInfo;
 
 import com.example.mrr.fortnitetracker.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class ProjectUtils {
 
     public static boolean isNetworkAvailable(Context context) {
@@ -96,5 +102,18 @@ public class ProjectUtils {
             default:
                 return FTConstants.RARITY_UNCOMMON;
         }
+    }
+
+    public static long getTimeUntilStringDate(String time) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(FTConstants.CATALOG_TIME_FORMAT, Locale.getDefault());
+        try {
+            Date catalogDate = dateFormat.parse(time);
+            Date nowDate = Calendar.getInstance().getTime();
+            return catalogDate.getTime() - nowDate.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return -1;
     }
 }

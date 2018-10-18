@@ -63,4 +63,8 @@ public class FTConstants {
     public final static int EPIC_EMOTE_PRICE = 800;
     public final static int RARE_EMOTE_PRICE = 500;
     public final static int UNCOMMON_EMOTE_PRICE = 200;
+
+
+    public final static String CATALOG_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+    public final static String TIMER_FORMAT = "%02d:%02d:%02d";
 }
