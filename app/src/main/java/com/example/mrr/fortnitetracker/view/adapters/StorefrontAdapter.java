@@ -71,6 +71,7 @@ public class StorefrontAdapter extends RecyclerView.Adapter<StorefrontAdapter.St
                 break;
         }
         holder.tvCatalogEntry.setText(entry.getName());
+        holder.tvCatalogEntryPrice.setText(String.valueOf(entry.getPrice()));
 
         try {
             InputStream inputStream;
@@ -96,11 +97,13 @@ public class StorefrontAdapter extends RecyclerView.Adapter<StorefrontAdapter.St
 
         ImageView ivCatalogEntry;
         TextView tvCatalogEntry;
+        TextView tvCatalogEntryPrice;
 
         StorefrontViewHolder(View itemView) {
             super(itemView);
             ivCatalogEntry = itemView.findViewById(R.id.ivCatalogEntry);
             tvCatalogEntry = itemView.findViewById(R.id.tvCatalogEntry);
+            tvCatalogEntryPrice = itemView.findViewById(R.id.tvCatalogEntryPrice);
         }
     }
 }
