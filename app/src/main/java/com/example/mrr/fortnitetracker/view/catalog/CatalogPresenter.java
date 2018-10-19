@@ -70,7 +70,10 @@ public class CatalogPresenter implements CatalogContracts.Presenter {
                                     view.initWeeklyStorefront(weeklyStorefrontCycler.getSublist());
                                     view.initDailyStorefront(dailyStorefrontCycler.getSublist());
                                 },
-                                error -> view.onFailure(error.getMessage())
+                                error -> {
+                                    view.hideProgress();
+                                    view.onFailure(error.getMessage());
+                                }
                         )
         );
     }
