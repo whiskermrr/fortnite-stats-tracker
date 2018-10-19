@@ -1,5 +1,8 @@
 package com.example.mrr.fortnitetracker.view.stats;
 
+import android.util.Log;
+
+import com.example.mrr.fortnitetracker.Network.NoConnectivityException;
 import com.example.rxjava_fortnite_api.models.stats.BattleRoyaleStats;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
@@ -61,16 +64,8 @@ public class StatsPresenter implements StatsContracts.Presenter {
     }
 
     private void onFailure(Throwable throwable) {
-        String errorMessage = throwable.getMessage();
         view.hideProgress();
-        if(throwable instanceof HttpException) {
-            if(((HttpException) throwable).response().code() == 404) {
-                errorMessage = "User not found.";
-            }
-        } else if(throwable instanceof SocketTimeoutException) {
-            errorMessage = "Connection problem. Please try again.";
-        }
-        view.onFailure(errorMessage);
+        view.onFailure(throwable.getMessage());
     }
 
 

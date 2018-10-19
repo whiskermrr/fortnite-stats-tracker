@@ -64,7 +64,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             e.printStackTrace();
         }
         holder.tDate.setText(date);
-        holder.tShortContent.setText(blogs.get(0).getShortContent().trim());
+        String shortContent = blogs.get(position).getShortContent().trim();
+        if(shortContent.equals("N/A")) {
+            holder.tShortContent.setVisibility(View.GONE);
+        } else {
+            holder.tShortContent.setText(shortContent);
+        }
+
     }
 
     @Override

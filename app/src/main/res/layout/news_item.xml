@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_32"
+            android:textColor="@color/colorPrimary"
             android:textAlignment="center"
             android:padding="@dimen/ui_margin_5"
             />
@@ -35,21 +36,22 @@
             android:id="@+id/news_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_14"
-            android:paddingStart="@dimen/ui_margin_10"
-            android:paddingEnd="@dimen/ui_margin_10"
-            android:paddingTop="@dimen/ui_margin_5"
+            android:textSize="@dimen/text_size_18"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/ui_margin_10"
+            android:layout_marginEnd="@dimen/ui_margin_10"
+            android:layout_marginTop="@dimen/ui_margin_5"
+            android:layout_marginBottom="@dimen/ui_margin_5"
             />
 
         <TextView
             android:id="@+id/news_short_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_18"
-            android:paddingStart="@dimen/ui_margin_10"
-            android:paddingEnd="@dimen/ui_margin_10"
-            android:paddingBottom="@dimen/ui_margin_10"
-            android:paddingTop="@dimen/ui_margin_5"
+            android:textSize="@dimen/text_size_21"
+            android:layout_marginStart="@dimen/ui_margin_10"
+            android:layout_marginEnd="@dimen/ui_margin_10"
+            android:layout_marginBottom="@dimen/ui_margin_10"
             />
 
     </LinearLayout>

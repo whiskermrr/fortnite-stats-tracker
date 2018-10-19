@@ -3,6 +3,7 @@ package com.example.mrr.fortnitetracker.dagger.modules;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.mrr.fortnitetracker.Network.ConnectivityInterceptor;
 import com.example.mrr.fortnitetracker.Utils.ProjectUtils;
 import com.example.mrr.fortnitetracker.dagger.scopes.FortniteApplicationScope;
 
@@ -29,11 +30,13 @@ public class NetworkModule {
     public OkHttpClient okHttpClient(Cache cache,
                                      HttpLoggingInterceptor interceptor,
                                      @Named("NetworkInterceptor") Interceptor networkInterceptor,
-                                     @Named("OfflineCacheInterceptor") Interceptor offlineCacheInterceptor
+                                     @Named("OfflineCacheInterceptor") Interceptor offlineCacheInterceptor,
+                                     ConnectivityInterceptor connectivityInterceptor
     ) {
         return new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
                 .addInterceptor(offlineCacheInterceptor)
+                .addInterceptor(connectivityInterceptor)
                 .addNetworkInterceptor(networkInterceptor)
                 .cache(cache)
                 .build();
@@ -106,5 +109,9 @@ public class NetworkModule {
         return new HttpLoggingInterceptor(message -> Log.v("LOGGING INTERCEPTOR", message)).setLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
-
+    @Provides
+    @FortniteApplicationScope
+    public ConnectivityInterceptor connectivityInterceptor(Context context) {
+        return new ConnectivityInterceptor(context);
+    }
 }
