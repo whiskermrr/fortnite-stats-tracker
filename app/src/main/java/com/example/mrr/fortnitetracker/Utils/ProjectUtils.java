@@ -35,30 +35,26 @@ public class ProjectUtils {
                 );
     }
 
-    public static int getColorResourceIdByRarity(String rarity) {
-        int colorResourceId;
+    public static int getBackgroundResourceIdByRarity(String rarity) {
+        int backgroundResourceId;
         switch(rarity) {
-            case FTConstants.RARITY_COMMON:
-                colorResourceId = R.color.colorRarityCommon;
-                break;
             case FTConstants.RARITY_UNCOMMON:
-                colorResourceId = R.color.colorRarityUncommon;
+                backgroundResourceId = R.drawable.border_uncommon;
                 break;
             case FTConstants.RARITY_RARE:
-                colorResourceId = R.color.colorRarityRare;
+                backgroundResourceId = R.drawable.border_rare;
                 break;
             case FTConstants.RARITY_EPIC:
-                colorResourceId = R.color.colorRarityEpic;
+                backgroundResourceId = R.drawable.border_epic;
                 break;
             case FTConstants.RARITY_LEGENDARY:
-                colorResourceId = R.color.colorRarityLegendary;
+                backgroundResourceId = R.drawable.border_legendary;
                 break;
             default:
-                colorResourceId = R.color.colorRarityCommon;
+                backgroundResourceId = R.drawable.border_common;
                 break;
-
         }
-        return colorResourceId;
+        return backgroundResourceId;
     }
 
     public static String getRarityOfCatalogEntry(String entryType, int price) {
