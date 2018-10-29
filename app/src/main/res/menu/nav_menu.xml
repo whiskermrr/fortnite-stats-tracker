@@ -10,7 +10,7 @@
             android:icon="@drawable/ic_patch_notes"
             android:title="@string/news" />
         <item
-            android:id="@+id/nav_patch_notes"
+            android:id="@+id/nav_weapons"
             android:icon="@drawable/ic_rifle"
             android:title="@string/weapons" />
         <item
@@ -18,9 +18,15 @@
             android:icon="@drawable/ic_twitter"
             android:title="@string/twitter" />
         <item
+            android:id="@+id/nav_shop"
+            android:icon="@drawable/ic_cart"
+            android:title="@string/shop" />
+
+        <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_about"
-            android:title="@string/shop" />
+            android:title="@string/about" />
+
     </group>
 
 </menu>
