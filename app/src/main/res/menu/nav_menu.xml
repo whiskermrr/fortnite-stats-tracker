@@ -7,11 +7,11 @@
             android:title="@string/profile_search" />
         <item
             android:id="@+id/nav_news"
-            android:icon="@drawable/ic_news"
+            android:icon="@drawable/ic_patch_notes"
             android:title="@string/news" />
         <item
             android:id="@+id/nav_patch_notes"
-            android:icon="@drawable/ic_patch_notes"
+            android:icon="@drawable/ic_rifle"
             android:title="@string/weapons" />
         <item
             android:id="@+id/nav_twitter"
@@ -20,7 +20,7 @@
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_about"
-            android:title="@string/about" />
+            android:title="@string/shop" />
     </group>
 
 </menu>
