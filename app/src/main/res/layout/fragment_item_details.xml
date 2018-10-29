@@ -6,25 +6,34 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.example.mrr.fortnitetracker.layout_components.SquereImageView
-        android:id="@+id/ivItemImage"
+    <RelativeLayout
+        android:id="@+id/layoutItemImage"
         android:layout_width="@dimen/item_detail_image_size"
         android:layout_height="@dimen/item_detail_image_size"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="@dimen/ui_margin_16"
-        tools:background="@color/colorRarityEpic"
-        />
+        >
+
+        <com.example.mrr.fortnitetracker.layout_components.SquereImageView
+            android:id="@+id/ivItemImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </RelativeLayout>
+
+
 
     <com.example.mrr.fortnitetracker.layout_components.FortniteTextView
         android:id="@+id/tvItemName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/ivItemImage"
+        app:layout_constraintTop_toBottomOf="@id/layoutItemImage"
         android:layout_margin="@dimen/default_ui_margin"
         android:textSize="@dimen/text_size_28"
-        android:textColor="@color/colorFuckingGray"
+        android:textColor="@color/colorAccent"
         android:textAlignment="center"
         tools:text="Assault Rifle"
         />

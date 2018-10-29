@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.mrr.fortnitetracker.R;
 import com.example.mrr.fortnitetracker.Utils.FTConstants;
+import com.example.mrr.fortnitetracker.Utils.ProjectUtils;
 import com.example.mrr.fortnitetracker.models.catalog.CatalogEntryViewModel;
 
 import java.io.IOException;
@@ -53,23 +54,8 @@ public class StorefrontAdapter extends RecyclerView.Adapter<StorefrontAdapter.St
     @Override
     public void onBindViewHolder(@NonNull StorefrontViewHolder holder, int position) {
         CatalogEntryViewModel entry = entries.get(position);
-        switch(entry.getRarity()) {
-            case FTConstants.RARITY_UNCOMMON:
-                holder.itemView.setBackground(context.getDrawable(R.drawable.border_uncommon));
-                break;
-            case FTConstants.RARITY_RARE:
-                holder.itemView.setBackground(context.getDrawable(R.drawable.border_rare));
-                break;
-            case FTConstants.RARITY_EPIC:
-                holder.itemView.setBackground(context.getDrawable(R.drawable.border_epic));
-                break;
-            case FTConstants.RARITY_LEGENDARY:
-                holder.itemView.setBackground(context.getDrawable(R.drawable.border_legendary));
-                break;
-            default:
-                holder.itemView.setBackground(context.getDrawable(R.drawable.border_common));
-                break;
-        }
+        int backgroundResourceId = ProjectUtils.getBackgroundResourceIdByRarity(entry.getRarity());
+        holder.itemView.setBackground(context.getDrawable(backgroundResourceId));
         holder.tvCatalogEntry.setText(entry.getName());
         holder.tvCatalogEntryPrice.setText(String.valueOf(entry.getPrice()));
 

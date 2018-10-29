@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -37,6 +38,9 @@ public class ItemDetailsFragment extends Fragment {
     @BindView(R.id.tvItemName)
     TextView tvItemName;
 
+    @BindView(R.id.layoutItemImage)
+    RelativeLayout layoutItemImage;
+
     @BindView(R.id.tableItemDetails)
     TableLayout tableItemDetails;
 
@@ -59,8 +63,8 @@ public class ItemDetailsFragment extends Fragment {
     }
 
     private void loadImage() {
-        int colorResourceId = ProjectUtils.getColorResourceIdByRarity(weapon.getRarity());
-        ivItemImage.setBackgroundColor(ContextCompat.getColor(getContext(), colorResourceId));
+        int backgroundResourceId = ProjectUtils.getBackgroundResourceIdByRarity(weapon.getRarity());
+        layoutItemImage.setBackground(getContext().getDrawable(backgroundResourceId));
 
         int imageDrawableId = ProjectUtils.getDrawableIdByFileName(getContext(), weapon.getImageFileName());
 

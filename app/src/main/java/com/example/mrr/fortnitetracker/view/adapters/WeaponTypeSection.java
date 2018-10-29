@@ -1,6 +1,7 @@
 package com.example.mrr.fortnitetracker.view.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -62,13 +63,13 @@ public class WeaponTypeSection extends StatelessSection {
     public void onBindItemViewHolder(RecyclerView.ViewHolder holder, int position) {
         WeaponViewHolder weaponHolder = (WeaponViewHolder) holder;
         final Weapon weapon = weapons.get(position);
-        int colorResourceId = ProjectUtils.getColorResourceIdByRarity(weapon.getRarity());
+        int backgroundResourceId = ProjectUtils.getBackgroundResourceIdByRarity(weapon.getRarity());
+        weaponHolder.itemView.setBackground(context.getDrawable(backgroundResourceId));
 
         weaponHolder.ibWeapon.setOnClickListener(view ->
                     publishSubject.onNext(weapons.get(position))
         );
 
-        weaponHolder.ibWeapon.setBackgroundColor(ContextCompat.getColor(context, colorResourceId));
         int weaponImageId = ProjectUtils.getDrawableIdByFileName(context, weapon.getImageFileName());
         if(weaponImageId > 0) {
             Picasso.with(context)

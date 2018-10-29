@@ -99,9 +99,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else if(selectedItemId == R.id.nav_news) {
             fragment = new NewsFragment();
         }
-        else if(selectedItemId == R.id.nav_patch_notes) {
+        else if(selectedItemId == R.id.nav_weapons) {
             fragment = new WeaponsFragment();
-        } else if(selectedItemId == R.id.nav_about) {
+        } else if(selectedItemId == R.id.nav_shop) {
             fragment = new CatalogFragment();
         }
 
