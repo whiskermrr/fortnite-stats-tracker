@@ -51,7 +51,6 @@ public class WeaponsFragment extends Fragment implements WeaponsContracts.View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
         AndroidSupportInjection.inject(this);
     }
 
@@ -97,7 +96,7 @@ public class WeaponsFragment extends Fragment implements WeaponsContracts.View {
         ItemDetailsFragment fragment = new ItemDetailsFragment();
         fragment.setArguments(bundle);
 
-        ((MainActivity) getActivity()).replaceFragment(fragment);
+        ((MainActivity) getActivity()).addFragment(fragment);
     }
 
     @Override
