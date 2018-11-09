@@ -58,6 +58,9 @@ public class ProjectUtils {
     }
 
     public static String getRarityOfCatalogEntry(String entryType, int price) {
+        if(entryType == null) // battle pass starts
+            return FTConstants.RARITY_EPIC;
+
         switch (entryType) {
             case FTConstants.SKIN:
                 if (price >= FTConstants.LEGENDARY_SKIN_PRICE) {
