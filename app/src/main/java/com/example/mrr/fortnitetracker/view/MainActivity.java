@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -112,23 +113,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void replaceNavigationFragment(Fragment fragment) {
         if(fragment != null) {
+            String fragmentTag = fragment.getClass().getSimpleName();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
             fragmentManager
                     .beginTransaction()
-                    .addToBackStack(fragment.getClass().getSimpleName())
-                    .replace(R.id.content_frame, fragment)
+                    .replace(R.id.content_frame, fragment, fragmentTag)
+                    .addToBackStack(fragmentTag)
                     .commit();
         }
     }
 
     public void replaceFragment(Fragment fragment) {
         if(fragment != null) {
+            String fragmentTag = fragment.getClass().getSimpleName();
             getSupportFragmentManager()
                     .beginTransaction()
-                    .addToBackStack(fragment.getClass().getSimpleName())
-                    .replace(R.id.content_frame, fragment)
+                    .replace(R.id.content_frame, fragment, fragmentTag)
+                    .addToBackStack(fragmentTag)
                     .commit();
         }
     }
@@ -144,12 +147,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void addFragment(Fragment fragment) {
         if(fragment != null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .addToBackStack(fragment.getClass().getSimpleName())
-                    .add(R.id.content_frame, fragment)
+            String fragmentTag = fragment.getClass().getSimpleName();
+            Fragment previousFragment = getTopFragment(getSupportFragmentManager());
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            if(previousFragment != null) {
+                transaction.hide(previousFragment);
+            }
+            transaction.add(R.id.content_frame, fragment, fragmentTag)
+                    .addToBackStack(fragmentTag)
                     .commit();
         }
+    }
+
+    public Fragment getTopFragment(FragmentManager manager) {
+        Fragment fragment = null;
+        if(manager.getBackStackEntryCount() > 0) {
+            FragmentManager.BackStackEntry entry =
+                    manager.getBackStackEntryAt(manager.getBackStackEntryCount() - 1);
+            fragment = manager.findFragmentByTag(entry.getName());
+        }
+
+        return fragment;
     }
 
     @Override
